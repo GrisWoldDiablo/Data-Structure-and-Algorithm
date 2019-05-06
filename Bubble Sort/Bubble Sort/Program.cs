@@ -8,11 +8,13 @@ namespace Bubble_Sort
 {
     class Program
     {
-        const int RANDOMSEED = 2019; // Random Seed number to keep constant
-        static Random randGen = new Random(RANDOMSEED); // Get a random generator.
+        const string ALGORITHM_NAME = "Bubble Sort";
+        const int RANDOM_SEED = 2019; // Random Seed number to keep constant
+        static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
+        const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000
 
         /// <summary>
-        /// Populate the array with random numbers between -100,000 to 100,000
+        /// Populate an int array with random numbers between -100,000 to 100,000
         /// </summary>
         /// <param name="arr">array to populate</param>
         static void PopulateArray(int[] arr)
@@ -26,23 +28,27 @@ namespace Bubble_Sort
 
         static void Main(string[] args)
         {
-            int[] number = new int[100000]; // Declare an array of 100,000 elements
-            PopulateArray(number); // Fill the array with random numbers
+            int[] array = new int[ARRAY_SIZE]; // Declare an array
+            PopulateArray(array); // Fill the array with random numbers
 
             long time = DateTime.Now.Ticks; // Get the current ticks
 
-            BubbleSort(number); // Sort the array
+            //Console.WriteLine(string.Join(",",number)); // Display array before sorting
+            BubbleSort(array); // Sort the array
+            //Console.WriteLine(string.Join(",",number)); // Display array after sorting
 
             time = DateTime.Now.Ticks - time; // Get the time spent sorting
 
-            Console.WriteLine($"Total Seconds:{TimeSpan.FromTicks(time).TotalSeconds}"); // Display the time spent in seconds
+            Console.WriteLine($"Sorting an {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Algorithm: {ALGORITHM_NAME}");// Print the name of the algorithm used.
+            Console.WriteLine($"Total Seconds:{TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds
 
         }
 
         /// <summary>
-        /// Sort the array using bubble sort method.
+        /// Sort the array using bubble sort algorithm.
         /// -----PSEUDO CODE-----
-        /// (A is and Array)
+        /// (A is an Array with index 0..n)
         /// BubbleSort(A)
         /// for i=0 to length of A - 1
         ///     for j=i-1 to length of A - 1
@@ -50,18 +56,18 @@ namespace Bubble_Sort
         ///             swap A[j] and A[i]
         /// -----PSEUDO CODE-----
         /// </summary>
-        /// <param name="arr"></param>
-        static void BubbleSort(int[] arr)
+        /// <param name="A">array to be sorted</param>
+        static void BubbleSort<T>(T[] A) where T : IComparable
         {
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < A.Length; i++)
             {
-                for (int j = i + 1; j < arr.Length; j++)
+                for (int j = i + 1; j < A.Length; j++)
                 {
-                    if (arr[j] < arr[i])
+                    if (A[j].CompareTo(A[i]) < 0)
                     {
-                        int temp = arr[j];
-                        arr[j] = arr[i];
-                        arr[i] = temp;
+                        T temp = A[j];
+                        A[j] = A[i];
+                        A[i] = temp;
                     }
                 }
             }
