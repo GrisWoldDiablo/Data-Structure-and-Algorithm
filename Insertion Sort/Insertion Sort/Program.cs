@@ -8,7 +8,7 @@ namespace Insertion_Sort
 {
     class Program
     {
-        const string ALGORITHM_NAME = "Insertion Sort";
+        const string ALGORITHM_NAME = "Insertion Sort"; // The name of the algorith used for sorting
         const int RANDOM_SEED = 2019; // Random Seed number to keep constant.
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
@@ -37,7 +37,7 @@ namespace Insertion_Sort
             //Console.WriteLine(string.Join(",",array)); // Display array after sorting.
 
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
-            Console.WriteLine($"Sorting an {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds:{TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
 
@@ -72,5 +72,5 @@ namespace Insertion_Sort
                 A[i + 1] = key;
             }
         }
-    }
-}
+    } // End Class
+} // End Namespace

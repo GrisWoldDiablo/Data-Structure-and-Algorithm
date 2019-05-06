@@ -8,10 +8,10 @@ namespace Bubble_Sort
 {
     class Program
     {
-        const string ALGORITHM_NAME = "Bubble Sort";
-        const int RANDOM_SEED = 2019; // Random Seed number to keep constant
+        const string ALGORITHM_NAME = "Bubble Sort"; // The name of the algorith used for sorting
+        const int RANDOM_SEED = 2019; // Random Seed number to keep constant.
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
-        const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000
+        const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
 
         /// <summary>
         /// Populate an int array with random numbers between -100,000 to 100,000
@@ -23,26 +23,24 @@ namespace Bubble_Sort
             {
                 arr[i] = randGen.Next(-100000, 100000);
             }
-
         }
 
         static void Main(string[] args)
         {
-            int[] array = new int[ARRAY_SIZE]; // Declare an array
-            PopulateArray(array); // Fill the array with random numbers
+            int[] array = new int[ARRAY_SIZE]; // Declare an array.
+            PopulateArray(array); // Fill the array with random numbers.
 
-            long time = DateTime.Now.Ticks; // Get the current ticks
+            long time = DateTime.Now.Ticks; // Get the current ticks.
 
-            //Console.WriteLine(string.Join(",",number)); // Display array before sorting
+            //Console.WriteLine(string.Join(",",array)); // Display array before sorting.
             BubbleSort(array); // Sort the array
-            //Console.WriteLine(string.Join(",",number)); // Display array after sorting
+            //Console.WriteLine(string.Join(",",array)); // Display array after sorting.
 
-            time = DateTime.Now.Ticks - time; // Get the time spent sorting
+            time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
-            Console.WriteLine($"Sorting an {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}");// Print the name of the algorithm used.
-            Console.WriteLine($"Total Seconds:{TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds
-
+            Console.WriteLine($"Total Seconds:{TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 
         /// <summary>
@@ -72,7 +70,5 @@ namespace Bubble_Sort
                 }
             }
         }
-
-        
     } // End Class
-}// End Namespace
+} // End Namespace
