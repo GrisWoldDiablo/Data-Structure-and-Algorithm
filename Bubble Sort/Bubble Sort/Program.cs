@@ -48,13 +48,13 @@ namespace Bubble_Sort
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
         /// BubbleSort(A)
-        /// for i = 0 to length of A - 1
-        ///     for j = i - 1 to length of A - 1
-        ///         if A[j] < A[i]
-        ///             swap A[j] and A[i]
+        ///  for i = 0 to length of A - 1
+        ///      for j = i - 1 to length of A - 1
+        ///          if A[j] < A[i]
+        ///              swap A[j] and A[i]
         /// -----PSEUDO CODE-----
         /// </summary>
-        /// <typeparam name="T">array type needs to be IComparable</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
         static void BubbleSort<T>(T[] A) where T : IComparable
         {
@@ -73,10 +73,10 @@ namespace Bubble_Sort
         }
 
         /// <summary>
-        /// Print the array elements
+        /// Print the array's elements
         /// </summary>
-        /// <typeparam name="T">array of any types, custom classes need to overide ToString()</typeparam>
-        /// <param name="array"></param>
+        /// <typeparam name="T">can be of any type, ToString() need to return key</typeparam>
+        /// <param name="array">array to be printed</param>
         static void PrintArray<T>(T[] array)
         {
             Console.WriteLine($"---- Array of {array.GetType()} ----");

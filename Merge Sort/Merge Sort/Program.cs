@@ -48,7 +48,7 @@ namespace Merge_Sort
         /// Sort the array using merge sort algorithm
         /// this overload version is to setup the array properly
         /// </summary>
-        /// <typeparam name="T">array type needs to be IComparable</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
         static void MergeSort<T>(T[] A) where T : IComparable
         {
@@ -61,14 +61,14 @@ namespace Merge_Sort
         /// (A is an Array with index 0..n)
         /// (p, q and r are indexes) 
         /// MergeSort(A,p,r)
-        /// if p < r
-        ///     q =  FLOOR[(p + r) / 2]
-        ///     MergeSort(A,p,q)
-        ///     MergeSort(A,q+1,r)
-        ///     Merge(A,p,q,r)
+        ///  if p < r
+        ///      q =  FLOOR[(p + r) / 2]
+        ///      MergeSort(A,p,q)
+        ///      MergeSort(A,q+1,r)
+        ///      Merge(A,p,q,r)
         /// -----PSEUDO CODE-----
         /// </summary>
-        /// <typeparam name="T">array type needs to be IComparable</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
         /// <param name="p">start index of array</param>
         /// <param name="r">end index of array</param>
@@ -90,27 +90,27 @@ namespace Merge_Sort
         /// (A is an Array with index 0..n)
         /// (p, q and r are indexes)
         /// Merge(A,p,q,r)
-        /// n1 = q - p + 1
-        /// n2 = r - q
-        /// let L[0..n1+1] and R[0..n2+1] be new arrays
-        /// for i = 0 to n1 - 1
-        ///     L[i] = A[p + i]
-        /// for j = 0 to n2 - 1
-        ///     R[j] = A[q + j + 1]
-        /// L[n1 + 1] = INFINITY
-        /// R[n2 + 1] = INFINITY
-        /// x = 0
-        /// y = 0
-        /// for k = p to r
-        ///     if L[x] <= R[y]
-        ///         A[k] = L[x]
-        ///         x = x + 1
-        ///     else
-        ///         A[k] = R[y]
-        ///         y = y + 1
+        ///  n1 = q - p + 1
+        ///  n2 = r - q
+        ///  let L[0..n1+1] and R[0..n2+1] be new arrays
+        ///  for i = 0 to n1 - 1
+        ///      L[i] = A[p + i]
+        ///  for j = 0 to n2 - 1
+        ///      R[j] = A[q + j + 1]
+        ///  L[n1 + 1] = INFINITY
+        ///  R[n2 + 1] = INFINITY
+        ///  x = 0
+        ///  y = 0
+        ///  for k = p to r
+        ///      if L[x] <= R[y]
+        ///          A[k] = L[x]
+        ///          x = x + 1
+        ///      else
+        ///          A[k] = R[y]
+        ///          y = y + 1
         /// -----PSEUDO CODE-----
         /// </summary>
-        /// <typeparam name="T">array type needs to be IComparable</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
         /// <param name="p">start index of first portion of the array</param>
         /// <param name="q">end index of first portion of the array</param>
@@ -149,10 +149,10 @@ namespace Merge_Sort
         }
 
         /// <summary>
-        /// Print the array elements
+        /// Print the array's elements
         /// </summary>
-        /// <typeparam name="T">array of any types, custom classes need to overide ToString()</typeparam>
-        /// <param name="array"></param>
+        /// <typeparam name="T">can be of any type, ToString() need to return key</typeparam>
+        /// <param name="array">array to be printed</param>
         static void PrintArray<T>(T[] array)
         {
             Console.WriteLine($"---- Array of {array.GetType()} ----");

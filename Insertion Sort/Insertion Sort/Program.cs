@@ -48,16 +48,16 @@ namespace Insertion_Sort
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
         /// InsertionSort(A)
-        /// for j = 1 to length of A - 1
-        ///     key = A[j]
-        ///     i = j - 1
-        ///     while i >= 0 and A[i] > key
-        ///         A[i + 1] = A[i]
-        ///         i = i + 1
-        ///     A[i+1] = key
+        ///  for j = 1 to length of A - 1
+        ///      key = A[j]
+        ///      i = j - 1
+        ///      while i >= 0 and A[i] > key
+        ///          A[i + 1] = A[i]
+        ///          i = i + 1
+        ///      A[i+1] = key
         /// -----PSEUDO CODE-----
         /// </summary>
-        /// <typeparam name="T">array type needs to be IComparable</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
         static void InsertionSort<T>(T[] A) where T : IComparable
         {
@@ -77,8 +77,8 @@ namespace Insertion_Sort
         /// <summary>
         /// Print the array elements
         /// </summary>
-        /// <typeparam name="T">array of any types, custom classes need to overide ToString()</typeparam>
-        /// <param name="array"></param>
+        /// <typeparam name="T">can be of any type, ToString() need to return key</typeparam>
+        /// <param name="array">array to be printed</param>
         static void PrintArray<T>(T[] array)
         {
             Console.WriteLine($"---- Array of {array.GetType()} ----");
