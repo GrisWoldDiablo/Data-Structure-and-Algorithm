@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Merge_Sort
+namespace Quick_Sort
 {
-   
     class Program
     {
-        const string ALGORITHM_NAME = "Merge Sort"; // The name of the algorith used for sorting
+        const string ALGORITHM_NAME = "Quick Sort"; // The name of the algorith used for sorting
         const int RANDOM_SEED = 2019; // Random Seed number to keep constant.
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
@@ -34,7 +33,7 @@ namespace Merge_Sort
             //PrintArray(array); // Display array before sorting.
 
             long time = DateTime.Now.Ticks; // Get the current ticks.
-            MergeSort(array); // Sort the array
+            QuickSort(array); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
             //PrintArray(array); // Display array after sorting.
@@ -45,110 +44,88 @@ namespace Merge_Sort
         }
 
         /// <summary>
-        /// Sort the array using merge sort algorithm
+        /// Sort the array using quick sort algorithm
         /// this overload version is to setup the array properly
         /// </summary>
         /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
-        static void MergeSort<T>(T[] A) where T : IComparable
+        private static void QuickSort<T>(T[] A) where T : IComparable
         {
-            MergeSort(A, 0, A.Length - 1);
+            QuickSort(A, 0, A.Length - 1);
         }
 
         /// <summary>
-        /// Sort the array using merge sort algorithm
+        /// Sort the array using quick sort algorithm
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
-        /// (p, q and r are indexes) 
-        /// MergeSort(A,p,r)
+        /// (p is the start index of the Array)
+        /// (r is the end index of the array)
+        /// QuickSort(A,p,r)
         ///  if p < r
-        ///      q =  FLOOR[(p + r) / 2]
-        ///      MergeSort(A,p,q)
-        ///      MergeSort(A,q+1,r)
-        ///      Merge(A,p,q,r)
+        ///     q = Partition(A,p,r)
+        ///     QuickSort(A,p,q-1)
+        ///     QuickSort(A,q+1,r)
         /// -----PSEUDO CODE-----
         /// </summary>
         /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
-        /// <param name="p">start index of array</param>
-        /// <param name="r">end index of array</param>
-        static void MergeSort<T>(T[] A, int p, int r) where T : IComparable
+        /// <param name="p">the start index of the array</param>
+        /// <param name="r">the end index of the array</param>
+        private static void QuickSort<T>(T[] A, int p, int r) where T : IComparable
         {
             if (p < r)
             {
-                int q = (p + r) / 2;
-                MergeSort(A, p, q);
-                MergeSort(A, q + 1, r);
-                Merge(A, p, q, r);
+                int q = Partition(A, p, r);
+                QuickSort(A, p, q - 1);
+                QuickSort(A, q + 1, r);
             }
         }
 
         /// <summary>
-        /// Merge the 2 array portions together.
+        /// Partition the array, rearrange the array inplace based 
+        /// on the element at index r used as pivot.
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
-        /// (p, q and r are indexes)
-        /// Merge(A,p,q,r)
-        ///  n1 = q - p + 1
-        ///  n2 = r - q
-        ///  let L[0..n1+1] and R[0..n2+1] be new arrays
-        ///  for i = 0 to n1 - 1
-        ///      L[i] = A[p + i]
-        ///  for j = 0 to n2 - 1
-        ///      R[j] = A[q + j + 1]
-        ///  L[n1 + 1] = INFINITY
-        ///  R[n2 + 1] = INFINITY
-        ///  x = 0
-        ///  y = 0
-        ///  for k = p to r
-        ///      if L[x] <= R[y]
-        ///          A[k] = L[x]
-        ///          x = x + 1
-        ///      else
-        ///          A[k] = R[y]
-        ///          y = y + 1
+        /// (p is the start index of the array)
+        /// (r is the end index and pivot of the array)
+        /// Partition(A,p,r)
+        ///  x = A[r]
+        ///  i = p - 1
+        ///  for j = p to r - 1
+        ///     if A[j] <= x
+        ///         i = i + 1
+        ///         swap A[i] and A[j]
+        ///  swap A[i + 1] and A[r]
+        ///  return i + 1
         /// -----PSEUDO CODE-----
         /// </summary>
         /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
-        /// <param name="p">start index of first portion of the array</param>
-        /// <param name="q">end index of first portion of the array</param>
-        /// <param name="r">end index of second portion of the array</param>
-        static void Merge<T>(T[] A, int p, int q, int r) where T : IComparable
+        /// <param name="p">the start index of the array</param>
+        /// <param name="r">the end index of the array</param>
+        /// <returns></returns>
+        private static int Partition<T>(T[] A, int p, int r) where T : IComparable
         {
-            int n1 = q - p + 1;
-            int n2 = r - q;
-            T[] L = new T[n1 + 1];
-            T[] R = new T[n2 + 1];
-            for (int i = 0; i < n1; i++)
+            T x = A[r];
+            int i = p - 1;
+            for (int j = p; j <= r - 1; j++)
             {
-                L[i] = A[p + i];
-            }
-            for (int j = 0; j < n2; j++)
-            {
-                R[j] = A[q + j + 1];
-            }
-            L[n1] = (dynamic)int.MaxValue; // To be refine for more complex generic type
-            R[n2] = (dynamic)int.MaxValue; // To be refine for more complex generic type
-            int x = 0;
-            int y = 0;
-            for (int k = p; k <= r; k++)
-            {
-                if (L[x].CompareTo(R[y]) <= 0)
+                if (A[j].CompareTo(x) <= 0)
                 {
-                    A[k] = L[x];
-                    x++;
-                }
-                else
-                {
-                    A[k] = R[y];
-                    y++;
+                    i++;
+                    T temp2 = A[j];
+                    A[j] = A[i];
+                    A[i] = temp2;
                 }
             }
+            T temp = A[i + 1];
+            A[i + 1] = A[r];
+            A[r] = temp;
+            return i + 1;
         }
 
         /// <summary>
-        /// Print the array's elements
+        /// Print the array elements
         /// </summary>
         /// <typeparam name="T">can be of any type, ToString() need to return key</typeparam>
         /// <param name="array">array to be printed</param>
