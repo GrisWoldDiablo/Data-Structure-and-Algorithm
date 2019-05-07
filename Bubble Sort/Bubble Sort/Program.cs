@@ -30,17 +30,17 @@ namespace Bubble_Sort
             int[] array = new int[ARRAY_SIZE]; // Declare an array.
             PopulateArray(array); // Fill the array with random numbers.
 
+            //PrintArray(array); // Display array before sorting.
+
             long time = DateTime.Now.Ticks; // Get the current ticks.
-
-            //Console.WriteLine(string.Join(",",array)); // Display array before sorting.
             BubbleSort(array); // Sort the array
-            //Console.WriteLine(string.Join(",",array)); // Display array after sorting.
-
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
+
+            //PrintArray(array); // Display array after sorting.
 
             Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}");// Print the name of the algorithm used.
-            Console.WriteLine($"Total Seconds:{TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
+            Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 
         /// <summary>
@@ -48,12 +48,13 @@ namespace Bubble_Sort
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
         /// BubbleSort(A)
-        /// for i=0 to length of A - 1
-        ///     for j=i-1 to length of A - 1
+        /// for i = 0 to length of A - 1
+        ///     for j = i - 1 to length of A - 1
         ///         if A[j] < A[i]
         ///             swap A[j] and A[i]
         /// -----PSEUDO CODE-----
         /// </summary>
+        /// <typeparam name="T">array type needs to be IComparable</typeparam>
         /// <param name="A">array to be sorted</param>
         static void BubbleSort<T>(T[] A) where T : IComparable
         {
@@ -69,6 +70,30 @@ namespace Bubble_Sort
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Print the array elements
+        /// </summary>
+        /// <typeparam name="T">array of any types, custom classes need to overide ToString()</typeparam>
+        /// <param name="array"></param>
+        static void PrintArray<T>(T[] array)
+        {
+            Console.WriteLine($"---- Array of {array.GetType()} ----");
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i != array.Length - 1)
+                {
+                    Console.Write(array[i] + ",");
+                    continue;
+                }
+                else
+                {
+                    Console.Write(array[i]);
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("---- ----");
         }
     } // End Class
 } // End Namespace
