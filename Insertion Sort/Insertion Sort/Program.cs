@@ -8,7 +8,7 @@ namespace Insertion_Sort
 {
     class Program
     {
-        const string ALGORITHM_NAME = "Insertion Sort"; // The name of the algorith used for sorting
+        const string ALGORITHM_NAME = "Insertion Sort"; // The name of the algorithm used for sorting
         const int RANDOM_SEED = 2019; // Random Seed number to keep constant.
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
