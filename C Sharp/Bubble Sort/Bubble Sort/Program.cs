@@ -13,18 +13,6 @@ namespace Bubble_Sort
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
 
-        /// <summary>
-        /// Populate an int array with random numbers between -100,000 to 100,000
-        /// </summary>
-        /// <param name="arr">array to populate</param>
-        static void PopulateArray(int[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = randGen.Next(-100000, 100000);
-            }
-        }
-
         static void Main(string[] args)
         {
             int[] array = new int[ARRAY_SIZE]; // Declare an array.
@@ -73,9 +61,21 @@ namespace Bubble_Sort
         }
 
         /// <summary>
+        /// Populate an int array with random numbers between -100,000 to 100,000
+        /// </summary>
+        /// <param name="arr">array to populate</param>
+        static void PopulateArray(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = randGen.Next(-100000, 100000);
+            }
+        }
+
+        /// <summary>
         /// Print the array's elements
         /// </summary>
-        /// <typeparam name="T">can be of any type, ToString() need to return key</typeparam>
+        /// <typeparam name="T">can be of any type, ToString() needs to return key</typeparam>
         /// <param name="array">array to be printed</param>
         static void PrintArray<T>(T[] array)
         {

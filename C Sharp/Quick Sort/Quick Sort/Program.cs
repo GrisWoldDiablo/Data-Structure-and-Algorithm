@@ -12,41 +12,35 @@ namespace Quick_Sort
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
 
-        /// <summary>
-        /// Populate an int array with random numbers between -100,000 to 100,000
-        /// </summary>
-        /// <param name="arr">array to populate</param>
-        static void PopulateArray(int[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = randGen.Next(-100000, 100000);
-            }
-        }
-
         static void Main(string[] args)
         {
-            int[] array = new int[ARRAY_SIZE]; // Declare an array.
-            PopulateArray(array); // Fill the array with random numbers.
-            int[] array2 = new int[ARRAY_SIZE];
-            Array.Copy(array, array2, array.Length);
+            int[] array1 = new int[ARRAY_SIZE]; // Declare an array.
+            PopulateArray(array1); // Fill the array with random numbers.
+            int[] array2 = new int[ARRAY_SIZE]; // Declare an array for Quick Sort Randomized.
+            Array.Copy(array1, array2, array1.Length); // Copy array1 into array2 in order to sort same values.
+
             //PrintArray(array); // Display array before sorting.
 
             long time = DateTime.Now.Ticks; // Get the current ticks.
-            QuickSort(array); // Sort the array
+            QuickSort(array1); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
             //PrintArray(array); // Display array after sorting.
 
-            Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Sorting a {array1.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
+
+            //------ Quick Sort Randomized portion ------
+            
+            //PrintArray(array2); // Display array2 before sorting.
 
             time = DateTime.Now.Ticks; // Get the current ticks.
             QuickSortRandomized(array2); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
-            //PrintArray(array); // Display array after sorting.
+            //PrintArray(array2); // Display array2 after sorting.
+
             Console.WriteLine();
             Console.WriteLine($"Sorting a {array2.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME} Randomized version"); // Print the name of the algorithm used.
@@ -199,9 +193,21 @@ namespace Quick_Sort
         }
 
         /// <summary>
+        /// Populate an int array with random numbers between -100,000 to 100,000
+        /// </summary>
+        /// <param name="arr">array to populate</param>
+        static void PopulateArray(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = randGen.Next(-100000, 100000);
+            }
+        }
+
+        /// <summary>
         /// Print the array elements
         /// </summary>
-        /// <typeparam name="T">can be of any type, ToString() need to return key</typeparam>
+        /// <typeparam name="T">can be of any type, ToString() needs to return key</typeparam>
         /// <param name="array">array to be printed</param>
         static void PrintArray<T>(T[] array)
         {

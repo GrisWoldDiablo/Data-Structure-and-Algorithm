@@ -13,18 +13,6 @@ namespace Heap_Sort
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
 
-        /// <summary>
-        /// Populate an int array with random numbers between -100,000 to 100,000
-        /// </summary>
-        /// <param name="arr">array to populate</param>
-        static void PopulateArray(int[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = randGen.Next(-100000, 100000);
-            }
-        }
-
         static void Main(string[] args)
         {
             int[] array = new int[ARRAY_SIZE]; // Declare an array.
@@ -144,6 +132,7 @@ namespace Heap_Sort
 
         /// <summary>
         /// Return the Parent element's index of the request element at index i
+        /// Not used for sorting.
         /// </summary>
         /// <param name="i">index of requested element</param>
         /// <returns>Parent's index of requested element</returns>
@@ -170,6 +159,18 @@ namespace Heap_Sort
         static int Right(int i)
         {
             return ((2 * i) + 1);
+        }
+
+        /// <summary>
+        /// Populate an int array with random numbers between -100,000 to 100,000
+        /// </summary>
+        /// <param name="arr">array to populate</param>
+        static void PopulateArray(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = randGen.Next(-100000, 100000);
+            }
         }
 
         /// <summary>
