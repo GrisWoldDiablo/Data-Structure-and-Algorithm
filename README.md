@@ -2,17 +2,17 @@
 Data strutures and Algorithms inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 ## Sorting Algorithms *[Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm)*
 - #### Bubble Sort *[Wikipedia](https://en.wikipedia.org/wiki/Bubble_sort)*
-	 [C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Bubble%20Sort/Bubble%20Sort/Program.cs), [C++ version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Bubble%20Sort/Bubble%20Sort/Bubble%20Sort.cpp)
+	 Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Bubble%20Sort/Bubble%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Bubble%20Sort/Bubble%20Sort/Bubble%20Sort.cpp)
 - #### Insertion Sort *[Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)*
-	[C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Insertion%20Sort/Insertion%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Insertion%20Sort/Insertion%20Sort/Program.cs)
 - #### Merge Sort *[Wikipedia](https://en.wikipedia.org/wiki/Merge_sort)*
-	[C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Merge%20Sort/Merge%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Merge%20Sort/Merge%20Sort/Program.cs)
 - #### Heap Sort *[Wikipedia](https://en.wikipedia.org/wiki/Heapsort)*
-	[C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Heap%20Sort/Heap%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Heap%20Sort/Heap%20Sort/Program.cs)
 - #### Quick Sort *[Wikipedia](https://en.wikipedia.org/wiki/Quicksort)*
-	[C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Quick%20Sort/Quick%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Quick%20Sort/Quick%20Sort/Program.cs)
 - #### Counting Sort *[Wikipedia](https://en.wikipedia.org/wiki/Counting_sort)*
-	[C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Counting%20Sort/Counting%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Counting%20Sort/Counting%20Sort/Program.cs)
 ## Data Structures *[Wikipedia](https://en.wikipedia.org/wiki/Data_structure)*
 - #### Stack *[Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))*
 - #### Queue *[Wikipedia](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))*
