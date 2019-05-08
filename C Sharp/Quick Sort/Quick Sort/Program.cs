@@ -28,7 +28,8 @@ namespace Quick_Sort
         {
             int[] array = new int[ARRAY_SIZE]; // Declare an array.
             PopulateArray(array); // Fill the array with random numbers.
-
+            int[] array2 = new int[ARRAY_SIZE];
+            Array.Copy(array, array2, array.Length);
             //PrintArray(array); // Display array before sorting.
 
             long time = DateTime.Now.Ticks; // Get the current ticks.
@@ -39,6 +40,16 @@ namespace Quick_Sort
 
             Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
+            Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
+
+            time = DateTime.Now.Ticks; // Get the current ticks.
+            QuickSortRandomized(array2); // Sort the array
+            time = DateTime.Now.Ticks - time; // Get the time spent sorting.
+
+            //PrintArray(array); // Display array after sorting.
+            Console.WriteLine();
+            Console.WriteLine($"Sorting a {array2.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Algorithm: {ALGORITHM_NAME} Randomized version"); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 
@@ -70,7 +81,7 @@ namespace Quick_Sort
         /// <param name="A">array to be sorted</param>
         /// <param name="p">the start index of the array</param>
         /// <param name="r">the end index of the array</param>
-        private static void QuickSort<T>(T[] A, int p, int r) where T : IComparable
+        static void QuickSort<T>(T[] A, int p, int r) where T : IComparable
         {
             if (p < r)
             {
@@ -102,8 +113,8 @@ namespace Quick_Sort
         /// <param name="A">array to be sorted</param>
         /// <param name="p">the start index of the array</param>
         /// <param name="r">the end index of the array</param>
-        /// <returns></returns>
-        private static int Partition<T>(T[] A, int p, int r) where T : IComparable
+        /// <returns>the new pivot's index</returns>
+        static int Partition<T>(T[] A, int p, int r) where T : IComparable
         {
             T x = A[r];
             int i = p - 1;
@@ -121,6 +132,70 @@ namespace Quick_Sort
             A[i + 1] = A[r];
             A[r] = temp;
             return i + 1;
+        }
+
+        /// <summary>
+        /// Sort the array using quick sort algorithm with a random pivot
+        /// this overload version is to setup the array properly
+        /// </summary>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
+        /// <param name="A">array to be sorted</param>
+        private static void QuickSortRandomized<T>(T[] A) where T : IComparable
+        {
+            QuickSortRandomized(A, 0, A.Length - 1);
+        }
+
+        /// <summary>
+        /// Sort the array using quick sort algorithm
+        /// -----PSEUDO CODE-----
+        /// (A is an Array with index 0..n)
+        /// (p is the start index of the Array)
+        /// (r is the end index of the array)
+        /// QuickSortRandomized(A,p,r)
+        ///  if p < r
+        ///     q = PartitionRadomized(A,p,r)
+        ///     QuickSortRandomized(A,p,q-1)
+        ///     QuickSortRandomized(A,q+1,r)
+        /// -----PSEUDO CODE-----
+        /// </summary>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
+        /// <param name="A">array to be sorted</param>
+        /// <param name="p">the start index of the array</param>
+        /// <param name="r">the end index of the array</param>
+        static void QuickSortRandomized<T>(T[] A, int p, int r) where T : IComparable
+        {
+            if (p < r)
+            {
+                int q = PartitionRadomized(A, p, r);
+                QuickSortRandomized(A, p, q - 1);
+                QuickSortRandomized(A, q + 1, r);
+            }
+        }
+
+        /// <summary>
+        /// Swap the pivot with a random element.
+        /// -----PSEUDO CODE-----
+        /// (A is an Array with index 0..n)
+        /// (p is the start index of the Array)
+        /// (r is the end index of the array)
+        /// PartitionRadomized(A,p,r)
+        ///  i = Random(p,r)
+        ///  swap A[r] and A[i]
+        ///  return Partition(A,p,r)
+        /// -----PSEUDO CODE-----
+        /// </summary>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
+        /// <param name="A">array to be sorted</param>
+        /// <param name="p">the start index of the array</param>
+        /// <param name="r">the end index of the array</param>
+        /// <returns>the new pivot's index</returns>
+        static int PartitionRadomized<T>(T[] A, int p, int r) where T : IComparable
+        {
+            int i = randGen.Next(p, r);
+            T temp = A[r];
+            A[r] = A[i];
+            A[i] = temp;
+            return Partition(A, p, r);
         }
 
         /// <summary>
