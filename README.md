@@ -1,6 +1,6 @@
 # Data-Structure-and-Algorithm
-Algorithms from CLRS
-## Sorting Algorithm
+Data strutures and Algorithms inspired by the book: Introduction to Algorithms by CLRS
+## Sorting Algorithms
 1. #### Bubble Sort *[Wikipedia](https://en.wikipedia.org/wiki/Bubble_sort)*
 	 [C# version](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Bubble%20Sort/Bubble%20Sort/Program.cs)
 2. #### Insertion Sort *[Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)*
