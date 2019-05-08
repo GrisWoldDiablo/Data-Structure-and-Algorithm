@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Alexandre Lepage
+ * Date: May 2019
+ */
+using System;
 
 namespace Merge_Sort
 {
@@ -10,7 +10,7 @@ namespace Merge_Sort
     class Program
     {
         const string ALGORITHM_NAME = "Merge Sort"; // The name of the algorithm used for sorting
-        const int RANDOM_SEED = 2019; // Random Seed number to keep constant.
+        const int RANDOM_SEED = 2019; // Random Seed number to keep values constant.
         static Random randGen = new Random(RANDOM_SEED); // Get a random generator.
         const int ARRAY_SIZE = 50000; // Set the size of the array to 50,000.
 
