@@ -48,7 +48,7 @@ def BubbleSort(A:list):
                 A[j] = A[i]
                 A[i] = temp
 
-def PopulateList(arr:list):
+def PopulateList(A:list):
     """
     Populate a list with random numbers between -100,000 to 100,000
     
@@ -56,7 +56,7 @@ def PopulateList(arr:list):
     A:list: the list to populate
     """
     for i in range(0, LIST_SIZE):
-        arr[i] = random.randint(-100000,100000)
+        A[i] = random.randint(-100000,100000)
 
 """Entry point"""
 if __name__ == "__main__":
