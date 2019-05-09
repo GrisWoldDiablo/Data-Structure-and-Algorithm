@@ -50,7 +50,7 @@ namespace Heap_Sort
         {
             BuildMaxHeap(A);
             int heapSize = A.Length;
-            for (int i = A.Length - 1; i > 0; i--)
+            for (int i = A.Length - 1; i >= 1; i--)
             {
                 T temp = A[0];
                 A[0] = A[i];
@@ -66,7 +66,7 @@ namespace Heap_Sort
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
         /// BuildMaxHeap(A)
-        ///  for i = FLOOR[(length of A - 1) / 2] down to 0
+        ///  for i = FLOOR[(length of A) / 2] down to 0
         ///     MaxHeapify(A,i,length of A)   
         /// -----PSEUDO CODE-----
         /// </summary>
@@ -74,9 +74,9 @@ namespace Heap_Sort
         /// <param name="A">array to be max heaped</param>
         private static void BuildMaxHeap<T>(T[] A) where T : IComparable
         {
-            for (int i = (A.Length - 1) / 2; i >= 0; i--)
+            for (int i = (A.Length) / 2; i >= 0; i--)
             {
-                MaxHeapify(A, i, A.Length - 1);
+                MaxHeapify(A, i, A.Length);
             }
         }
 
@@ -89,11 +89,11 @@ namespace Heap_Sort
         /// MaxHeapify(A,i,heapSize)
         ///  l = Left(i)
         ///  r = Right(i)
-        ///  if l <= heapSize and A[l] > A[i]
+        ///  if l < heapSize and A[l] > A[i]
         ///     largest = l
         ///  else
         ///     lasgest = i
-        ///  if r <= heapSize and A[r] > A[largest]
+        ///  if r < heapSize and A[r] > A[largest]
         ///     largest = r
         ///  if largest =/= i
         ///     swap A[i] and A[largest]
@@ -104,12 +104,12 @@ namespace Heap_Sort
         /// <param name="A">array of the element to be heapified</param>
         /// <param name="i">index of the element to be heapified</param>
         /// <param name="heapSize">the size of the heap</param>
-        private static void MaxHeapify<T>(T[] A, int i, int heapSize) where T : IComparable
+        static void MaxHeapify<T>(T[] A, int i, int heapSize) where T : IComparable
         {
             int l = Left(i);
             int r = Right(i);
             int largest;
-            if (l <= heapSize && A[l].CompareTo(A[i]) > 0)
+            if (l < heapSize && A[l].CompareTo(A[i]) > 0)
             {
                 largest = l;
             }
@@ -117,7 +117,7 @@ namespace Heap_Sort
             {
                 largest = i;
             }
-            if (r <= heapSize && A[r].CompareTo(A[largest]) > 0)
+            if (r < heapSize && A[r].CompareTo(A[largest]) > 0)
             {
                 largest = r;
             }

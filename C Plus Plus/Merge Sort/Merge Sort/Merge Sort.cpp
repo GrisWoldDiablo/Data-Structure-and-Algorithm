@@ -37,7 +37,7 @@ int main()
 	MergeSort(myArray); // Sort the array
 	auto endTime = chrono::system_clock::now(); // Get the time after sorting.
 
-	PrintArray(myArray); // Display array after sorting.
+	//PrintArray(myArray); // Display array after sorting.
 
 	std::chrono::duration<double> diff = endTime - startTime; // Get the difference from start to end time
 
