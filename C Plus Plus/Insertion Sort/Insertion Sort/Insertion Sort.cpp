@@ -8,14 +8,14 @@
 #include <typeinfo>
 using namespace std;
 
-#define ALGORITHM_NAME ("Bubble Sort") // The name of the algorithm used for sorting
+#define ALGORITHM_NAME ("Insertion Sort") // The name of the algorithm used for sorting
 #define RANDOM_SEED 2019 // Random Seed number to keep values constant.
 #define ARRAY_SIZE 50000 // Set the size of the array to 50,000.
 mt19937 gen(RANDOM_SEED);
 uniform_int_distribution<int> dist(-100000, 100000);
 
 template<typename T>
-void BubbleSort(T[]);
+void InsertionSort(T[]);
 template<typename T>
 void PopulateArray(T[]);
 template<typename T>
@@ -29,7 +29,7 @@ int main()
 	//PrintArray(myArray); // Display array before sorting.
 
 	auto startTime = chrono::system_clock::now(); // Get the time before sorting.
-	BubbleSort(myArray); // Sort the array
+	InsertionSort(myArray); // Sort the array
 	auto endTime = chrono::system_clock::now(); // Get the time after sorting.
 
 	//PrintArray(myArray); // Display array after sorting.
@@ -42,31 +42,33 @@ int main()
 }
 
 /// <summary>
-/// Sort the array using bubble sort algorithm.
+/// Sort the array using insertion sort algorithm.
 /// -----PSEUDO CODE-----
 /// (A is an Array with index 0..n)
-/// BubbleSort(A)
-///  for i = 0 to length of A - 1
-///      for j = i - 1 to length of A - 1
-///          if A[j] < A[i]
-///              swap A[j] and A[i]
+/// InsertionSort(A)
+///  for j = 1 to length of A - 1
+///      key = A[j]
+///      i = j - 1
+///      while i >= 0 and A[i] > key
+///          A[i + 1] = A[i]
+///          i = i + 1
+///      A[i+1] = key
 /// -----PSEUDO CODE-----
 /// </summary>
 /// <param name="A">array to be sorted</param>
 template<typename T> // can be of any type, needs to implement LessThan operator '<'
-void BubbleSort(T A[])
+void InsertionSort(T A[])
 {
-	for (int i = 0; i < ARRAY_SIZE; i++)
+	for (int j = 1; j < ARRAY_SIZE; j++)
 	{
-		for (int j = i + 1; j < ARRAY_SIZE; j++)
+		T key = A[j];
+		int i = j - 1;
+		while (i >= 0 && A[i] > key)
 		{
-			if (A[j] < A[i])
-			{
-				T temp = A[j];
-				A[j] = A[i];
-				A[i] = temp;
-			}
+			A[i + 1] = A[i];
+			i--;
 		}
+		A[i + 1] = key;
 	}
 }
 
@@ -87,7 +89,7 @@ void PopulateArray(T arr[])
 /// Print the array's elements
 /// </summary>
 /// <param name="array">array to be printed</param>
-template<typename T> // can be of any type, custom type needs to overload Bitwise Left Shift '<<' operator
+template<typename T> // can be of any type, custom type needs to overload bitwise left shift '<<' operator
 void PrintArray(T arr[])
 {
 	for (int i = 0; i < ARRAY_SIZE; i++)
