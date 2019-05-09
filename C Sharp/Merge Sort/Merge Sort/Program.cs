@@ -25,7 +25,7 @@ namespace Merge_Sort
             MergeSort(array); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
-            //PrintArray(array); // Display array after sorting.
+            PrintArray(array); // Display array after sorting.
 
             Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
@@ -47,7 +47,7 @@ namespace Merge_Sort
         /// Sort the array using merge sort algorithm
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n)
-        /// (p, q and r are indexes) 
+        /// (p and r are indexes) 
         /// MergeSort(A,p,r)
         ///  if p < r
         ///      q =  FLOOR[(p + r) / 2]
@@ -138,12 +138,12 @@ namespace Merge_Sort
         /// <summary>
         /// Populate an int array with random numbers between -100,000 to 100,000
         /// </summary>
-        /// <param name="arr">array to populate</param>
-        static void PopulateArray(int[] arr)
+        /// <param name="A">array to populate</param>
+        static void PopulateArray(int[] A)
         {
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < A.Length; i++)
             {
-                arr[i] = randGen.Next(-100000, 100000);
+                A[i] = randGen.Next(-100000, 100000);
             }
         }
 
@@ -151,20 +151,19 @@ namespace Merge_Sort
         /// Print the array's elements
         /// </summary>
         /// <typeparam name="T">can be of any type, ToString() needs to return key</typeparam>
-        /// <param name="array">array to be printed</param>
-        static void PrintArray<T>(T[] array)
+        /// <param name="A">array to be printed</param>
+        static void PrintArray<T>(T[] A)
         {
-            Console.WriteLine($"---- Array of {array.GetType()} ----");
-            for (int i = 0; i < array.Length; i++)
+            Console.WriteLine($"---- Array of {A.GetType()} ----");
+            for (int i = 0; i < A.Length; i++)
             {
-                if (i != array.Length - 1)
+                if (i != A.Length - 1)
                 {
-                    Console.Write(array[i] + ",");
-                    continue;
+                    Console.Write(A[i] + ",");
                 }
                 else
                 {
-                    Console.Write(array[i]);
+                    Console.Write(A[i]);
                 }
             }
             Console.WriteLine();

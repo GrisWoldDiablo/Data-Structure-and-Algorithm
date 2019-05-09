@@ -15,11 +15,11 @@ mt19937 gen(RANDOM_SEED);
 uniform_int_distribution<int> dist(-100000, 100000);
 
 template<typename T>
-void InsertionSort(T[]);
+void InsertionSort(T A[]);
 template<typename T>
-void PopulateArray(T[]);
+void PopulateArray(T A[]);
 template<typename T>
-void PrintArray(T[]);
+void PrintArray(T A[]);
 
 int main()
 {
@@ -75,26 +75,34 @@ void InsertionSort(T A[])
 /// <summary>
 /// Populate an array with random numbers between -100,000 to 100,000
 /// </summary>
-/// <param name="arr">array to populate</param>
+/// <param name="A">array to populate</param>
 template<typename T> // can be of any type, custom type needs to implement explicit conversion to integer
-void PopulateArray(T arr[])
+void PopulateArray(T A[])
 {
 	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
-		arr[i] = dist(gen);
+		A[i] = dist(gen);
 	}
 }
 
 /// <summary>
 /// Print the array's elements
 /// </summary>
-/// <param name="array">array to be printed</param>
+/// <param name="A">array to be printed</param>
 template<typename T> // can be of any type, custom type needs to overload bitwise left shift '<<' operator
-void PrintArray(T arr[])
+void PrintArray(T A[])
 {
+	cout << "---- Array of " << typeid(A).name() << " ----" << endl;
 	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
-		cout << arr[i] << ",";
+		if (i != ARRAY_SIZE - 1)
+		{
+			cout << A[i] << ",";
+		}
+		else
+		{
+			cout << A[i];
+		}
 	}
-	cout << endl;
+	cout << endl << "---- ----" << endl;
 }

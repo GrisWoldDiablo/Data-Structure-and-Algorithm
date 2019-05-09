@@ -195,12 +195,12 @@ namespace Quick_Sort
         /// <summary>
         /// Populate an int array with random numbers between -100,000 to 100,000
         /// </summary>
-        /// <param name="arr">array to populate</param>
-        static void PopulateArray(int[] arr)
+        /// <param name="A">array to populate</param>
+        static void PopulateArray(int[] A)
         {
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < A.Length; i++)
             {
-                arr[i] = randGen.Next(-100000, 100000);
+                A[i] = randGen.Next(-100000, 100000);
             }
         }
 
@@ -208,20 +208,19 @@ namespace Quick_Sort
         /// Print the array elements
         /// </summary>
         /// <typeparam name="T">can be of any type, ToString() needs to return key</typeparam>
-        /// <param name="array">array to be printed</param>
-        static void PrintArray<T>(T[] array)
+        /// <param name="A">array to be printed</param>
+        static void PrintArray<T>(T[] A)
         {
-            Console.WriteLine($"---- Array of {array.GetType()} ----");
-            for (int i = 0; i < array.Length; i++)
+            Console.WriteLine($"---- Array of {A.GetType()} ----");
+            for (int i = 0; i < A.Length; i++)
             {
-                if (i != array.Length - 1)
+                if (i != A.Length - 1)
                 {
-                    Console.Write(array[i] + ",");
-                    continue;
+                    Console.Write(A[i] + ",");
                 }
                 else
                 {
-                    Console.Write(array[i]);
+                    Console.Write(A[i]);
                 }
             }
             Console.WriteLine();
