@@ -8,7 +8,7 @@ Data strutures and Algorithms inspired by the book: [Introduction to Algorithms 
 - #### Merge Sort *[Wikipedia](https://en.wikipedia.org/wiki/Merge_sort)*
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Merge%20Sort/Merge%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Merge%20Sort/Merge%20Sort/Merge%20Sort.cpp)
 - #### Heap Sort *[Wikipedia](https://en.wikipedia.org/wiki/Heapsort)*
-	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Heap%20Sort/Heap%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Heap%20Sort/Heap%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Heap%20Sort/Heap%20Sort/Heap%20Sort.cpp)
 - #### Quick Sort *[Wikipedia](https://en.wikipedia.org/wiki/Quicksort)*
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Quick%20Sort/Quick%20Sort/Program.cs)
 - #### Counting Sort *[Wikipedia](https://en.wikipedia.org/wiki/Counting_sort)*
