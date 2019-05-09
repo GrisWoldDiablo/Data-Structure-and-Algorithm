@@ -2,7 +2,7 @@
 Data strutures and Algorithms inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 ## Sorting Algorithms *[Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm)*
 - #### Bubble Sort *[Wikipedia](https://en.wikipedia.org/wiki/Bubble_sort)*
-	 Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Bubble%20Sort/Bubble%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Bubble%20Sort/Bubble%20Sort/Bubble%20Sort.cpp)
+	 Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Bubble%20Sort/Bubble%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Bubble%20Sort/Bubble%20Sort/Bubble%20Sort.cpp), [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Bubble%20Sort/Bubble%20Sort/Bubble_Sort.py)
 - #### Insertion Sort *[Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)*
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Insertion%20Sort/Insertion%20Sort/Program.cs)
 - #### Merge Sort *[Wikipedia](https://en.wikipedia.org/wiki/Merge_sort)*
