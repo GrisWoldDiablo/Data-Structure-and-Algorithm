@@ -80,7 +80,6 @@ namespace Counting_Sort
                 
                 B[C[(dynamic)A[i] - minValue] - 1] = (dynamic)A[i]; // To be refine for more complex generic type
                 C[(dynamic)A[i] - minValue]--; // To be refine for more complex generic type
-
             }
             
             Array.Copy(B, A, A.Length);

@@ -49,7 +49,7 @@ int main()
 
 
 /// <summary>
-/// Sort the array using merge sort algorithm
+/// Sort the array using merge sort algorithm,
 /// this overload version is to setup the array properly
 /// </summary>
 /// <param name="A">array to be sorted</param>

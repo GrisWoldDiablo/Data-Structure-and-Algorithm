@@ -43,12 +43,12 @@ namespace Quick_Sort
 
             Console.WriteLine();
             Console.WriteLine($"Sorting a {array2.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
-            Console.WriteLine($"Algorithm: {ALGORITHM_NAME} Randomized version"); // Print the name of the algorithm used.
+            Console.WriteLine($"Algorithm: {ALGORITHM_NAME} Randomized version."); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 
         /// <summary>
-        /// Sort the array using quick sort algorithm
+        /// Sort the array using quick sort algorithm,
         /// this overload version is to setup the array properly
         /// </summary>
         /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>

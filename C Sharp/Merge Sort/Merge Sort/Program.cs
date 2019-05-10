@@ -33,7 +33,7 @@ namespace Merge_Sort
         }
 
         /// <summary>
-        /// Sort the array using merge sort algorithm
+        /// Sort the array using merge sort algorithm,
         /// this overload version is to setup the array properly
         /// </summary>
         /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
