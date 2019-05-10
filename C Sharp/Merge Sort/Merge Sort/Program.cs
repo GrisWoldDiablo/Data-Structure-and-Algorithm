@@ -25,7 +25,7 @@ namespace Merge_Sort
             MergeSort(array); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
-            PrintArray(array); // Display array after sorting.
+            //PrintArray(array); // Display array after sorting.
 
             Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
             Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
@@ -84,8 +84,8 @@ namespace Merge_Sort
         ///      L[i] = A[p + i]
         ///  for j = 0 to n2 - 1
         ///      R[j] = A[q + j + 1]
-        ///  L[n1 + 1] = INFINITY
-        ///  R[n2 + 1] = INFINITY
+        ///  L[n1] = INFINITY
+        ///  R[n2] = INFINITY
         ///  x = 0
         ///  y = 0
         ///  for k = p to r

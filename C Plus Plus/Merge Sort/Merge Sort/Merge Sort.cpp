@@ -100,8 +100,8 @@ void MergeSort(T A[], int p, int r)
 ///      L[i] = A[p + i]
 ///  for j = 0 to n2 - 1
 ///      R[j] = A[q + j + 1]
-///  L[n1 + 1] = INFINITY
-///  R[n2 + 1] = INFINITY
+///  L[n1] = INFINITY
+///  R[n2] = INFINITY
 ///  x = 0
 ///  y = 0
 ///  for k = p to r
