@@ -18,7 +18,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 - #### Quick Sort *[Wikipedia](https://en.wikipedia.org/wiki/Quicksort)*
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Quick%20Sort/Quick%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Quick%20Sort/Quick%20Sort/Quick%20Sort.cpp)
 - #### Counting Sort *[Wikipedia](https://en.wikipedia.org/wiki/Counting_sort)*
-	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Counting%20Sort/Counting%20Sort/Program.cs)
+	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Counting%20Sort/Counting%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Counting%20Sort/Counting%20Sort/Counting%20Sort.cpp)
 ## Data Structures *[Wikipedia](https://en.wikipedia.org/wiki/Data_structure)*
 - #### Stack *[Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))*
 - #### Queue *[Wikipedia](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))*
