@@ -12,8 +12,8 @@ using namespace std;
 #define ALGORITHM_NAME ("Merge Sort") // The name of the algorithm used for sorting
 #define RANDOM_SEED 2019 // Random Seed number to keep values constant.
 #define ARRAY_SIZE 50000 // Set the size of the array to 50,000.
-mt19937 gen(RANDOM_SEED);
-uniform_int_distribution<int> dist(-100000, 100000);
+mt19937 gen(RANDOM_SEED); // Seed the mersenne twister random number generator
+uniform_int_distribution<int> dist(-100000, 100000); // Set the random number distribution between -100,000 and 100,000 inclusive.
 
 template<typename T>
 void MergeSort(T A[]);
