@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Quick Sort", "Quick Sort\Quick Sort.pyproj", "{DFBAD120-C714-45AE-8942-AA0E86BB8564}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFBAD120-C714-45AE-8942-AA0E86BB8564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBAD120-C714-45AE-8942-AA0E86BB8564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {985DBB14-DBFB-4814-BA0C-764CD67EC9C1}
+	EndGlobalSection
+EndGlobal
