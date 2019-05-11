@@ -108,11 +108,11 @@ void BuildMaxHeap(T A[])
 /// MaxHeapify(A,i,heapSize)
 ///  l = Left(i)
 ///  r = Right(i)
-///  if l <= heapSize and A[l] > A[i]
+///  if l < heapSize and A[l] > A[i]
 ///     largest = l
 ///  else
-///     lasgest = i
-///  if r <= heapSize and A[r] > A[largest]
+///     largest = i
+///  if r < heapSize and A[r] > A[largest]
 ///     largest = r
 ///  if largest =/= i
 ///     swap A[i] and A[largest]
@@ -120,7 +120,7 @@ void BuildMaxHeap(T A[])
 /// -----PSEUDO CODE-----
 /// </summary>
 /// <param name="A">array of the element to be heapified</param>
-/// <param name="i">index of the element to be heapified</param>
+/// <param name="i">sub tree root index of the heap</param>
 /// <param name="heapSize">the size of the heap</param>
 template<typename T> // can be of any type, custom types needs to implement GreaterThan operator '>'
 void MaxHeapify(T A[], int i, int heapSize)
@@ -150,7 +150,7 @@ void MaxHeapify(T A[], int i, int heapSize)
 }
 
 /// <summary>
-/// Return the Parent element's index of the request element at index i
+/// Return the Parent element's index of the request element
 /// Not used for sorting.
 /// </summary>
 /// <param name="i">index of requested element</param>
@@ -161,23 +161,23 @@ int Parent(int i)
 }
 
 /// <summary>
-/// Return the Left child element's index of the request element at index i
+/// Return the Left child element's index of the request element
 /// </summary>
 /// <param name="i">index of requested element</param>
 /// <returns>Left child's index of requested element</returns>
 int Left(int i)
 {
-	return (2 * i);
+	return (i * 2);
 }
 
 /// <summary>
-/// Return the Right child element's index of the request element at index i
+/// Return the Right child element's index of the request element
 /// </summary>
 /// <param name="i">index of requested element</param>
 /// <returns>Right child's index of requested element</returns>
 int Right(int i)
 {
-	return ((2 * i) + 1);
+	return ((i * 2) + 1);
 }
 
 /// <summary>

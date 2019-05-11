@@ -92,7 +92,7 @@ namespace Heap_Sort
         ///  if l < heapSize and A[l] > A[i]
         ///     largest = l
         ///  else
-        ///     lasgest = i
+        ///     largest = i
         ///  if r < heapSize and A[r] > A[largest]
         ///     largest = r
         ///  if largest =/= i
@@ -102,7 +102,7 @@ namespace Heap_Sort
         /// </summary>
         /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
         /// <param name="A">array of the element to be heapified</param>
-        /// <param name="i">index of the element to be heapified</param>
+        /// <param name="i">sub tree root index of the heap</param>
         /// <param name="heapSize">the size of the heap</param>
         static void MaxHeapify<T>(T[] A, int i, int heapSize) where T : IComparable
         {
@@ -131,7 +131,7 @@ namespace Heap_Sort
         }
 
         /// <summary>
-        /// Return the Parent element's index of the request element at index i
+        /// Return the Parent element's index of the request element
         /// Not used for sorting.
         /// </summary>
         /// <param name="i">index of requested element</param>
@@ -142,23 +142,23 @@ namespace Heap_Sort
         }
 
         /// <summary>
-        /// Return the Left child element's index of the request element at index i
+        /// Return the Left child element's index of the request element
         /// </summary>
         /// <param name="i">index of requested element</param>
         /// <returns>Left child's index of requested element</returns>
         static int Left(int i)
         {
-            return (2 * i);
+            return (i * 2);
         }
 
         /// <summary>
-        /// Return the Right child element's index of the request element at index i
+        /// Return the Right child element's index of the request element
         /// </summary>
         /// <param name="i">index of requested element</param>
         /// <returns>Right child's index of requested element</returns>
         static int Right(int i)
         {
-            return ((2 * i) + 1);
+            return ((i * 2) + 1);
         }
 
         /// <summary>
