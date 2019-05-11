@@ -40,8 +40,8 @@ def BubbleSort(A:list):
     Keyword arguments:
     A:list: the list to be sorted
     """
-    for i in range(0, LIST_SIZE):
-        for j in range(i + 1, LIST_SIZE):
+    for i in range(0, len(A)):
+        for j in range(i + 1, len(A)):
             if (A[j] < A[i]):
                 temp = A[j]
                 A[j] = A[i]
@@ -54,7 +54,7 @@ def PopulateList(A:list):
     Keyword arguments:
     A:list: the list to populate
     """
-    for i in range(0, LIST_SIZE):
+    for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
 def PrintList(A:list):

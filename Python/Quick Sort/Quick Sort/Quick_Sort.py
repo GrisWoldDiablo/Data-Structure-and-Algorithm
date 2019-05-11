@@ -60,7 +60,7 @@ def QuickSort(A:list, p:int=None, r:int=None):
     r:int: the end index of the list
     """
     if p == None or r == None:
-        QuickSort(A, 0, LIST_SIZE - 1)
+        QuickSort(A, 0, len(A) - 1)
         return
     if p < r:
         q = Partition(A, p, r)
@@ -127,7 +127,7 @@ def QuickSortRandomized(A:list, p:int=None, r:int=None):
     r:int: the end index of the list
     """
     if p == None or r == None:
-        QuickSortRandomized(A, 0, LIST_SIZE - 1)
+        QuickSortRandomized(A, 0, len(A) - 1)
         return
     if p < r:
         q = PartitionRandomized(A, p, r)
@@ -168,7 +168,7 @@ def PopulateList(A:list):
     Keyword arguments:
     A:list: the list to populate
     """
-    for i in range(0, LIST_SIZE):
+    for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
 def PrintList(A:list):

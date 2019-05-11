@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<ProfilingTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectTarget>
-    <TargetProject>ef286d3c-d800-437f-af14-dfae40b50e38</TargetProject>
-    <FriendlyName>Bubble Sort</FriendlyName>
-  </ProjectTarget>
-  <UseVTune>false</UseVTune>
-</ProfilingTarget>

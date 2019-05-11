@@ -45,7 +45,7 @@ def MergeSort(A:list, p:int=None, r:int=None):
     r:int: end index of list
     """
     if p is None or r is None:
-        MergeSort(A, 0, LIST_SIZE - 1)
+        MergeSort(A, 0, len(A) - 1)
         return
     if p < r:
         q = int((p + r) / 2)
@@ -114,7 +114,7 @@ def PopulateList(A:list):
     Keyword arguments:
     A:list: the list to populate
     """
-    for i in range(0, LIST_SIZE):
+    for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
 def PrintList(A:list):

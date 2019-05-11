@@ -43,7 +43,7 @@ def InsertionSort(A:list):
     Keyword arguments:
     A:list: the list to be sorted
     """
-    for j in range(0, LIST_SIZE):
+    for j in range(0, len(A)):
         key = A[j]
         i = j - 1
         while i >= 0 and A[i] > key:
@@ -58,7 +58,7 @@ def PopulateList(A:list):
     Keyword arguments:
     A:list: the list to populate
     """
-    for i in range(0, LIST_SIZE):
+    for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
 def PrintList(A:list):

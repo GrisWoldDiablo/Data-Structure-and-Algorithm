@@ -43,8 +43,8 @@ def HeapSort(A:list):
     A:list: list to be sorted
     """
     BuildMaxHeap(A)
-    heapSize = LIST_SIZE
-    for i in range(LIST_SIZE - 1, 0, -1):
+    heapSize = len(A)
+    for i in range(len(A) - 1, 0, -1):
         temp = A[0]
         A[0] = A[i]
         A[i] = temp
@@ -65,8 +65,8 @@ def BuildMaxHeap(A:list):
     Keyword Argument
     A:list: list to be sorted
     """
-    for i in range(int((LIST_SIZE) / 2), -1, -1):
-        MaxHeapify(A, i, LIST_SIZE)
+    for i in range(int((len(A)) / 2), -1, -1):
+        MaxHeapify(A, i, len(A))
 
 def MaxHeapify(A:list, i:int, heapSize:int):
     """
@@ -151,7 +151,7 @@ def PopulateList(A:list):
     Keyword arguments:
     A:list: the list to populate
     """
-    for i in range(0, LIST_SIZE):
+    for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
 def PrintList(A:list):
