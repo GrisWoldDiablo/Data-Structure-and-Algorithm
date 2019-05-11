@@ -7,7 +7,7 @@ import time
 
 ALGORITHM_NAME = "Quick Sort" # The name of the algorithm used for sorting
 random.seed(2019) # Random Seed number to keep values constant.
-LIST_SIZE = 25000 # Set the size of the list to 25,000.
+LIST_SIZE = 50000 # Set the size of the list to 50,000.
 
 def main():
     myList1 = [0] * LIST_SIZE # A list to be sorted.
