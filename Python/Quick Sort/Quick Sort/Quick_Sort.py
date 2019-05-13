@@ -11,36 +11,36 @@ LIST_SIZE = 50000 # Set the size of the list to 50,000.
 
 def main():
     myList1 = [0] * LIST_SIZE # A list to be sorted.
-    PopulateList(myList1) # Fill the list with random numbers.
+    populate_list(myList1) # Fill the list with random numbers.
     myList2 = list(myList1) # Declare a list for Quick Sort Randomized and use myList1 in order to use same values.
     
-    #PrintList(myList1) # Display list before sorting.
+    #print_list(myList1) # Display list before sorting.
 
     ticks = time.time() # Get the time before sorting.
-    QuickSort(myList1) # Sort the list
+    quick_sort(myList1) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
-    #PrintList(myList1) # Display list after sorting.
+    #print_list(myList1) # Display list after sorting.
 
     print("Sorting an array of type", type(myList1), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm: ", ALGORITHM_NAME) # Print the name of the algorithm used.
-    print("Total Seconds : ", ticks) # Print the time spent in seconds.
+    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
+    print("Total Seconds :", ticks) # Print the time spent in seconds.
     
     #------ Quick Sort Randomized portion ------
     
-    #PrintList(myList2) # Display list before sorting.
+    print_list(myList2) # Display list before sorting.
 
     ticks = time.time() # Get the time before sorting.
-    QuickSortRandomized(myList2) # Sort the list
+    quick_sort_randomized(myList2) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
-    #PrintList(myList2) # Display list after sorting.
+    #print_list(myList2) # Display list after sorting.
     print()
     print("Sorting an array of type", type(myList2), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm: ", ALGORITHM_NAME, "Randomized version") # Print the name of the algorithm used.
-    print("Total Seconds : ", ticks) # Print the time spent in seconds.
+    print("Algorithm:", ALGORITHM_NAME, "Randomized version") # Print the name of the algorithm used.
+    print("Total Seconds :", ticks) # Print the time spent in seconds.
 
-def QuickSort(A:list, p:int=None, r:int=None):
+def quick_sort(A:list, p:int=None, r:int=None):
     """
     Sort the array using quick sort algorithm
     -----PSEUDO CODE-----
@@ -60,14 +60,14 @@ def QuickSort(A:list, p:int=None, r:int=None):
     r:int: the end index of the list
     """
     if p == None or r == None:
-        QuickSort(A, 0, len(A) - 1)
+        quick_sort(A, 0, len(A) - 1)
         return
     if p < r:
-        q = Partition(A, p, r)
-        QuickSort(A, p, q - 1)
-        QuickSort(A, q + 1, r)
+        q = partition(A, p, r)
+        quick_sort(A, p, q - 1)
+        quick_sort(A, q + 1, r)
 
-def Partition(A:list, p:int=None, r:int=None):
+def partition(A:list, p:int=None, r:int=None):
     """
     Partition the array, rearrange the array inplace based 
     on the element at index r used as pivot.
@@ -107,7 +107,7 @@ def Partition(A:list, p:int=None, r:int=None):
     A[r] = temp;
     return i + 1
 
-def QuickSortRandomized(A:list, p:int=None, r:int=None):
+def quick_sort_randomized(A:list, p:int=None, r:int=None):
     """
     Sort the array using quick sort algorithm
     -----PSEUDO CODE-----
@@ -127,14 +127,14 @@ def QuickSortRandomized(A:list, p:int=None, r:int=None):
     r:int: the end index of the list
     """
     if p == None or r == None:
-        QuickSortRandomized(A, 0, len(A) - 1)
+        quick_sort_randomized(A, 0, len(A) - 1)
         return
     if p < r:
-        q = PartitionRandomized(A, p, r)
-        QuickSortRandomized(A, p, q - 1)
-        QuickSortRandomized(A, q + 1, r)
+        q = partition_randomized(A, p, r)
+        quick_sort_randomized(A, p, q - 1)
+        quick_sort_randomized(A, q + 1, r)
 
-def PartitionRandomized(A:list, p:int=None, r:int=None):
+def partition_randomized(A:list, p:int=None, r:int=None):
     """
     Swap the pivot with a random element.
     -----PSEUDO CODE-----
@@ -159,9 +159,9 @@ def PartitionRandomized(A:list, p:int=None, r:int=None):
     temp = A[r]
     A[r] = A[i]
     A[i] = temp
-    return Partition(A, p, r)
+    return partition(A, p, r)
 
-def PopulateList(A:list):
+def populate_list(A:list):
     """
     Populate a list with random numbers between -100,000 to 100,000
     
@@ -171,7 +171,7 @@ def PopulateList(A:list):
     for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
-def PrintList(A:list):
+def print_list(A:list):
     """ 
     Print the list's elements
 

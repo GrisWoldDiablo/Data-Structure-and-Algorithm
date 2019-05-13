@@ -11,21 +11,21 @@ LIST_SIZE = 50000 # Set the size of the list to 50,000.
 
 def main():
     myList = [0] * LIST_SIZE # A list to be sorted.
-    PopulateList(myList) # Fill the list with random numbers.
+    populate_list(myList) # Fill the list with random numbers.
     
-    #PrintList(myList) # Display list before sorting.
+    print_list(myList) # Display list before sorting.
 
     ticks = time.time() # Get the time before sorting.
-    MergeSort(myList) # Sort the list
+    merge_sort(myList) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
-    #PrintList(myList) # Display list after sorting.
+    print_list(myList) # Display list after sorting.
 
     print("Sorting an array of type", type(myList), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm: ", ALGORITHM_NAME) # Print the name of the algorithm used.
-    print("Total Seconds : ", ticks) # Print the time spent in seconds.
+    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
+    print("Total Seconds :", ticks) # Print the time spent in seconds.
 
-def MergeSort(A:list, p:int=None, r:int=None):
+def merge_sort(A:list, p:int=None, r:int=None):
     """
     Sort the list using merge sort algorithm
     -----PSEUDO CODE-----
@@ -45,15 +45,15 @@ def MergeSort(A:list, p:int=None, r:int=None):
     r:int: end index of list
     """
     if p is None or r is None:
-        MergeSort(A, 0, len(A) - 1)
+        merge_sort(A, 0, len(A) - 1)
         return
     if p < r:
         q = int((p + r) / 2)
-        MergeSort(A, p, q)
-        MergeSort(A, q + 1, r)
-        Merge(A, p, q, r)
+        merge_sort(A, p, q)
+        merge_sort(A, q + 1, r)
+        merge(A, p, q, r)
 
-def Merge(A:list, p:int, q:int, r:int):
+def merge(A:list, p:int, q:int, r:int):
     """
     Merge the 2 array portions together.
     -----PSEUDO CODE-----
@@ -107,7 +107,7 @@ def Merge(A:list, p:int, q:int, r:int):
             A[k] = R[y]
             y += 1
     
-def PopulateList(A:list):
+def populate_list(A:list):
     """
     Populate a list with random numbers between -100,000 to 100,000
     
@@ -117,7 +117,7 @@ def PopulateList(A:list):
     for i in range(0, len(A)):
         A[i] = random.randint(-100000,100000)
 
-def PrintList(A:list):
+def print_list(A:list):
     """ 
     Print the list's elements
 
