@@ -4,7 +4,7 @@ Date: May 2019
 """
 import time
 
-DATA_STRUCTURE_NAME = "Stack" # The name of the algorithm
+DATA_STRUCTURE_NAME = "Stack" # The name of the data structure
 STACK_SIZE = 10000000 # size of stack for speed testing
 
 def main():
