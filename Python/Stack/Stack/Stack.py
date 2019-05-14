@@ -64,7 +64,7 @@ class TheStack:
         -----PSEUDO CODE-----
         Stack()
          Let S[0..7] be a new array
-         top = -1
+         S.top = -1
         -----PSEUDO CODE-----
         """
         self.__keys = [0] * self.__intitial_size
@@ -75,12 +75,15 @@ class TheStack:
         Add an element to the top of the stack 
         -----PSEUDO CODE-----
         (S is the Stack, key is the element to be added to the stack)
-        Push(S,key)
+        Push(S,k)
          S.top = S.top + 1
          if S.top == S.size
             IncreaseSize(S)
-         S[S.top] = key
+         S[S.top] = k
         -----PSEUDO CODE-----
+
+        Keyword argument:
+        key: the element to be added to the stack
         """
         self.__top += 1
         if self.__top == len(self.__keys):
@@ -99,6 +102,9 @@ class TheStack:
             S.top = S.top - 1
             return S[S.top + 1]
         -----PSEUDO CODE-----
+
+        Return:
+        var: the element at the top of the stack
         """
         if self.__top < 0:
             raise Exception("Cannot pop: Stack is empty!")
@@ -114,6 +120,9 @@ class TheStack:
         Count(S)
          return S.top + 1
         -----PSEUDO CODE-----
+
+        Return:
+        int: the amount of the element in the stack
         """
         return self.__top + 1
     
@@ -128,6 +137,9 @@ class TheStack:
          else
             return False
         -----PSEUDO CODE-----
+
+        Return:
+        bool: True if stack is empty
         """
         return self.__top < 0
 
@@ -159,6 +171,9 @@ class TheStack:
             T[i] = S[S.top - i]
          return T
         -----PSEUDO CODE-----
+
+        Return:
+        list: the stack in a list form
         """
         T = [0] * (self.__top + 1)
         for i in range(self.__top, -1, -1):
@@ -176,6 +191,9 @@ class TheStack:
             Throw Error
          return S[S.top]
         -----PSEUDO CODE-----
+
+        Return:
+        var: the element on top of the stack
         """
         if self.__top < 0:
             raise Exception("Cannot peek: Stack is empty!")
@@ -217,7 +235,7 @@ def print_stack(S:TheStack):
     """
     Emtpy the stack and print all its elements
     
-    Keyword arguments:
+    Keyword argument:
     S:TheStack: the stack to print
     """
     print("There is", S.count(), "element(s) in the stack.")
