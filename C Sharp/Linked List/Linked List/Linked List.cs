@@ -101,7 +101,6 @@ namespace Linked_List
             return false;
         }
 
-
         /// <summary>
         /// find the node predecessing the node with a specific value
         /// -----PSEUDO CODE-----
@@ -190,6 +189,7 @@ namespace Linked_List
             }
             return y;
         }
+
         /// <summary>
         /// check if the list contains a node with a specific value
         /// -----PSEUDO CODE-----
