@@ -42,7 +42,8 @@ public: // Property
 /// initialize head, tail, size and
 /// initinial size of the array is 8.
 /// -----PSEUDO CODE-----
-/// Queue()
+/// (Q is the queue)
+/// Queue(Q)
 ///  Q.head = 0
 ///  Q.tail = 0
 ///  Q.size = 0
