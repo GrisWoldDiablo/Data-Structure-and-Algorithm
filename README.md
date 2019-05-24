@@ -27,11 +27,11 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	Language version: [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Stack/Stack/Stack.py)
 - #### Queue *[Wikipedia](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))*
 	|Regular|Priority *[Wikipedia](https://en.wikipedia.org/wiki/Priority_queue)*|
-	|--|--|
+	|:---:|:---:|
 	| [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Queue/Queue/TheQueue.h) |  |
 - #### Linked List *[Wikipedia](https://en.wikipedia.org/wiki/Linked_list)*
 	| `Types` | Linear | Circular |
-	|--|--|--|
+	|---|:---:|---|
 	| Singly | [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Linked%20List/Linked%20List/Linked%20List.cs#L9) |  |
 	| Doubly |  |  |
 - #### Hash Table *[Wikipedia](https://en.wikipedia.org/wiki/Hash_table)*
