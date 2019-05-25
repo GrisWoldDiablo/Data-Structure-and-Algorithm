@@ -1,5 +1,5 @@
 ![Title](Title.png)
-# 
+## Description
 Inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
 All code and pseudocode by me.
