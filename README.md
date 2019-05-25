@@ -33,7 +33,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 - #### Linked List *[Wikipedia](https://en.wikipedia.org/wiki/Linked_list)*
 
 	| `Types` | Linear | Circular |
-	|---|:---:|---|
+	|:---:|:---:|:---:|
 	| Singly | [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Linked%20List/Linked%20List/Linked%20List.cs#L9) |  |
 	| Doubly |  |  |
 - #### Hash Table *[Wikipedia](https://en.wikipedia.org/wiki/Hash_table)*
