@@ -1,6 +1,6 @@
 ![Title](Title.png)
-# Data-Structure-and-Algorithm
-Data structures and Algorithms inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
+# 
+Inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
 All code and pseudocode by me.
 
