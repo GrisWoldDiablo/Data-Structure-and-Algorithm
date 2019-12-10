@@ -37,7 +37,7 @@ namespace Bubble_Sort
         /// (A is an Array with index 0..n)
         /// BubbleSort(A)
         ///  for i = 0 to length of A - 1
-        ///      for j = i - 1 to length of A - 1
+        ///      for j = i + 1 to length of A - 1
         ///          if A[j] < A[i]
         ///              swap A[j] and A[i]
         /// -----PSEUDO CODE-----
