@@ -19,7 +19,7 @@ def main():
     insertion_sort(myList) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
-    #print_list(myList) # Display list after sorting.
+    print_list(myList) # Display list after sorting.
 
     print("Sorting an array of type", type(myList), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
     print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
@@ -36,7 +36,7 @@ def insertion_sort(A:list):
          i = j - 1
          while i >= 0 and A[i] > key
              A[i + 1] = A[i]
-             i = i + 1
+             i = i - 1
          A[i+1] = key
     -----PSEUDO CODE-----
     
