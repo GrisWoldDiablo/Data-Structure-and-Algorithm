@@ -28,7 +28,7 @@ def main():
     
     #------ Quick Sort Randomized portion ------
     
-    print_list(myList2) # Display list before sorting.
+    #print_list(myList2) # Display list before sorting.
 
     ticks = time.time() # Get the time before sorting.
     quick_sort_randomized(myList2) # Sort the list
