@@ -55,7 +55,7 @@ class TheStack:
     Custom stack class
     """
     __keys:list # The array holding the keys
-    __intitial_size:int = 2 # The size of the array holding the stack
+    __intitial_size:int = 8 # The size of the array holding the stack
     def __init__(self):
         """
         Contructor of the Class
