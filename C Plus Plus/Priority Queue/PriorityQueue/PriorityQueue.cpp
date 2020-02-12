@@ -21,7 +21,7 @@ void PrintArray(T A[], int arraySize);
 int main()
 {
 	cout << "---- Data structure : " << DATA_STRUCTURE_NAME << " ----" << endl; // Print the data structure name
-	ThePriorityQueue<int> myQueue; // Create a new queue
+	ThePriorityQueue<int> myQueue(true); // Create a new queue
 	cout << "Declared a " << typeid(myQueue).name() << "." << endl; // Print the name of the class of the stack
 	PopulateQueue(myQueue, 10); // Populate the queue with x elements
 	auto* myArray = myQueue.ToArray(); // Convert queue to array
@@ -83,18 +83,22 @@ void PopulateQueue(ThePriorityQueue<T>& Q, int x)
 {
 	cout << "Enqueuing " << x << " element(s) to the queue." << endl;
 	cout << "Added: ";
-	for (int i = 0; i < x; i++)
+	for (int i = x - 1; i >= 0; i--)
 	{
-		if (i != x - 1)
-		{
-			cout << i << ",";
-		}
-		else
-		{
-			cout << i << " to the queue in that order." << endl;
-		}
 		Q.Enqueue(i);
 	}
+	//for (int i = 0; i < x; i++)
+	//{
+	//	if (i != x - 1)
+	//	{
+	//		cout << i << ",";
+	//	}
+	//	else
+	//	{
+	//		cout << i << " to the queue in that order." << endl;
+	//	}
+	//	Q.Enqueue(i);
+	//}
 }
 
 /// <summary>

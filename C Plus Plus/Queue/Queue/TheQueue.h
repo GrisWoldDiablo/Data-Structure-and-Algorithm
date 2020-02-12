@@ -167,7 +167,7 @@ inline bool TheQueue<T>::Empty()
 ///		if j == length of Q
 ///			j = j - length of Q
 ///  Q.head = 0
-///  Q.tail = 0
+///  Q.tail = Q.size
 ///  Q = T
 /// -----PSEUDO CODE-----
 /// </summary>
