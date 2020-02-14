@@ -5,21 +5,22 @@
 
 #ifndef THEPRIORITYQUEUE
 #define THEPRIORITYQUEUE
-
-/// <summary>
-/// Custom priority queue class
-/// </summary>
+#include <limits>
+ /// <summary>
+ /// Custom priority queue class
+ /// </summary>
 template <class T>
 class ThePriorityQueue
 {
 private: // class variables
-	int _head; // index of the element at the beginning of the queue
-	int _tail; // index of the element at the end of the queue
+	//int _head; // index of the element at the beginning of the queue
+	//int _tail; // index of the element at the end of the queue
 	int _size; // the size of the queue
 	T* _array; // array holding the queue
 	int _arraySize; // current size of the array
 	const int ARRAY_INITIAL_SIZE = 8; // initial size of the array holding the queue
 	bool _minPriority;
+	T _priorityBound;
 
 public: // user Methods
 	//ThePriorityQueue(); // Constructor
@@ -28,20 +29,33 @@ public: // user Methods
 	void Enqueue(T key);
 	T Dequeue();
 	T Peek();
+
 	void Clear();
 	T* ToArray();
 	bool Empty();
 
 private: // class Method
 	void IncreaseSize();
-	void HeapSort();
-	void BuildMaxHeap();
-	void MaxHeapify(T A[], int i, int heapSize);
+	void MaxHeapify(int i, int heapSize);
+	void IncreaseKey(int i, T key);
+	void MinHeapify(int i, int heapSize);
+	void DecreaseKey(int i, T key);
+	int Parent(int i);
+	int Left(int i);
+	int Right(int i);
 
 public: // Property
 	int Count() { return _size; }
-	int Left(int i);
-	int Right(int i);
+	std::string Type() {
+		if (_minPriority)
+		{
+			return "Min";
+		}
+		else
+		{
+			return "Max";
+		}
+	}
 };
 
 /// <summary>
@@ -60,13 +74,18 @@ public: // Property
 template<class T>
 inline ThePriorityQueue<T>::ThePriorityQueue(bool minPriority)
 {
-	_head = 0;
-	_tail = 0;
 	_size = 0;
 	_array = new T[ARRAY_INITIAL_SIZE];
 	_arraySize = ARRAY_INITIAL_SIZE;
 	_minPriority = minPriority;
-
+	if (_minPriority)
+	{
+		_priorityBound = std::numeric_limits<T>::max();
+	}
+	else
+	{
+		_priorityBound = std::numeric_limits<T>::min();
+	}
 }
 
 /// <summary>
@@ -97,15 +116,19 @@ inline ThePriorityQueue<T>::~ThePriorityQueue()
 template<class T>
 inline void ThePriorityQueue<T>::Enqueue(T key)
 {
-	_array[_tail++] = key;
 	_size++;
-	if (_tail == _arraySize)
-	{
-		_tail = 0;
-	}
-	if (_tail == _head)
+	if (_size == _arraySize)
 	{
 		IncreaseSize();
+	}
+	_array[_size - 1] = _priorityBound;
+	if (_minPriority)
+	{
+		DecreaseKey(_size - 1, key);
+	}
+	else
+	{
+		IncreaseKey(_size - 1, key);
 	}
 }
 
@@ -129,16 +152,20 @@ inline void ThePriorityQueue<T>::Enqueue(T key)
 template<class T>
 inline T ThePriorityQueue<T>::Dequeue()
 {
-	HeapSort();
 	if (_size == 0)
 	{
-		throw std::exception("Cannot dequeue: Queue is empty!");
+		throw std::exception("Queue is empty!");
 	}
+	T key = _array[0];
+	_array[0] = _array[_size - 1];
 	_size--;
-	T key = _array[_head++];
-	if (_head == _arraySize)
+	if (_minPriority)
 	{
-		_head = 0;
+		MinHeapify(0, _size + 1);
+	}
+	else
+	{
+		MaxHeapify(0, _size + 1);
 	}
 	return key;
 }
@@ -161,9 +188,44 @@ inline T ThePriorityQueue<T>::Peek()
 {
 	if (_size == 0)
 	{
-		throw std::exception("Cannot peek: Queue is empty!");
+		throw std::exception("Queue is empty!");
 	}
-	return _array[_head];
+	return _array[0];
+}
+
+
+template<class T>
+inline void ThePriorityQueue<T>::IncreaseKey(int i, T key)
+{
+	if (key < _array[i])
+	{
+		throw std::exception("New key is smaller than current key.");
+	}
+	_array[i] = key;
+	while (i > 0 && _array[Parent(i)] < _array[i])
+	{
+		T temp = _array[Parent(i)];
+		_array[Parent(i)] = _array[i];
+		_array[i] = temp;
+		i = Parent(i);
+	}
+}
+
+template<class T>
+inline void ThePriorityQueue<T>::DecreaseKey(int i, T key)
+{
+	if (key > _array[i])
+	{
+		throw std::exception("New key is larger than current key.");
+	}
+	_array[i] = key;
+	while (i > 0 && _array[Parent(i)] > _array[i])
+	{
+		T temp = _array[Parent(i)];
+		_array[Parent(i)] = _array[i];
+		_array[i] = temp;
+		i = Parent(i);
+	}
 }
 
 /// <summary>
@@ -181,8 +243,6 @@ inline T ThePriorityQueue<T>::Peek()
 template<class T>
 inline void ThePriorityQueue<T>::Clear()
 {
-	_head = 0;
-	_tail = 0;
 	_size = 0;
 	_arraySize = ARRAY_INITIAL_SIZE;
 	delete[] _array;
@@ -212,17 +272,9 @@ template<class T>
 inline T* ThePriorityQueue<T>::ToArray()
 {
 	T* tempArray = new T[_size];
-	int i = 0;
-	int j = _head;
-	while (i < _size)
+	for (int i = 0; i < _size; i++)
 	{
-		tempArray[i] = _array[j];
-		i++;
-		j++;
-		if (j == _arraySize)
-		{
-			j -= _arraySize;
-		}
+		tempArray[i] = _array[i];
 	}
 	return tempArray;
 }
@@ -242,7 +294,7 @@ inline T* ThePriorityQueue<T>::ToArray()
 template<class T>
 inline bool ThePriorityQueue<T>::Empty()
 {
-	return _size == 0;
+	return Count() == 0;
 }
 
 /// <summary>
@@ -268,76 +320,16 @@ inline bool ThePriorityQueue<T>::Empty()
 template<class T>
 inline void ThePriorityQueue<T>::IncreaseSize()
 {
-	int previousArraySize = _arraySize;
 	_arraySize *= 2;
 	T* tempArray = new T[_arraySize];
-	int i = 0;
-	int j = _head;
-	while (i < _size)
+	for (int i = 0; i < _size; i++)
 	{
-		tempArray[i] = _array[j];
-		i++;
-		j++;
-		if (j == previousArraySize)
-		{
-			j -= previousArraySize;
-		}
+		tempArray[i] = _array[i];
 	}
-
 	delete[] _array;
-	_head = 0;
-	_tail = _size;
 	_array = tempArray;
 }
 
-/// <summary>
-/// Sort the array using heap sort algorithm
-/// -----PSEUDO CODE-----
-/// (A is an Array with index 0..n)
-/// Heapsort(A)
-///  BuildMaxHeap(A)
-///  heapSize = lenght of A
-///  for i = lenght of A - 1 to 1
-///      swap A[0] and A[i]
-///      heapSize = heapSize - 1
-///      MaxHeapify(A,0,heapSize)
-/// -----PSEUDO CODE-----
-/// </summary>
-/// <param name="A">array to be sorted</param>
-template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
-void ThePriorityQueue<T>::HeapSort()
-{
-	BuildMaxHeap();
-	int heapSize = _size;
-	for (int i = _tail - 1; i >= _head + 1; i--)
-	{
-		T temp = _array[_head];
-		_array[_head] = _array[i];
-		_array[i] = temp;
-		heapSize--;
-		MaxHeapify(_array, _head, heapSize);
-	}
-}
-
-/// <summary>
-/// Place the max element as the root of the heap
-/// run heapify on each nodes.
-/// -----PSEUDO CODE-----
-/// (A is an Array with index 0..n)
-/// BuildMaxHeap(A)
-///  for i = FLOOR[(length of A) / 2] down to 0
-///     MaxHeapify(A,i,length of A)   
-/// -----PSEUDO CODE-----
-/// </summary>
-/// <param name="A">array to be sorted</param>
-template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
-inline void ThePriorityQueue<T>::BuildMaxHeap()
-{
-	for (int i = (_size / 2) + _head ; i >= _head; i--)
-	{
-		MaxHeapify(_array, i, _size);
-	}
-}
 
 /// <summary>
 /// Makes sure that the node is the biggest one out of its childrens
@@ -363,13 +355,12 @@ inline void ThePriorityQueue<T>::BuildMaxHeap()
 /// <param name="i">sub tree root index of the heap</param>
 /// <param name="heapSize">the size of the heap</param>
 template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
-inline void ThePriorityQueue<T>::MaxHeapify(T A[], int i, int heapSize)
+inline void ThePriorityQueue<T>::MaxHeapify(int i, int heapSize)
 {
-	i += _head;
 	int l = Left(i);
 	int r = Right(i);
 	int largest;
-	if (l < heapSize && A[l] > A[i])
+	if (l < heapSize && _array[l] > _array[i])
 	{
 		largest = l;
 	}
@@ -377,17 +368,50 @@ inline void ThePriorityQueue<T>::MaxHeapify(T A[], int i, int heapSize)
 	{
 		largest = i;
 	}
-	if (r < heapSize && A[r] > A[largest])
+	if (r < heapSize && _array[r] > _array[largest])
 	{
 		largest = r;
 	}
 	if (largest != i)
 	{
-		T temp = A[largest];
-		A[largest] = A[i];
-		A[i] = temp;
-		MaxHeapify(A, largest, heapSize);
+		T temp = _array[largest];
+		_array[largest] = _array[i];
+		_array[i] = temp;
+		MaxHeapify(largest, heapSize);
 	}
+}
+
+template<class T>
+inline void ThePriorityQueue<T>::MinHeapify(int i, int heapSize)
+{
+	int l = Left(i);
+	int r = Right(i);
+	int smallest;
+	if (l < heapSize && _array[l] < _array[i])
+	{
+		smallest = l;
+	}
+	else
+	{
+		smallest = i;
+	}
+	if (r < heapSize && _array[r] < _array[smallest])
+	{
+		smallest = r;
+	}
+	if (smallest != i)
+	{
+		T temp = _array[smallest];
+		_array[smallest] = _array[i];
+		_array[i] = temp;
+		MinHeapify(smallest, heapSize);
+	}
+}
+
+template<class T>
+inline int ThePriorityQueue<T>::Parent(int i)
+{
+	return (i / 2);
 }
 
 /// <summary>

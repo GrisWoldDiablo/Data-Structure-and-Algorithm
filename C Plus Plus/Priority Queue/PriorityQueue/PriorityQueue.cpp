@@ -4,10 +4,13 @@
  */
 #include <iostream>
 #include <chrono>
+#include <random>
 #include <typeinfo>
 #include "ThePriorityQueue.h"
 using namespace std;
 
+template<class T>
+void PopulateQueue(ThePriorityQueue<T>& Q);
 template<class T>
 void PopulateQueue(ThePriorityQueue<T>& Q, int x);
 template<class T>
@@ -15,14 +18,18 @@ void PrintQueue(ThePriorityQueue<T>& Q);
 template<typename T>
 void PrintArray(T A[], int arraySize);
 
-#define	DATA_STRUCTURE_NAME ("Queue") // The name of the data structure
-#define PRIORITYQUEUE_SIZE 10000000 // size of queue for speed testing
+#define	DATA_STRUCTURE_NAME ("Priority Queue, Min and Max") // The name of the data structure
+#define RANDOM_SEED 2019 // Random Seed number to keep values constant.
+mt19937 gen(RANDOM_SEED); // Seed the mersenne twister random number generator
+uniform_int_distribution<int> dist(-100000, 100000); // Set the random number distribution between -100,000 and 100,000 inclusive.
+
+#define QUEUE_SIZE 1000000 // size of queue for speed testing
 
 int main()
 {
 	cout << "---- Data structure : " << DATA_STRUCTURE_NAME << " ----" << endl; // Print the data structure name
-	ThePriorityQueue<int> myQueue(true); // Create a new queue
-	cout << "Declared a " << typeid(myQueue).name() << "." << endl; // Print the name of the class of the stack
+	ThePriorityQueue<int> myQueue(false); // Create a new queue
+	cout << "Declared a " << typeid(myQueue).name() << " set to " << myQueue.Type() << "." << endl; // Print the name of the class of the stack
 	PopulateQueue(myQueue, 10); // Populate the queue with x elements
 	auto* myArray = myQueue.ToArray(); // Convert queue to array
 	cout << "queue to array: " << endl;
@@ -31,16 +38,15 @@ int main()
 	PrintQueue(myQueue); // Print all the elements of the queue
 
 	// ---- Class Speed Test portion -----
-	cout << "\nTesting queue speed with " << PRIORITYQUEUE_SIZE << " elements." << endl;
+	cout << "\nTesting queue speed with " << QUEUE_SIZE << " elements." << endl;
 	myQueue.Clear(); // Reinitialize the queue
 	delete[] myArray; // Reinitialize the array
 
 	// Speed test: Enqueue QUEUE_SIZE elements to the queue
 	auto startTime = chrono::system_clock::now(); // Get the time before enqueuing.
-	for (int i = 0; i < PRIORITYQUEUE_SIZE; i++) // Enqueue QUEUE_SIZE elements to the queue
-	{
-		myQueue.Enqueue(i); // Enqueue i to the queue
-	}
+	
+	PopulateQueue(myQueue); // Fill the Priority Queue with random numbers.
+	
 	auto endTime = chrono::system_clock::now(); // Get the time after enqueuing.
 	std::chrono::duration<double> diff = endTime - startTime; // Get the difference from start to end time
 	auto totalDiff = diff; // Get the time spent for enqueuing
@@ -74,7 +80,19 @@ int main()
 }
 
 /// <summary>
-/// Populate a queue with ascending values from 0 to x (exclusive)
+/// Populate a priority queue with random numbers between -100,000 to 100,000
+/// </summary>
+/// <param name="A">array to populate</param>
+template<typename T> // can be of any type, custom types needs to implement explicit conversion to integer
+void PopulateQueue(ThePriorityQueue<T>& Q)
+{
+	for (int i = 0; i < QUEUE_SIZE; i++)
+	{
+		Q.Enqueue(dist(gen));
+	}
+}
+/// <summary>
+/// Populate a priority queue with ascending values from 0 to x (exclusive)
 /// </summary>
 /// <param name="Q">queue to populate</param>
 /// <param name="x">the amount of element(s) to add to the queue</param>
@@ -83,22 +101,18 @@ void PopulateQueue(ThePriorityQueue<T>& Q, int x)
 {
 	cout << "Enqueuing " << x << " element(s) to the queue." << endl;
 	cout << "Added: ";
-	for (int i = x - 1; i >= 0; i--)
+	for (int i = 0; i < x; i++)
 	{
+		if (i != x - 1)
+		{
+			cout << i << ",";
+		}
+		else
+		{
+			cout << i << " to the queue in that order." << endl;
+		}
 		Q.Enqueue(i);
 	}
-	//for (int i = 0; i < x; i++)
-	//{
-	//	if (i != x - 1)
-	//	{
-	//		cout << i << ",";
-	//	}
-	//	else
-	//	{
-	//		cout << i << " to the queue in that order." << endl;
-	//	}
-	//	Q.Enqueue(i);
-	//}
 }
 
 /// <summary>
