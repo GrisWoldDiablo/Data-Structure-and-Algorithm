@@ -6,6 +6,7 @@
 #include <chrono>
 #include <random>
 #include <typeinfo>
+#include <vector>   
 #include "ThePriorityQueue.h"
 using namespace std;
 
@@ -28,7 +29,7 @@ uniform_int_distribution<int> dist(-100000, 100000); // Set the random number di
 int main()
 {
 	cout << "---- Data structure : " << DATA_STRUCTURE_NAME << " ----" << endl; // Print the data structure name
-	ThePriorityQueue<int> myQueue(false); // Create a new queue
+	ThePriorityQueue<int> myQueue(PriorityType::Max); // Create a new queue
 	cout << "Declared a " << typeid(myQueue).name() << " set to " << myQueue.Type() << "." << endl; // Print the name of the class of the stack
 	PopulateQueue(myQueue, 10); // Populate the queue with x elements
 	auto* myArray = myQueue.ToArray(); // Convert queue to array

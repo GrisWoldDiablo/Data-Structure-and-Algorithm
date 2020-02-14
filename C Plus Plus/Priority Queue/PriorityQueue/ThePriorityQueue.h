@@ -6,6 +6,12 @@
 #ifndef THEPRIORITYQUEUE
 #define THEPRIORITYQUEUE
 #include <limits>
+
+enum class PriorityType
+{
+	Min,
+	Max
+};
  /// <summary>
  /// Custom priority queue class
  /// </summary>
@@ -19,12 +25,11 @@ private: // class variables
 	T* _array; // array holding the queue
 	int _arraySize; // current size of the array
 	const int ARRAY_INITIAL_SIZE = 8; // initial size of the array holding the queue
-	bool _minPriority;
-	T _priorityBound;
+	PriorityType _priorityType; // If the queue is has priority has minimum or maximum
+	T _priorityBound; // Based on the priority type a value limit value is set
 
 public: // user Methods
-	//ThePriorityQueue(); // Constructor
-	ThePriorityQueue(bool minPriority); // Constructor
+	ThePriorityQueue(PriorityType minPriority); // Constructor
 	~ThePriorityQueue(); // Destructor
 	void Enqueue(T key);
 	T Dequeue();
@@ -45,46 +50,47 @@ private: // class Method
 	int Right(int i);
 
 public: // Property
+
 	int Count() { return _size; }
 	std::string Type() {
-		if (_minPriority)
+		switch (_priorityType)
 		{
+		case PriorityType::Min:
 			return "Min";
-		}
-		else
-		{
+			break;
+		default: // PriorityType::Max
 			return "Max";
+			break;
 		}
 	}
 };
 
 /// <summary>
 /// Class constructor,
-/// initialize head, tail, size and
+/// initialize size and
 /// initinial size of the array is 8.
 /// -----PSEUDO CODE-----
 /// (Q is the queue)
-/// PriorityQueue(Q)
-///  Q.head = 0
-///  Q.tail = 0
+/// PriorityQueue(Q,type)
 ///  Q.size = 0
 ///  Let Q[0..7] be a new array
 /// -----PSEUDO CODE-----
 /// </summary>
 template<class T>
-inline ThePriorityQueue<T>::ThePriorityQueue(bool minPriority)
+inline ThePriorityQueue<T>::ThePriorityQueue(PriorityType minPriority)
 {
 	_size = 0;
 	_array = new T[ARRAY_INITIAL_SIZE];
 	_arraySize = ARRAY_INITIAL_SIZE;
-	_minPriority = minPriority;
-	if (_minPriority)
+	_priorityType = minPriority;
+	switch (_priorityType)
 	{
+	case PriorityType::Min:
 		_priorityBound = std::numeric_limits<T>::max();
-	}
-	else
-	{
+		break;
+	default: // PriorityType::Max
 		_priorityBound = std::numeric_limits<T>::min();
+		break;
 	}
 }
 
@@ -122,13 +128,14 @@ inline void ThePriorityQueue<T>::Enqueue(T key)
 		IncreaseSize();
 	}
 	_array[_size - 1] = _priorityBound;
-	if (_minPriority)
+	switch (_priorityType)
 	{
+	case PriorityType::Min:
 		DecreaseKey(_size - 1, key);
-	}
-	else
-	{
+		break;
+	case PriorityType::Max:
 		IncreaseKey(_size - 1, key);
+		break;
 	}
 }
 
@@ -159,13 +166,14 @@ inline T ThePriorityQueue<T>::Dequeue()
 	T key = _array[0];
 	_array[0] = _array[_size - 1];
 	_size--;
-	if (_minPriority)
+	switch (_priorityType)
 	{
+	case PriorityType::Min:
 		MinHeapify(0, _size + 1);
-	}
-	else
-	{
+		break;
+	case PriorityType::Max:
 		MaxHeapify(0, _size + 1);
+		break;
 	}
 	return key;
 }
