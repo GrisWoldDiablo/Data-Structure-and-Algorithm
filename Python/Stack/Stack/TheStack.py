@@ -1,3 +1,8 @@
+"""
+Author: Alexandre Lepage
+Date: May 2019
+"""
+
 class TheStack:
     """ 
     Custom stack class
