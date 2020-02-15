@@ -202,7 +202,7 @@ inline void TheQueue<T>::IncreaseSize()
 /// -----PSEUDO CODE-----
 /// (Q is the Queue)
 /// ToArray(Q)
-///  Let T[0..length of Q * 2] be a new array
+///  Let T[0..length of Q] be a new array
 ///  i = 0
 ///  j = Q.head
 ///  while i < Q.size
