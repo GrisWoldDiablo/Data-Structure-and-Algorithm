@@ -40,27 +40,16 @@ public: // user Methods
 private: // class Method
 	void IncreaseSize();
 	void MaxHeapify(int i, int heapSize);
-	void IncreaseKey(int i, T key);
 	void MinHeapify(int i, int heapSize);
+	void IncreaseKey(int i, T key);
 	void DecreaseKey(int i, T key);
 	int Parent(int i);
 	int Right(int i);
 	int Left(int i);
 
 public: // Property
-
 	int Count() { return _size; }
-	std::string Type() {
-		switch (_priorityType)
-		{
-		case PriorityType::Min:
-			return "Min";
-			break;
-		default: // PriorityType::Max
-			return "Max";
-			break;
-		}
-	}
+	PriorityType Type() { return _priorityType; }
 };
 
 /// <summary>
@@ -79,21 +68,21 @@ public: // Property
 ///		Q.pritotyBound = -inifity
 /// -----PSEUDO CODE-----
 /// </summary>
-/// <param name = "minPriority">Type of priority of the queue, min or max</param>
+/// <param name = "priorityType">Type of priority of the queue, min or max</param>
 template<class T>
-inline ThePriorityQueue<T>::ThePriorityQueue(PriorityType minPriority)
+inline ThePriorityQueue<T>::ThePriorityQueue(PriorityType priorityType)
 {
 	_size = 0;
 	_array = new T[ARRAY_INITIAL_SIZE];
 	_arraySize = ARRAY_INITIAL_SIZE;
-	_priorityType = minPriority;
+	_priorityType = priorityType;
 	switch (_priorityType)
 	{
 	case PriorityType::Min:
 		_priorityBound = std::numeric_limits<T>::max();
 		break;
 	default: // PriorityType::Max
-		_priorityBound = std::numeric_limits<T>::min();
+		_priorityBound = -std::numeric_limits<T>::max();
 		break;
 	}
 }
@@ -212,74 +201,6 @@ inline T ThePriorityQueue<T>::Peek()
 }
 
 /// <summary>
-///	This increase the value of the element at position i with the new element
-/// Throws an error if the new element is smaller than the current one.
-/// -----PSEUDO CODE-----
-/// (Q is the Queue, i is the index, k is the key)
-/// IncreaseKey(Q,i,k)
-///  if	key < Q[i]
-///		Throw Error
-///  else
-///		Q[i] = key
-///		while i > 0 and Q[Parent(i)] < Q[i]
-///			swap Q[Parent(i)] and Q[i]
-///			i = Parent(i)
-/// -----PSEUDO CODE-----
-/// </summary>
-/// <param name="i">the index of the element to increase</param>
-/// <param name="key">the new element</param>
-template<class T> // can be of any type, custom types needs to implement LessThan operator '<'
-inline void ThePriorityQueue<T>::IncreaseKey(int i, T key)
-{
-	if (key < _array[i])
-	{
-		throw std::exception("New key is smaller than current key.");
-	}
-	_array[i] = key;
-	while (i > 0 && _array[Parent(i)] < _array[i])
-	{
-		T temp = _array[Parent(i)];
-		_array[Parent(i)] = _array[i];
-		_array[i] = temp;
-		i = Parent(i);
-	}
-}
-
-/// <summary>
-///	This increase the value of the element at position i with the new element
-/// Throws an error if the new element is smaller than the current one.
-/// -----PSEUDO CODE-----
-/// (Q is the Queue, i is the index, k is the key)
-/// DecreaseKey(Q,i,k)
-///  if	key < Q[i]
-///		Throw Error
-///  else
-///		Q[i] = key
-///		while i > 0 and Q[Parent(i)] > Q[i]
-///			swap Q[Parent(i)] and Q[i]
-///			i = Parent(i)
-/// -----PSEUDO CODE-----
-/// </summary>
-/// <param name="i">the index of the element to decrease</param>
-/// <param name="key">the new element</param>
-template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
-inline void ThePriorityQueue<T>::DecreaseKey(int i, T key)
-{
-	if (key > _array[i])
-	{
-		throw std::exception("New key is larger than current key.");
-	}
-	_array[i] = key;
-	while (i > 0 && _array[Parent(i)] > _array[i])
-	{
-		T temp = _array[Parent(i)];
-		_array[Parent(i)] = _array[i];
-		_array[i] = temp;
-		i = Parent(i);
-	}
-}
-
-/// <summary>
 /// Delete the queue and reinitialize it,
 /// initinial size of the array is 8.
 /// -----PSEUDO CODE-----
@@ -364,7 +285,6 @@ inline void ThePriorityQueue<T>::IncreaseSize()
 	delete[] _array;
 	_array = tempArray;
 }
-
 
 /// <summary>
 /// Makes sure that the node is the biggest one out of its childrens
@@ -463,6 +383,74 @@ inline void ThePriorityQueue<T>::MinHeapify(int i, int heapSize)
 		_array[smallest] = _array[i];
 		_array[i] = temp;
 		MinHeapify(smallest, heapSize);
+	}
+}
+
+/// <summary>
+///	This increase the value of the element at position i with the new element
+/// Throws an error if the new element is smaller than the current one.
+/// -----PSEUDO CODE-----
+/// (Q is the Queue, i is the index, k is the key)
+/// IncreaseKey(Q,i,k)
+///  if	key < Q[i]
+///		Throw Error
+///  else
+///		Q[i] = key
+///		while i > 0 and Q[Parent(i)] < Q[i]
+///			swap Q[Parent(i)] and Q[i]
+///			i = Parent(i)
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="i">the index of the element to increase</param>
+/// <param name="key">the new element</param>
+template<class T> // can be of any type, custom types needs to implement LessThan operator '<'
+inline void ThePriorityQueue<T>::IncreaseKey(int i, T key)
+{
+	if (key < _array[i])
+	{
+		throw std::exception("New key is smaller than current key.");
+	}
+	_array[i] = key;
+	while (i > 0 && _array[Parent(i)] < _array[i])
+	{
+		T temp = _array[Parent(i)];
+		_array[Parent(i)] = _array[i];
+		_array[i] = temp;
+		i = Parent(i);
+	}
+}
+
+/// <summary>
+///	This increase the value of the element at position i with the new element
+/// Throws an error if the new element is smaller than the current one.
+/// -----PSEUDO CODE-----
+/// (Q is the Queue, i is the index, k is the key)
+/// DecreaseKey(Q,i,k)
+///  if	key < Q[i]
+///		Throw Error
+///  else
+///		Q[i] = key
+///		while i > 0 and Q[Parent(i)] > Q[i]
+///			swap Q[Parent(i)] and Q[i]
+///			i = Parent(i)
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="i">the index of the element to decrease</param>
+/// <param name="key">the new element</param>
+template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
+inline void ThePriorityQueue<T>::DecreaseKey(int i, T key)
+{
+	if (key > _array[i])
+	{
+		throw std::exception("New key is larger than current key.");
+	}
+	_array[i] = key;
+	while (i > 0 && _array[Parent(i)] > _array[i])
+	{
+		T temp = _array[Parent(i)];
+		_array[Parent(i)] = _array[i];
+		_array[i] = temp;
+		i = Parent(i);
 	}
 }
 

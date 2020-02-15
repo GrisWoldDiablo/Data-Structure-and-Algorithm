@@ -23,13 +23,13 @@ void PrintArray(T A[], int arraySize);
 mt19937 gen(RANDOM_SEED); // Seed the mersenne twister random number generator
 uniform_int_distribution<int> dist(-100000, 100000); // Set the random number distribution between -100,000 and 100,000 inclusive.
 
-#define QUEUE_SIZE 1000000 // size of queue for speed testing
+#define QUEUE_SIZE 10000000 // size of queue for speed testing
 
 int main()
 {
 	cout << "---- Data structure : " << DATA_STRUCTURE_NAME << " ----" << endl; // Print the data structure name
-	ThePriorityQueue<int> myQueue(PriorityType::Max); // Create a new queue
-	cout << "Declared a " << typeid(myQueue).name() << " set to " << myQueue.Type() << "." << endl; // Print the name of the class of the stack
+	ThePriorityQueue<int> myQueue(PriorityType::Min); // Create a new queue
+	cout << "Declared a " << typeid(myQueue).name() << " set to " << (myQueue.Type() == PriorityType::Min ? "Min" : "Max") << "." << endl; // Print the name of the class of the stack
 	PopulateQueue(myQueue, 10); // Populate the queue with x elements
 	auto* myArray = myQueue.ToArray(); // Convert queue to array
 	cout << "queue to array: " << endl;
@@ -43,36 +43,34 @@ int main()
 	delete[] myArray; // Reinitialize the array
 
 	// Speed test: Enqueue QUEUE_SIZE elements to the queue
+	cout << "- Enqueuing elements -" << endl;
 	auto startTime = chrono::system_clock::now(); // Get the time before enqueuing.
-	
 	PopulateQueue(myQueue); // Fill the Priority Queue with random numbers.
-	
 	auto endTime = chrono::system_clock::now(); // Get the time after enqueuing.
 	std::chrono::duration<double> diff = endTime - startTime; // Get the difference from start to end time
 	auto totalDiff = diff; // Get the time spent for enqueuing
-	cout << "- Enqueuing elements -" << endl;
 	cout << "Total seconds : " << diff.count() << endl; // Print the time spent in seconds
 
 	// Speed test: Convert the queue to an array
+	cout << "- Converting queue to array -" << endl;
 	startTime = chrono::system_clock::now(); // Get the time before converting.
 	myArray = myQueue.ToArray();
 	endTime = chrono::system_clock::now(); // Get the time after converting.
 	diff = endTime - startTime; // Get the difference from start to end time
 	totalDiff += diff; // Add the time spent for converting
-	cout << "- Converting queue to array -" << endl;
 	cout << "Total seconds : " << diff.count() << endl; // Print the time spent in seconds
 	delete[] myArray; // Reinitialize the array
 
 	// Speed test: Dequeue all elements from the queue
+	cout << "- Dequeuing all elements -" << endl;
 	startTime = chrono::system_clock::now(); // Get the time before dequeuing.
-	while (!myQueue.Empty()) // Dequeue elements until the dequeue is empty
+	while (!myQueue.Empty()) // Dequeue elements until the queue is empty
 	{
 		myQueue.Dequeue(); // Dequeue an element from the queue 
 	}
 	endTime = chrono::system_clock::now(); // Get the time after dequeuing.
 	diff = endTime - startTime; // Get the difference from start to end time
 	totalDiff += diff; // Add the time spent for dequeuing
-	cout << "- Dequeuing all elements -" << endl;
 	cout << "Total seconds : " << diff.count() << endl; // Print the time spent in seconds
 
 	cout << "- Class Speed for all 3 tests -" << endl;
@@ -82,7 +80,7 @@ int main()
 /// <summary>
 /// Populate a priority queue with random numbers between -100,000 to 100,000
 /// </summary>
-/// <param name="A">array to populate</param>
+/// <param name="A">queue to populate</param>
 template<typename T> // can be of any type, custom types needs to implement explicit conversion to integer
 void PopulateQueue(ThePriorityQueue<T>& Q)
 {
@@ -91,6 +89,7 @@ void PopulateQueue(ThePriorityQueue<T>& Q)
 		Q.Enqueue(dist(gen));
 	}
 }
+
 /// <summary>
 /// Populate a priority queue with ascending values from 0 to x (exclusive)
 /// </summary>

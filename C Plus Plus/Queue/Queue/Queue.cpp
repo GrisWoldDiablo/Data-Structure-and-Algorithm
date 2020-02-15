@@ -4,10 +4,13 @@
  */
 #include <iostream>
 #include <chrono>
+#include <random>
 #include <typeinfo>
 #include "TheQueue.h"
 using namespace std;
 
+template<class T>
+void PopulateQueue(TheQueue<T>& Q);
 template<class T>
 void PopulateQueue(TheQueue<T>& Q, int x);
 template<class T>
@@ -16,6 +19,10 @@ template<typename T>
 void PrintArray(T A[], int arraySize);
 
 #define	DATA_STRUCTURE_NAME ("Queue") // The name of the data structure
+#define RANDOM_SEED 2019 // Random Seed number to keep values constant.
+mt19937 gen(RANDOM_SEED); // Seed the mersenne twister random number generator
+uniform_int_distribution<int> dist(-100000, 100000); // Set the random number distribution between -100,000 and 100,000 inclusive.
+
 #define QUEUE_SIZE 10000000 // size of queue for speed testing
 
 int main()
@@ -37,40 +44,49 @@ int main()
 
 	// Speed test: Enqueue QUEUE_SIZE elements to the queue
 	auto startTime = chrono::system_clock::now(); // Get the time before enqueuing.
-	for (int i = 0; i < QUEUE_SIZE; i++) // Enqueue QUEUE_SIZE elements to the queue
-	{
-		myQueue.Enqueue(i); // Enqueue i to the queue
-	}
+	cout << "- Enqueuing elements -" << endl;
+	PopulateQueue(myQueue); // Enqueue i to the queue
 	auto endTime = chrono::system_clock::now(); // Get the time after enqueuing.
 	std::chrono::duration<double> diff = endTime - startTime; // Get the difference from start to end time
 	auto totalDiff = diff; // Get the time spent for enqueuing
-	cout << "- Enqueuing elements -" << endl;
 	cout << "Total seconds : " << diff.count() << endl; // Print the time spent in seconds
 
 	// Speed test: Convert the queue to an array
+	cout << "- Converting queue to array -" << endl;
 	startTime = chrono::system_clock::now(); // Get the time before converting.
 	myArray = myQueue.ToArray();
 	endTime = chrono::system_clock::now(); // Get the time after converting.
 	diff = endTime - startTime; // Get the difference from start to end time
 	totalDiff += diff; // Add the time spent for converting
-	cout << "- Converting queue to array -" << endl;
 	cout << "Total seconds : " << diff.count() << endl; // Print the time spent in seconds
-	delete[] myArray; // Reinitialize the array
 
 	// Speed test: Dequeue all elements from the queue
+	cout << "- Dequeuing all elements -" << endl;
 	startTime = chrono::system_clock::now(); // Get the time before dequeuing.
-	while (!myQueue.Empty()) // Dequeue elements until the dequeue is empty
+	while (!myQueue.Empty()) // Dequeue elements until the queue is empty
 	{
 		myQueue.Dequeue(); // Dequeue an element from the queue 
 	}
 	endTime = chrono::system_clock::now(); // Get the time after dequeuing.
 	diff = endTime - startTime; // Get the difference from start to end time
 	totalDiff += diff; // Add the time spent for dequeuing
-	cout << "- Dequeuing all elements -" << endl;
 	cout << "Total seconds : " << diff.count() << endl; // Print the time spent in seconds
 
 	cout << "- Class Speed for all 3 tests -" << endl;
 	cout << "Total seconds : " << totalDiff.count() << endl; // Print the time spent in seconds for all test combined
+}
+
+/// <summary>
+/// Populate a queue with random numbers between -100,000 to 100,000
+/// </summary>
+/// <param name="A">queue to populate</param>
+template<typename T> // can be of any type, custom types needs to implement explicit conversion to integer
+void PopulateQueue(TheQueue<T>& Q)
+{
+	for (int i = 0; i < QUEUE_SIZE; i++)
+	{
+		Q.Enqueue(dist(gen));
+	}
 }
 
 /// <summary>
