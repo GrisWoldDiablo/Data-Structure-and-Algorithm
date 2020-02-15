@@ -29,7 +29,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 
 	|Regular|Priority *[Wikipedia](https://en.wikipedia.org/wiki/Priority_queue)*|
 	|:---:|:---:|
-	| [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Queue/Queue/TheQueue.h) |  |
+	| [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Queue/Queue/TheQueue.h) | [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Priority%20Queue/PriorityQueue/ThePriorityQueue.h) |
 - #### Linked List *[Wikipedia](https://en.wikipedia.org/wiki/Linked_list)*
 
 	| `Types` | Linear | Circular |
