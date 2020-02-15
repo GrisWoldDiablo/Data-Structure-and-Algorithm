@@ -21,20 +21,22 @@ namespace Quick_Sort
 
             //PrintArray(array); // Display array before sorting.
 
+            Console.WriteLine($"Sorting a {array1.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
             long time = DateTime.Now.Ticks; // Get the current ticks.
             QuickSort(array1); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
             //PrintArray(array); // Display array after sorting.
 
-            Console.WriteLine($"Sorting a {array1.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
-            Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
 
             //------ Quick Sort Randomized portion ------
             
             //PrintArray(array2); // Display array2 before sorting.
 
+            Console.WriteLine($"Sorting a {array2.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Algorithm: {ALGORITHM_NAME} Randomized version."); // Print the name of the algorithm used.
             time = DateTime.Now.Ticks; // Get the current ticks.
             QuickSortRandomized(array2); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
@@ -42,8 +44,6 @@ namespace Quick_Sort
             //PrintArray(array2); // Display array2 after sorting.
 
             Console.WriteLine();
-            Console.WriteLine($"Sorting a {array2.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
-            Console.WriteLine($"Algorithm: {ALGORITHM_NAME} Randomized version."); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 

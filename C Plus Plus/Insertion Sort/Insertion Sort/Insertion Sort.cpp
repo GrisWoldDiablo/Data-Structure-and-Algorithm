@@ -28,6 +28,8 @@ int main()
 
 	//PrintArray(myArray); // Display array before sorting.
 
+	cout << "Sorting an array of type " << typeid(myArray).name() << " elements." << endl; // Print the type of the array and the amount of element in it.
+	cout << "Algorithm: " << ALGORITHM_NAME << endl; // Print the name of the algorithm used.
 	auto startTime = chrono::system_clock::now(); // Get the time before sorting.
 	InsertionSort(myArray); // Sort the array
 	auto endTime = chrono::system_clock::now(); // Get the time after sorting.
@@ -36,8 +38,6 @@ int main()
 
 	std::chrono::duration<double> diff = endTime - startTime; // Get the difference from start to end time
 
-	cout << "Sorting an array of type " << typeid(myArray).name() << " elements." << endl; // Print the type of the array and the amount of element in it.
-	cout << "Algorithm: " << ALGORITHM_NAME << endl; // Print the name of the algorithm used.
 	cout << "Total Seconds : " << diff.count() << endl; // Print the time spent in seconds.
 }
 

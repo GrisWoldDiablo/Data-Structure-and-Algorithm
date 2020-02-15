@@ -16,28 +16,28 @@ def main():
     
     #print_list(myList1) # Display list before sorting.
 
+    print("Sorting an array of type", type(myList1), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
+    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
     ticks = time.time() # Get the time before sorting.
     quick_sort(myList1) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
     #print_list(myList1) # Display list after sorting.
 
-    print("Sorting an array of type", type(myList1), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
     print("Total Seconds :", ticks) # Print the time spent in seconds.
     
     #------ Quick Sort Randomized portion ------
     
     #print_list(myList2) # Display list before sorting.
 
+    print("Sorting an array of type", type(myList2), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
+    print("Algorithm:", ALGORITHM_NAME, "Randomized version") # Print the name of the algorithm used.
     ticks = time.time() # Get the time before sorting.
     quick_sort_randomized(myList2) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
     #print_list(myList2) # Display list after sorting.
     print()
-    print("Sorting an array of type", type(myList2), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm:", ALGORITHM_NAME, "Randomized version") # Print the name of the algorithm used.
     print("Total Seconds :", ticks) # Print the time spent in seconds.
 
 def quick_sort(A:list, p:int=None, r:int=None):

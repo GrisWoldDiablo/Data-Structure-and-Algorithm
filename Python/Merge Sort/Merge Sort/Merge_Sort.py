@@ -13,16 +13,16 @@ def main():
     myList = [0] * LIST_SIZE # A list to be sorted.
     populate_list(myList) # Fill the list with random numbers.
     
-    print_list(myList) # Display list before sorting.
+    # print_list(myList) # Display list before sorting.
 
+    print("Sorting an array of type", type(myList), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
+    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
     ticks = time.time() # Get the time before sorting.
     merge_sort(myList) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
-    print_list(myList) # Display list after sorting.
+    # print_list(myList) # Display list after sorting.
 
-    print("Sorting an array of type", type(myList), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
     print("Total Seconds :", ticks) # Print the time spent in seconds.
 
 def merge_sort(A:list, p:int=None, r:int=None):

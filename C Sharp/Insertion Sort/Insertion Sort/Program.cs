@@ -20,14 +20,14 @@ namespace Insertion_Sort
 
             //PrintArray(array); // Display array before sorting.
 
+            Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
+            Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
             long time = DateTime.Now.Ticks; // Get the current ticks.
             InsertionSort(array); // Sort the array
             time = DateTime.Now.Ticks - time; // Get the time spent sorting.
 
             //PrintArray(array); // Display array after sorting.
 
-            Console.WriteLine($"Sorting a {array.GetType()} array of {ARRAY_SIZE} elements."); // Print the type of the array and the amount of element in it.
-            Console.WriteLine($"Algorithm: {ALGORITHM_NAME}"); // Print the name of the algorithm used.
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 

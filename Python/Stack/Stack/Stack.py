@@ -22,29 +22,29 @@ def main():
     myStack.clear() # Reinitialize the stack
     
     # Speed test: Push STACK_SIZE elements to the stack
+    print("- Pushing elements -")
     ticks = time.time() # Get the time before pushing.
     for i in range(0, STACK_SIZE): # Push STACK_SIZE elements to the stack
         myStack.push(i) # Push i to the stack
     ticks = time.time() - ticks # Get the time difference after pushing.
     total_ticks = ticks # Get the time spent for pushing
-    print("- Pushing elements -")
     print("Total Seconds :", ticks) # Print the time spent in seconds.
     
     # Speed test: Convert the stack to a list
+    print("- Converting stack to list -")
     ticks = time.time() # Get the time before converting to list.
     myList = myStack.to_list() # Convert the stack to a list
     ticks = time.time() - ticks # Get the time difference after converting to list.
     total_ticks += ticks # Add the time spent for converting
-    print("- Converting stack to list -")
     print("Total Seconds :", ticks) # Print the time spent in seconds.
 
     # Speed test: Pop all elements from the stack
+    print("- Popping all elements -")
     ticks = time.time() # Get the time before popping.
     while not myStack.empty(): # Pop all the elements from the stack
         myStack.pop() # Pop an element from the stack
     ticks = time.time() - ticks # Get the time difference after popping.
     total_ticks += ticks # Add the time spent for popping
-    print("- Popping all elements -")
     print("Total Seconds :", ticks) # Print the time spent in seconds.
     
     print("- Class Speed for all 3 tests -")

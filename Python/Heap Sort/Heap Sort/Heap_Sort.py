@@ -15,14 +15,14 @@ def main():
     
     #print_list(myList) # Display list before sorting.
 
+    print("Sorting an array of type", type(myList), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
+    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
     ticks = time.time() # Get the time before sorting.
     heap_sort(myList) # Sort the list
     ticks = time.time() - ticks # Get the time difference after sorting.
 
     #print_list(myList) # Display list after sorting.
 
-    print("Sorting an array of type", type(myList), "of", LIST_SIZE, "elements.") # Print the type of the list and the amount of element in it.
-    print("Algorithm:", ALGORITHM_NAME) # Print the name of the algorithm used.
     print("Total Seconds :", ticks) # Print the time spent in seconds.
 
 def heap_sort(A:list):

@@ -39,6 +39,8 @@ int main()
 	copy(begin(myArray1), end(myArray1), begin(myArray2)); // Copy myArray1 into myArray2 in order to sort same values.
 	//PrintArray(myArray1); // Display array before sorting.
 
+	cout << "Sorting an array of type " << typeid(myArray1).name() << " elements." << endl; // Print the type of the array and the amount of element in it.
+	cout << "Algorithm: " << ALGORITHM_NAME << endl; // Print the name of the algorithm used.
 	auto startTime = chrono::system_clock::now(); // Get the time before sorting.
 	QuickSort(myArray1); // Sort the array
 	auto endTime = chrono::system_clock::now(); // Get the time after sorting.
@@ -47,14 +49,14 @@ int main()
 
 	std::chrono::duration<double> diff = endTime - startTime; // Get the difference from start to end time
 	
-	cout << "Sorting an array of type " << typeid(myArray1).name() << " elements." << endl; // Print the type of the array and the amount of element in it.
-	cout << "Algorithm: " << ALGORITHM_NAME << endl; // Print the name of the algorithm used.
 	cout << "Total Seconds : " << diff.count() << endl; // Print the time spent in seconds.
 
 	//------ Quick Sort Randomized portion ------
 	
 	//PrintArray(myArray2); // Display array before sorting.
 
+	cout << "Sorting an array of type " << typeid(myArray2).name() << " elements." << endl; // Print the type of the array and the amount of element in it.
+	cout << "Algorithm: " << ALGORITHM_NAME << " Randomized version."<< endl; // Print the name of the algorithm used.
 	startTime = chrono::system_clock::now(); // Get the time before sorting.
 	QuickSortRandomized(myArray2); // Sort the array
 	endTime = chrono::system_clock::now(); // Get the time after sorting.
@@ -64,8 +66,6 @@ int main()
 	diff = endTime - startTime; // Get the difference from start to end time
 
 	cout << endl;
-	cout << "Sorting an array of type " << typeid(myArray2).name() << " elements." << endl; // Print the type of the array and the amount of element in it.
-	cout << "Algorithm: " << ALGORITHM_NAME << " Randomized version."<< endl; // Print the name of the algorithm used.
 	cout << "Total Seconds : " << diff.count() << endl; // Print the time spent in seconds.
 }
 
