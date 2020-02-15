@@ -24,7 +24,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Counting%20Sort/Counting%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Counting%20Sort/Counting%20Sort/Counting%20Sort.cpp), [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Counting%20Sort/Counting%20Sort/Counting_Sort.py)
 ## Data Structures *[Wikipedia](https://en.wikipedia.org/wiki/Data_structure)*
 - #### Stack *[Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))*
-	Language version: [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Stack/Stack/Stack.py)
+	Language version: [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Stack/Stack/TheStack.py)
 - #### Queue *[Wikipedia](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))*
 
 	|Regular|Priority *[Wikipedia](https://en.wikipedia.org/wiki/Priority_queue)*|
