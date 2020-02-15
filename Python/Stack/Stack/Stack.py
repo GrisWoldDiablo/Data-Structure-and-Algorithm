@@ -3,14 +3,14 @@ Author: Alexandre Lepage
 Date: May 2019
 """
 import time
-import TheStack
+from TheStack import TheStack
 
 DATA_STRUCTURE_NAME = "Stack" # The name of the data structure
 STACK_SIZE = 10000000 # size of stack for speed testing
 
 def main():
     print("---- Data structure :", DATA_STRUCTURE_NAME,"----") # Print the data structure name
-    myStack = TheStack.TheStack() # Create a new stack
+    myStack = TheStack() # Create a new stack
     print("Declared a",type(myStack),".") # Print the name of the class of the stack
     populate_stack(myStack, 10) # Populate the stack with x elements
     myList = myStack.to_list() # Convert the stack to a list
