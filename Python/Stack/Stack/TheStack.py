@@ -9,6 +9,7 @@ class TheStack:
     """
     __keys:list # The array holding the keys
     __intitial_size:int = 8 # The size of the array holding the stack
+
     def __init__(self):
         """
         Contructor of the Class
@@ -23,11 +24,11 @@ class TheStack:
         self.__keys = [0] * self.__intitial_size
         self.__top = -1
             
-    def push(self, key):
+    def push(self, k):
         """
         Add an element to the top of the stack 
         -----PSEUDO CODE-----
-        (S is the Stack, key is the element to be added to the stack)
+        (S is the Stack, k is the element to be added to the stack)
         Push(S,k)
          S.top = S.top + 1
          if S.top == S.size
@@ -36,12 +37,12 @@ class TheStack:
         -----PSEUDO CODE-----
 
         Keyword argument:
-        key: the element to be added to the stack
+        k: the element to be added to the stack
         """
         self.__top += 1
         if self.__top == len(self.__keys):
             self.__increase_size()
-        self.__keys[self.__top] = key
+        self.__keys[self.__top] = k
 
     def pop(self):
         """

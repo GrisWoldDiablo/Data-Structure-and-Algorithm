@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Linked List.cs" />
+    <Compile Include="TheSinglyLinearLinkedList.cs" />
+    <Compile Include="TheLinkedList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
