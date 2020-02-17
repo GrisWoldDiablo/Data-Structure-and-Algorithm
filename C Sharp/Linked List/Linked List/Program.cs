@@ -14,7 +14,7 @@ namespace Linked_List
         const int LIST_SIZE = 1000000; // Set the size of the list to 1,000,000.
         const int TEST_AMOUNT = 500; // Amount of item that will be used for some testing.
 
-        // ---- Array for testing setup ----
+        // ---- Arrays for testing setup ----
         static int[] myArray = new int[LIST_SIZE];
         static int[] delTestArray = new int[TEST_AMOUNT];
         static int[] searchTestArray = new int[TEST_AMOUNT];
@@ -99,8 +99,8 @@ namespace Linked_List
             Console.WriteLine($"\tTotal Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
             #endregion
 
-            #region DELETE_NODE_TEST
-            // Speed test: Deleting TEST_AMOUNT node from the list
+            #region DELETE_NODE_FOUND_TEST
+            // Speed test: Deleting foundNodes node from the list
             Console.Write($"- Deleting {foundNodes} nodes. -");
             time = DateTime.Now.Ticks; // Get the current ticks.
             for (int i = 0; i < theFoundNodes.Length; i++)
@@ -110,6 +110,19 @@ namespace Linked_List
             time = DateTime.Now.Ticks - time; // Get the time spent Searching.
             totalTime += time; // Add the time spend for this test
             Console.WriteLine($"- {testList.Count} nodes left  -");
+            Console.WriteLine($"\tTotal Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
+            #endregion
+
+            #region CONTAINS_TEST
+            // Speed test: Do a contains of TEST_AMOUNT elements from the list
+            Console.WriteLine($"- Run contains on {TEST_AMOUNT} values. -");
+            time = DateTime.Now.Ticks; // Get the current ticks.
+            for (int i = 0; i < containTestArray.Length; i++)
+            {
+                testList.Contains((dynamic)containTestArray[i]); // Check if list contains a node with specific value.
+            }
+            time = DateTime.Now.Ticks - time; // Get the time spent looking.
+            totalTime += time; // Add the time spend for this test
             Console.WriteLine($"\tTotal Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
             #endregion
 

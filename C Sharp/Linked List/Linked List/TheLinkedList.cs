@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Author: Alexandre Lepage
+ * Date: May 2019
+ */
+using System;
 
 namespace Linked_List
 {
+    /// <summary>
+    /// Custom abstract linked list class
+    /// </summary>
+    /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
     public abstract class TheLinkedList<T> where T : IComparable
     {
         protected TheNode<T> head; // node at the head of the list
@@ -53,6 +57,10 @@ namespace Linked_List
         }
     } // End Class TheLinkedList
 
+    /// <summary>
+    /// Custom abstract node class for Linked List
+    /// </summary>
+    /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
     public abstract class TheNode<T> where T : IComparable
     {
         public T key; // value of the node

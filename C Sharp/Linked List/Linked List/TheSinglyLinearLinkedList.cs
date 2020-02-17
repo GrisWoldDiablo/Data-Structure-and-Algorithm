@@ -260,9 +260,9 @@ namespace Linked_List
         /// <summary>
         /// Class constructor
         /// -----PSEUDO CODE-----
-        /// (x is the node, k is the value of the node)
-        /// TSLNode(x,k)
-        ///  x.key = k
+        /// (k is the value of the node)
+        /// TSLNode(k)
+        ///  key = k
         /// -----PSEUDO CODE-----
         /// </summary>
         /// <param name="k">value of the node</param>
