@@ -118,7 +118,7 @@ namespace Linked_List
         }
 
         /// <summary>
-        ///  find the node predecessing the node
+        /// find the node predecessing the node
         /// -----PSEUDO CODE-----
         /// (L is the LinkedList, x is the value of the node to look at)
         /// Predecessor(L,x)
