@@ -148,20 +148,20 @@ class TheBinarySearchTree(TheTree):
         if isinstance(z, TheNode) is False:
             raise TypeError("Wrong type provided.")
         if z.left is None:
-            self.__transplant(z, z.right)
+            self._transplant(z, z.right)
         elif z.right is None:
-            self.__transplant(z, z.left)
+            self._transplant(z, z.left)
         else:
             y = self.minimum_node(z.right)
             if y.parent != z:
-                self.__transplant(y, y.right)
+                self._transplant(y, y.right)
                 y.right = z.right
                 y.right.parent = y
-            self.__transplant(z, y)
+            self._transplant(z, y)
             y.left = z.left
             y.left.parent = y
 
-    def __transplant(self, u:TheNode, v:TheNode):
+    def _transplant(self, u:TheNode, v:TheNode):
         """
         Replace the subtree rooted at node u
         with the subtree rooted a node v

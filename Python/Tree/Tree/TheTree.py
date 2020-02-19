@@ -223,7 +223,7 @@ class TheTree(ABC):
         """
         # Here I have made 2 searching methods, 
         # one that uses recursive and the other iterative approach
-        # return self.__search_recursive(self.root, k)
+        # return self._search_recursive(self.root, k)
         return self._search_iterative(self.root, k)
     
     def _search_recursive(self, x:TheNode, k):
