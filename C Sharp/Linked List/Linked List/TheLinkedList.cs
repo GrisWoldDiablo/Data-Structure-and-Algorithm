@@ -65,7 +65,7 @@ namespace Linked_List
     {
         public T key; // value of the node
         public TheNode<T> next; // node after this one in the list
-        protected TheNode<T> prev; // node before this one in the list
+        public TheNode<T> prev; // node before this one in the list
 
         /// <summary>
         /// compares this object to the argument one.

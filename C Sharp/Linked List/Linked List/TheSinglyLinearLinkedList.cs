@@ -65,7 +65,7 @@ namespace Linked_List
         /// -----PSEUDO CODE-----
         /// (L is the LinkedList, k is the value of the node to be deleted)
         /// Delete(L,k)
-        ///  y.key = k
+        ///  y = Search(L,k)
         ///  Delete(L,y)
         /// -----PSEUDO CODE-----
         /// </summary>
@@ -73,7 +73,8 @@ namespace Linked_List
         /// <returns>True if node was removed</returns>
         public override bool Delete(T k)
         {
-            return Delete(new TSLNode<T>(k));
+            TheNode<T> y = Search(k);
+            return Delete(y);
         }
 
         /// <summary>

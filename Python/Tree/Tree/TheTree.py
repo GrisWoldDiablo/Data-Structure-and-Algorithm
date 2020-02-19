@@ -10,11 +10,6 @@ class TheNode(ABC):
     Custom abstract Tree Node class
     """
 
-    left:None # Node on the left of this one
-    right:None # Node on the right of this one
-    parent:None # Node above/parent of this node
-    key:None # Key value this node is holding
-
     def __init__(self,k):
         """
         Constructor of the Class
@@ -32,10 +27,10 @@ class TheNode(ABC):
         Keyword argument:
         k: the value of the node
         """
-        self.left = None
-        self.right = None
-        self.parent = None
-        self.key = k
+        self.left = None   # Node on the left of this one
+        self.right = None  # Node on the right of this one
+        self.parent = None # Node above/parent of this node
+        self.key = k       # Key value this node is holding
 
     def predecessor(self): 
         """
@@ -106,12 +101,12 @@ class TheNode(ABC):
             lk = self.left.key
         if self.right is not None:
             rk = self.right.key
-        return 'Node:' + '(' + str(self.key) + ', Parent=' + str(pk) + ', Left=' + str(lk) + ', Right=' + str(rk) + ')'
+        return 'Node:(' + str(self.key) + ', Parent=' + str(pk) + ', Left=' + str(lk) + ', Right=' + str(rk) + ')'
     
     def height(self):
-        return self.__height(self)
+        return self._height(self)
 
-    def __height(self, x):
+    def _height(self, x):
         """
         get the height of the node
         -----PSEUDO CODE-----
@@ -135,8 +130,8 @@ class TheNode(ABC):
         if x is None:
             return -1
 
-        leftHeight = self.__height(x.left) + 1
-        rightHeight = self.__height(x.right) + 1
+        leftHeight = self._height(x.left) + 1
+        rightHeight = self._height(x.right) + 1
 
         if leftHeight > rightHeight:
             return leftHeight
@@ -149,7 +144,6 @@ class TheTree(ABC):
     """
     Custom abstract Tree class
     """
-    root:TheNode
 
     def __init__(self):
         """
@@ -161,7 +155,7 @@ class TheTree(ABC):
          root = NIL
         -----PSEUDO CODE-----
         """
-        self.root = None
+        self.root = None # The node at the root of the tree
 
     @abstractmethod
     def insert_value(self, k):
@@ -172,7 +166,11 @@ class TheTree(ABC):
         pass
 
     @abstractmethod
-    def delete(self, z:TheNode):
+    def delete_value(self, k):
+        pass
+
+    @abstractmethod
+    def delete_node(self, z:TheNode):
         pass
 
     def search_value(self, k):
@@ -189,7 +187,7 @@ class TheTree(ABC):
         Return:
         TheNode: found node or None
         """
-        return self.__search(k)
+        return self._search(k)
 
     def search_node(self, x:TheNode):
         """
@@ -205,9 +203,11 @@ class TheTree(ABC):
         Return:
         TheNode: found node or None
         """
-        return self.__search(x.key)
+        if isinstance(x, TheNode) is False:
+            raise TypeError("Wrong type provided")
+        return self._search(x.key)
 
-    def __search(self, k):
+    def _search(self, k):
         """
         Find a node with a specific value
         -----PSEUDO CODE-----
@@ -224,9 +224,9 @@ class TheTree(ABC):
         # Here I have made 2 searching methods, 
         # one that uses recursive and the other iterative approach
         # return self.__search_recursive(self.root, k)
-        return self.__search_iterative(self.root, k)
+        return self._search_iterative(self.root, k)
     
-    def __search_recursive(self, x:TheNode, k):
+    def _search_recursive(self, x:TheNode, k):
         """
         Find a node with a specific value,
         using the recursive approach.
@@ -251,11 +251,11 @@ class TheTree(ABC):
         if x is None or k == x.key:
             return x
         if k < x.key:
-            return self.__search_recursive(x.left, k)
+            return self._search_recursive(x.left, k)
         else:
-            return self.__search_recursive(x.right, k)
+            return self._search_recursive(x.right, k)
 
-    def __search_iterative(self, x:TheNode, k):
+    def _search_iterative(self, x:TheNode, k):
         """
         Find a node with a specific value,
         using the iterative approach.
@@ -315,6 +315,8 @@ class TheTree(ABC):
         Return:
         TheNode: minimum node of this root
         """
+        if isinstance(x, TheNode) is False:
+            raise TypeError("Wrong type provided")
         while x.left is not None:
             x = x.left
         return x
@@ -350,6 +352,8 @@ class TheTree(ABC):
         Return:
         TheNode: maximum node of this root
         """
+        if isinstance(x, TheNode) is False:
+            raise TypeError("Wrong type provided")
         while x.right is not None:
             x = x.right
         return x
@@ -375,10 +379,12 @@ class TheTree(ABC):
         Return:
         TheNode: found node or None
         """
+        if isinstance(x, TheNode) is False:
+            raise TypeError("Wrong type provided")
         if x.left is not None:
             return TheTree.maximum_node(x.left)
         y = x.parent
-        while y is not None and x is y.left:
+        while y is not None and x == y.left:
             x = y
             y = y.parent
         return y
@@ -404,10 +410,12 @@ class TheTree(ABC):
         Return:
         TheNode: found node or None
         """
+        if isinstance(x,TheNode) is False:
+            raise TypeError("Wrong type provided")
         if x.right is not None:
             return TheTree.minimum_node(x.right)
         y = x.parent
-        while y is not None and x is y.right:
+        while y is not None and x == y.right:
             x = y
             y = y.parent
         return y
@@ -422,9 +430,9 @@ class TheTree(ABC):
          InorderWalk(T.root)
         -----PSEUDO CODE-----
         """
-        self.__inorder_walk(self.root)
+        self._inorder_walk(self.root)
 
-    def __inorder_walk(self, x:TheNode):
+    def _inorder_walk(self, x:TheNode):
         """
         Walks through all the nodes on the tree, starting
         at a speficic node in order and print their keys
@@ -441,10 +449,10 @@ class TheTree(ABC):
         x:TheNode: the root of the tree
         """
         if x is not None:
-            self.__inorder_walk(x.left)
+            self._inorder_walk(x.left)
             print(x)
-            self.__inorder_walk(x.right)
-
+            self._inorder_walk(x.right)
+            
     def height(self):
         """
         get the height of the tree
@@ -454,7 +462,7 @@ class TheTree(ABC):
         -----PSEUDO CODE-----
 
         Return:
-        int: the height of the tree
+        int: the height of the tree 
         """
         return self.root.height()
 #endregion TheTree class

@@ -85,6 +85,8 @@ class TheBinarySearchTree(TheTree):
         Keyword argument:
         x:TheNode: the node to insert
         """
+        if isinstance(z, TheNode) is False:
+            raise TypeError("Wrong type provided.")
         y = None
         x = self.root
         while x is not None:
@@ -100,8 +102,26 @@ class TheBinarySearchTree(TheTree):
             y.left = z
         else:
             y.right = z
-    
-    def delete(self, z:TheNode):
+
+    def delete_value(self, k):
+        """
+        Delete a node with a specific value
+        -----PSEUDO CODE-----
+        (T is the Tree, k is the value to look for)
+        Delete(T,k)
+         y = Search(T,k)
+         if y =/= NIL
+            Delete(T.root,y)
+        -----PSEUDO CODE-----
+        
+        Keyword argument:
+        k:var: the value of the node to delete
+        """
+        y = self.search_value(k)
+        if y is not None:
+            self.delete_node(y)
+
+    def delete_node(self, z:TheNode):
         """
         Delete a node from the tree
         -----PSEUDO CODE-----
@@ -109,9 +129,9 @@ class TheBinarySearchTree(TheTree):
         Delete(T,z)
          if z.left == NIL
             Transplant(T, z, z.right)
-        else if z.right == NIL
+         else if z.right == NIL
             Transplant(T, z, z.left)
-        else
+         else
             y = Minimum(T, z.right)
             if y.parent =/= z
                 Transplant(T, y, y.right)
@@ -125,6 +145,8 @@ class TheBinarySearchTree(TheTree):
         Keyword argument:
         z:TheNode: the node to delete
         """
+        if isinstance(z, TheNode) is False:
+            raise TypeError("Wrong type provided.")
         if z.left is None:
             self.__transplant(z, z.right)
         elif z.right is None:

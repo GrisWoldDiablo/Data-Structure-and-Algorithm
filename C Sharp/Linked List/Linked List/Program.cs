@@ -133,8 +133,8 @@ namespace Linked_List
         /// <summary>
         /// Fill array B with random values from array A.
         /// </summary>
-        /// <param name="A"></param>
-        /// <param name="B"></param>
+        /// <param name="A">array to get values from</param>
+        /// <param name="B">array to fill</param>
         static void GetRandomValues(int[] A, int[] B)
         {
             for (int i = 0; i < B.Length; i++)
