@@ -4,8 +4,6 @@ Inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.
 
 All code and pseudocode by me.
 
-Modified Counting Sort, it can deal with negative numbers
-
 Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/LICENSE)
 
 *`PS: This project is a work in progress.`*
@@ -20,7 +18,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Heap%20Sort/Heap%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Heap%20Sort/Heap%20Sort/Heap%20Sort.cpp), [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Heap%20Sort/Heap%20Sort/Heap_Sort.py)
 - #### Quick Sort *[Wikipedia](https://en.wikipedia.org/wiki/Quicksort)*
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Quick%20Sort/Quick%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Quick%20Sort/Quick%20Sort/Quick%20Sort.cpp), [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Quick%20Sort/Quick%20Sort/Quick_Sort.py)
-- #### Counting Sort *[Wikipedia](https://en.wikipedia.org/wiki/Counting_sort)*
+- #### Counting Sort *[Wikipedia](https://en.wikipedia.org/wiki/Counting_sort)* *`Modified algorithm, it can deal with negative numbers`*
 	Language version: [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Counting%20Sort/Counting%20Sort/Program.cs), [C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Counting%20Sort/Counting%20Sort/Counting%20Sort.cpp), [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Counting%20Sort/Counting%20Sort/Counting_Sort.py)
 ## Data Structures *[Wikipedia](https://en.wikipedia.org/wiki/Data_structure)*
 - #### Stack *[Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))*
