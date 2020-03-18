@@ -151,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractGraph.h" />
-    <ClInclude Include="AdjacentVertex.h" />
     <ClInclude Include="ListGraph.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

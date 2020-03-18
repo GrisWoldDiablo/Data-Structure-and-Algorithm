@@ -16,7 +16,7 @@ public:
 	std::vector<Vertex*>* adjacencyList;
 
 	ListGraph(std::initializer_list<int> keys);
-
+	~ListGraph();
 	int GetAdjSize();
 
 	void AddEdge(int sourceKey, int destinationKey) override;
@@ -31,6 +31,11 @@ public:
 ListGraph::ListGraph(std::initializer_list<int> keys) : AbstractGraph(keys)
 {
 	adjacencyList = new std::vector<Vertex*>[GetAdjSize()];
+}
+
+ListGraph::~ListGraph()
+{
+	delete[] adjacencyList;
 }
 
 int ListGraph::GetAdjSize()

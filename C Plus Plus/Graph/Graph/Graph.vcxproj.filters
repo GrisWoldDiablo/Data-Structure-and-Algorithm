@@ -29,8 +29,5 @@
     <ClInclude Include="ListGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdjacentVertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
