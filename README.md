@@ -1,4 +1,4 @@
-![Title](Title.png)
+﻿![Title](Title.png)
 ## Description
 Inspired by the book: [Introduction to Algorithms by CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
 
@@ -31,17 +31,24 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 - #### Linked List *[Wikipedia](https://en.wikipedia.org/wiki/Linked_list)*
 
 	| `Types` | Linear | Circular |
-	|:---:|:---:|:---:|
-	| Singly | [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Linked%20List/Linked%20List/Linked%20List.cs#L9) |  |
-	| Doubly |  |  |
+	|:---|:---:|:---:|
+	| **Singly** | [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Linked%20List/Linked%20List/Linked%20List.cs#L9) |  |
+	| **Doubly** |  |  |
 - #### Hash Table *[Wikipedia](https://en.wikipedia.org/wiki/Hash_table)*
 ## Trees *[Wikipedia](https://en.wikipedia.org/wiki/Tree_(data_structure))*
 - #### Binary Search Tree *[Wikipedia](https://en.wikipedia.org/wiki/Binary_search_tree)*
 	Language version: [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Tree/Tree/TheBinarySearchTree.py)
 - #### Red-Black Tree *[Wikipedia](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)*
 ## Search Algorithms *[Wikipedia](https://en.wikipedia.org/wiki/Search_algorithm)*
-- #### DFS (Depth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)*
-- #### BFS (Breadth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)*
-- #### Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)*
-- #### Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)*
-- #### A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)*
+|`Algorithm \ Graph` | List | Matrix |
+|:---|:---:|:---:|
+|${BFS}^{1}$|||
+|$DFS^{2}$|||
+|$Bellman Ford^{3}$|||
+|$Disjkstra^{4}$|||
+|$A^{*5}$|||
+1. #### BFS (Breadth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)*
+2. #### DFS (Depth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)*
+3. #### Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)*
+4. #### Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)*
+5. #### A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)*

@@ -5,6 +5,9 @@
 
 #pragma once
 
+#include <limits.h>
+#include <iostream>
+
  /// <summary>
  /// 
  /// </summary>
@@ -50,14 +53,12 @@ public:
 	bool operator==(const Vertex& a) const { return this->key == a.key; };
 	friend std::ostream& operator<<(std::ostream& os, const Vertex& v)
 	{
-		// write obj to stream
-		return os << v.key << ':' << v.color;
+		return os << v.key;// << ':' << v.color;
 	}
 	
 	friend std::ostream& operator<<(std::ostream& os, const Vertex* v)
 	{
-		// write obj to stream
-		return os << v->key << ':' << v->color;
+		return os << v->key;// << ':' << v->color;
 	}
 };
 

@@ -8,7 +8,7 @@
 #include <queue>
 
  /// <summary>
- /// 
+ /// Custom ListGraph class for graph algorithms
  /// </summary>
 class ListGraph : public AbstractGraph
 {
@@ -17,7 +17,7 @@ public:
 
 	ListGraph(std::initializer_list<int> keys);
 	~ListGraph();
-	int GetAdjSize();
+	int GetAdjListSize();
 
 	void AddEdge(int sourceKey, int destinationKey) override;
 	void BreadthFirstSearch(int sourceKey) override;
@@ -30,7 +30,7 @@ public:
 
 ListGraph::ListGraph(std::initializer_list<int> keys) : AbstractGraph(keys)
 {
-	adjacencyList = new std::vector<Vertex*>[GetAdjSize()];
+	adjacencyList = new std::vector<Vertex*>[GetAdjListSize()];
 }
 
 ListGraph::~ListGraph()
@@ -38,7 +38,7 @@ ListGraph::~ListGraph()
 	delete[] adjacencyList;
 }
 
-int ListGraph::GetAdjSize()
+int ListGraph::GetAdjListSize()
 {
 	return maxKey - minKey + 1;
 }
@@ -120,6 +120,8 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 		Q.pop();
 		for (Vertex* v : adjacencyList[u->key - minKey])
 		{
+			PrintVertices();
+			std::cout <<"-"<< std::endl;
 			if (v->color == Color::White)
 			{
 				v->color = Color::Grey;
@@ -154,7 +156,7 @@ void ListGraph::AStar(int sourceKey)
 
 void ListGraph::PrintEdges()
 {
-	for (int i = 0; i < GetAdjSize(); i++)
+	for (int i = 0; i < GetAdjListSize(); i++)
 	{
 		std::cout << vertices[i].key << '[';
 		for (auto vertex : adjacencyList[i])

@@ -19,15 +19,28 @@ uniform_int_distribution<int> dist(-100000, 100000); // Set the random number di
 
 int main()
 {
-    auto test = ListGraph({ 2,3,4,5 });
+    auto test = ListGraph({ 1,2,3,4,5,6,7 });
     test.AddEdge(2, 3);
     test.AddEdge(3, 4);
     test.AddEdge(4, 5);
 	test.AddEdge(2, 4);
 	test.AddEdge(4, 2);
+	test.AddEdge(2, 1);
+	test.AddEdge(1, 6);
+	test.AddEdge(7, 1);
+
+    //test.PrintVertices();
     test.BreadthFirstSearch(2);
+    test.PrintVertices();
     test.PrintPath(2, 5);
-    test.BreadthFirstSearch(3);
+	test.BreadthFirstSearch(3);
+	test.PrintVertices(); 
     test.PrintPath(3, 2);
+    test.PrintPath(3, 6);
+    test.BreadthFirstSearch(7);
+    test.PrintPath(7, 6);
+	test.PrintVertices();
     test.PrintEdges();
+    //test.PrintVertices();
+
 }

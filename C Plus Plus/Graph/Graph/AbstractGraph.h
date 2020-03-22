@@ -4,26 +4,28 @@
  */
 
 #pragma once
+
 #include "Vertex.h"
 #include <vector>
 #include <limits.h>
-
+#include <iostream>
 
 /// <summary>
-/// 
+/// Custom Abstract Graph class
 /// </summary>
 class AbstractGraph
 {
-
-protected:
-    std::vector<Vertex>  vertices;
-    int minKey = INT_MAX;
-    int maxKey = INT_MIN;
+protected: 
+    // class variables
+    std::vector<Vertex>  vertices; // List of the vertices in the Graph
+    int minKey = INT_MAX; // The minimum value of the keys
+    int maxKey = INT_MIN; // The maximum value of the keys
     int time = 0;
 
+    AbstractGraph(std::initializer_list<int> keys); // Constructor
+
 public:
-    AbstractGraph(std::initializer_list<int> keys);
-    void PrintVertices();
+    void PrintVertices(); //
     void PrintPath(int sourceKey, int destinationKey);
 
 private:
