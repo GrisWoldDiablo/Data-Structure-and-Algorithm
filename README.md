@@ -48,14 +48,14 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	|**2. DFS (Depth-First Search)**<sup id="a5">[5](#f5)</sup>|||
 	|**3. Bellman Ford**<sup id="a6">[6](#f6)</sup>|||
 	|**4. Disjkstra**<sup id="a7">[7](#f7)</sup>|||
-	|**5. A\***<sup id="a8">[8](#f8)</sup>|||
+	|**5. A\* (A Star)**<sup id="a8">[8](#f8)</sup>|||
 
 ## `Foot Notes`
-<b id="f1">1.</b> Graphs structure *[Wikipedia](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))* [↩](#a1)
-<b id="f2">2.</b> Adjacency List *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_list)* [↩](#a2)
-<b id="f3">3.</b> Adjacency Matrix *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_matrix)* [↩](#a3)
-<b id="f4">4.</b> BFS (Breadth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)* [↩](#a4)
-<b id="f5">5.</b> DFS (Depth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)* [↩](#a5)
-<b id="f6">6.</b> Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)* [↩](#a6)
-<b id="f7">7.</b> Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)* [↩](#a7)
-<b id="f8">8.</b> A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)* [↩](#a8)
+<b id="f1">1.</b> Graphs structure *[Wikipedia](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))* [↩](#a1)  
+<b id="f2">2.</b> Adjacency List *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_list)* [↩](#a2)  
+<b id="f3">3.</b> Adjacency Matrix *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_matrix)* [↩](#a3)  
+<b id="f4">4.</b> BFS (Breadth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)* [↩](#a4)  
+<b id="f5">5.</b> DFS (Depth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)* [↩](#a5)  
+<b id="f6">6.</b> Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)* [↩](#a6)  
+<b id="f7">7.</b> Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)* [↩](#a7)  
+<b id="f8">8.</b> A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)* [↩](#a8)  
