@@ -40,16 +40,22 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	Language version: [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Tree/Tree/TheBinarySearchTree.py)
 - #### Red-Black Tree *[Wikipedia](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)*
 ## Search Algorithms *[Wikipedia](https://en.wikipedia.org/wiki/Search_algorithm)*
+- #### Graphs structure<sup id="a1">[1](#f1)</sup>
 
-|`Algorithm \ Graph` | List | Matrix |
-|:---|:---:|:---:|
-|**1. BFS**|||
-|**2. DFS**|||
-|**3. Bellman Ford**|||
-|**4. Disjkstra**|||
-|**5. A\***|||
-1. #### BFS (Breadth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)*
-2. #### DFS (Depth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)*
-3. #### Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)*
-4. #### Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)*
-5. #### A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)*
+	|`Algorithm \ Adjacency` | List<sup id="a2">[2](#f2)</sup> | Matrix<sup id="a3">[3](#f3)</sup> |
+	|:---|:---:|:---:|
+	|**1. BFS (Breadth-First Search)**<sup id="a4">[4](#f4)</sup>|||
+	|**2. DFS (Depth-First Search)**<sup id="a5">[5](#f5)</sup>|||
+	|**3. Bellman Ford**<sup id="a6">[6](#f6)</sup>|||
+	|**4. Disjkstra**<sup id="a7">[7](#f7)</sup>|||
+	|**5. A\***<sup id="a8">[8](#f8)</sup>|||
+
+## `Foot Notes`
+<b id="f1">1.</b> Graphs structure *[Wikipedia](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))* [↩](#a1)</br>
+<b id="f2">2.</b> Adjacency List *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_list)* [↩](#a2)</br>
+<b id="f3">3.</b> Adjacency Matrix *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_matrix)* [↩](#a3)</br>
+<b id="f4">4.</b> BFS (Breadth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)* [↩](#a4)</br>
+<b id="f5">5.</b> DFS (Depth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)* [↩](#a5)</br>
+<b id="f6">6.</b> Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)* [↩](#a6)</br>
+<b id="f7">7.</b> Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)* [↩](#a7)</br>
+<b id="f8">8.</b> A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)* [↩](#a8)</br>
