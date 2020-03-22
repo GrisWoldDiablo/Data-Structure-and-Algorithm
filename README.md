@@ -40,6 +40,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	Language version: [Python](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/Python/Tree/Tree/TheBinarySearchTree.py)
 - #### Red-Black Tree *[Wikipedia](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)*
 ## Search Algorithms *[Wikipedia](https://en.wikipedia.org/wiki/Search_algorithm)*
+
 |`Algorithm \ Graph` | List | Matrix |
 |:---|:---:|:---:|
 |**1. BFS**|||
