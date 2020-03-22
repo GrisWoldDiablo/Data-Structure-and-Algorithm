@@ -42,11 +42,11 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 ## Search Algorithms *[Wikipedia](https://en.wikipedia.org/wiki/Search_algorithm)*
 |`Algorithm \ Graph` | List | Matrix |
 |:---|:---:|:---:|
-|${BFS}^{1}$|||
-|$DFS^{2}$|||
-|$Bellman Ford^{3}$|||
-|$Disjkstra^{4}$|||
-|$A^{*5}$|||
+|**1. BFS**|||
+|**2. DFS**|||
+|**3. Bellman Ford**|||
+|**4. Disjkstra**|||
+|**5. A\***|||
 1. #### BFS (Breadth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)*
 2. #### DFS (Depth-First search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)*
 3. #### Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)*
