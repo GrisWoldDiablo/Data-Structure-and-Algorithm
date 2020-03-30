@@ -55,7 +55,7 @@ public: // Property
 /// <summary>
 /// Class constructor,
 /// initialize size and priority type.
-/// initinial size of the array is 8.
+/// initial size of the array is 8.
 /// -----PSEUDO CODE-----
 /// (Q is the queue, t is the type of priority)
 /// PriorityQueue(Q,t)
@@ -63,9 +63,9 @@ public: // Property
 ///  Q.priotityType = t
 ///  Let Q[0..7] be a new array
 ///  if type == Min
-///		Q.priorityBound = +inifity
+///		Q.priorityBound = +infinity
 ///  else
-///		Q.pritotyBound = -inifity
+///		Q.pritotyBound = -infinity
 /// -----PSEUDO CODE-----
 /// </summary>
 /// <param name = "priorityType">Type of priority of the queue, min or max</param>
@@ -98,7 +98,7 @@ inline ThePriorityQueue<T>::~ThePriorityQueue()
 }
 
 /// <summary>
-/// Add an element in the queue and call the appriopriate
+/// Add an element in the queue and call the appropriate
 /// function to place the element at the right place in the
 /// queue based on the priority type.
 /// -----PSEUDO CODE-----
@@ -136,7 +136,7 @@ inline void ThePriorityQueue<T>::Enqueue(T key)
 }
 
 /// <summary>
-/// Remove an element priority element and reorgazine the heap
+/// Remove an element priority element and reorganize the heap
 /// to bring the next element in line at the front of the queue.
 /// -----PSEUDO CODE-----
 /// (Q is the Queue)
@@ -202,7 +202,7 @@ inline T ThePriorityQueue<T>::Peek()
 
 /// <summary>
 /// Delete the queue and reinitialize it,
-/// initinial size of the array is 8.
+/// initial size of the array is 8.
 /// -----PSEUDO CODE-----
 /// (Q is the Queue)
 /// Clear(Q)
@@ -287,7 +287,7 @@ inline void ThePriorityQueue<T>::IncreaseSize()
 }
 
 /// <summary>
-/// Makes sure that the node is the biggest one out of its childrens
+/// Makes sure that the node is the biggest one out of its children
 /// -----PSEUDO CODE-----
 /// (A is an Array with index 0..n)
 /// (i is the index of the node to MaxHeapify)
@@ -337,7 +337,7 @@ inline void ThePriorityQueue<T>::MaxHeapify(int i, int heapSize)
 }
 
 /// <summary>
-/// Makes sure that the node is the smallest one out of its childrens
+/// Makes sure that the node is the smallest one out of its children
 /// -----PSEUDO CODE-----
 /// (A is an Array with index 0..n)
 /// (i is the index of the node to MinHeapify)
@@ -473,7 +473,7 @@ inline int ThePriorityQueue<T>::Parent(int i)
 template<class T>
 inline int ThePriorityQueue<T>::Left(int i)
 {
-	return (i * 2);
+	return (i * 2) + 1;
 }
 
 /// <summary>
@@ -484,7 +484,7 @@ inline int ThePriorityQueue<T>::Left(int i)
 template<class T> 
 inline int ThePriorityQueue<T>::Right(int i)
 {
-	return ((i * 2) + 1);
+	return (i * 2) + 2;
 }
 
 #endif // !THEPRIORITYQUEUE

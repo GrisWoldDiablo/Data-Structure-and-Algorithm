@@ -130,7 +130,7 @@ def left(i:int):
     Return
     int: Left child's index of requested element
     """
-    return (i * 2)
+    return (i * 2) + 1
 
 def right(i:int):
     """
@@ -142,7 +142,7 @@ def right(i:int):
     Return
     int: Right child's index of requested element
     """
-    return ((i * 2) + 1)
+    return (i * 2) + 2
 
 def populate_list(A:list):
     """

@@ -167,7 +167,7 @@ int Parent(int i)
 /// <returns>Left child's index of requested element</returns>
 int Left(int i)
 {
-	return (i * 2);
+	return (i * 2) + 1;
 }
 
 /// <summary>
@@ -177,7 +177,7 @@ int Left(int i)
 /// <returns>Right child's index of requested element</returns>
 int Right(int i)
 {
-	return ((i * 2) + 1);
+	return (i * 2) + 2;
 }
 
 /// <summary>

@@ -148,7 +148,7 @@ namespace Heap_Sort
         /// <returns>Left child's index of requested element</returns>
         static int Left(int i)
         {
-            return (i * 2);
+            return (i * 2) + 1;
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Heap_Sort
         /// <returns>Right child's index of requested element</returns>
         static int Right(int i)
         {
-            return ((i * 2) + 1);
+            return (i * 2) + 2;
         }
 
         /// <summary>
