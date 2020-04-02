@@ -14,7 +14,7 @@ namespace Linked_List
     class TheSinglyLinearLinkedList<T> : TheLinkedList<T> where T : IComparable
     {
         /// <summary>
-        /// Class custructor
+        /// Class constructor
         /// -----PSEUDO CODE-----
         /// LinkedList()
         ///  head = NIL
