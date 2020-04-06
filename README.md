@@ -32,7 +32,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 
 	| `Types` | Linear | Circular |
 	|:---|:---:|:---:|
-	| **Singly** | [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Linked%20List/Linked%20List/Linked%20List.cs#L9) |  |
+	| **Singly** | [C#](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Sharp/Linked%20List/Linked%20List/TheSinglyLinearLinkedList.cs) |  |
 	| **Doubly** |  |  |
 - #### Hash Table *[Wikipedia](https://en.wikipedia.org/wiki/Hash_table)*
 ## Trees *[Wikipedia](https://en.wikipedia.org/wiki/Tree_(data_structure))*
