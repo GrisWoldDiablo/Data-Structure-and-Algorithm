@@ -15,7 +15,9 @@ class ListGraph : public AbstractGraph
 public:
 	std::vector<Vertex*>* adjacencyList; //The adjacency list for the vertices.
 
-	ListGraph(std::initializer_list<int> keys);
+	ListGraph(std::initializer_list<int> keys); // Constructor
+	ListGraph(std::vector<int> keys); // Constructor
+	ListGraph(int keys[], int arraySize); // Constructor
 	~ListGraph();
 
 	void AddEdge(int sourceKey, int destinationKey) override;
@@ -38,6 +40,37 @@ public:
 /// </summary>
 /// <param name="keys">list of keys of the vertices to add to the graph</param>
 ListGraph::ListGraph(std::initializer_list<int> keys) : AbstractGraph(keys)
+{
+	adjacencyList = new std::vector<Vertex*>[maxKey - minKey + 1];
+}
+
+/// <summary>
+/// Class constructor
+/// -----PSEUDO CODE-----
+/// (G is the graph, Keys is the graph vertices' keys)
+/// ListGraph(G,Keys)
+///	 AbstractGraph(G,Keys)
+///  let adjacencyList be a new list of (G.maxKey - G.minKey + 1) size
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="keys">list of keys of the vertices to add to the graph</param>
+ListGraph::ListGraph(std::vector<int> keys) : AbstractGraph(keys)
+{
+	adjacencyList = new std::vector<Vertex*>[maxKey - minKey + 1];
+}
+
+/// <summary>
+/// Class constructor
+/// -----PSEUDO CODE-----
+/// (G is the graph, Keys is the array of graph vertices' keys, aSize is size of the array)
+/// ListGraph(G,Keys)
+///	 AbstractGraph(G,Keys)
+///  let adjacencyList be a new list of (G.maxKey - G.minKey + 1) size
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="keys">array of the keys of the vertices to add to the graph</param>
+/// <param name="arraySize">size of the array</param>
+ListGraph::ListGraph(int keys[], int arraySize) : AbstractGraph(keys, arraySize)
 {
 	adjacencyList = new std::vector<Vertex*>[maxKey - minKey + 1];
 }
@@ -180,7 +213,7 @@ void ListGraph::AStar(int sourceKey)
 /// -----PSEUDO CODE-----
 /// (G is the Graph)
 /// PrintEdges(G)
-///  for i = 0 to length of G.adjacencyList
+///  for i = 0 to length of G.adjacencyList - 1
 ///		print "G.vertices[i].key["
 ///		for each v in adjacencyList[i]
 ///			if v == adjacencyList[i] last element

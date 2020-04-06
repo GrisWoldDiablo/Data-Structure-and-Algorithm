@@ -23,6 +23,8 @@ protected:
 	int time = 0;
 
 	AbstractGraph(std::initializer_list<int> keys); // Constructor
+	AbstractGraph(std::vector<int> keys); // Constructor
+	AbstractGraph(int keys[], int arraySize); // Constructor
 
 public:
 	void PrintVertices(); //
@@ -67,6 +69,67 @@ AbstractGraph::AbstractGraph(std::initializer_list<int> keys)
 		if (key > maxKey)
 		{
 			maxKey = key;
+		}
+	}
+}
+
+/// <summary>
+/// Class constructor
+/// -----PSEUDO CODE-----
+/// (G is the graph, Keys is the graph vertices' keys)
+/// AbstractGraph(G, Keys)
+///  for each key in keys
+///		G.vertices.add(key)
+///		if key < G.minKey
+///			G.minKey = key
+///		if key > G.maxKey
+///			G.maxKey = key
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="keys">list of keys of the vertices to add to the graph</param>
+AbstractGraph::AbstractGraph(std::vector<int> keys)
+{
+	for (int key : keys)
+	{
+		vertices.push_back(Vertex(key));
+		if (key < minKey)
+		{
+			minKey = key;
+		}
+		if (key > maxKey)
+		{
+			maxKey = key;
+		}
+	}
+}
+
+/// <summary>
+/// Class constructor
+/// -----PSEUDO CODE-----
+/// (G is the graph, Keys is the array of graph vertices' keys, aSize is size of the array)
+/// AbstractGraph(G,Keys,aSize)
+///  for i = 0 to aSize - 1
+///		G.vertices.add(key[i])
+///		if key[i] < G.minKey
+///			G.minKey = key[i]
+///		if key[i] > G.maxKey
+///			G.maxKey = key[i]
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="keys">array of the keys of the vertices to add to the graph</param>
+/// <param name="arraySize">size of the array</param>
+AbstractGraph::AbstractGraph(int keys[], int arraySize)
+{
+	for (int i = 0; i < arraySize; i++)
+	{
+		vertices.push_back(Vertex(keys[i]));
+		if (keys[i] < minKey)
+		{
+			minKey = keys[i];
+		}
+		if (keys[i] > maxKey)
+		{
+			maxKey = keys[i];
 		}
 	}
 }
