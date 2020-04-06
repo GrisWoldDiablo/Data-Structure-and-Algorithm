@@ -42,5 +42,4 @@ int main()
 	test.PrintVertices();
     test.PrintEdges();
     //test.PrintVertices();
-
 }
