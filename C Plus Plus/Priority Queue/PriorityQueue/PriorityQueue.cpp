@@ -115,7 +115,7 @@ void PopulateQueue(ThePriorityQueue<T>& Q, int x)
 }
 
 /// <summary>
-/// Emtpy the queue and print all its elements
+/// Empty the queue and print all its elements
 /// </summary>
 /// <param name="Q">queue to be printed</param>
 template<class T> // can be of any type, custom type needs to overload Bitwise Left Shift '<<' operator

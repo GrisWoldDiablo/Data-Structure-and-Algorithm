@@ -70,7 +70,7 @@ public: // Property
 /// </summary>
 /// <param name = "priorityType">Type of priority of the queue, min or max</param>
 template<class T>
-inline ThePriorityQueue<T>::ThePriorityQueue(PriorityType priorityType)
+ThePriorityQueue<T>::ThePriorityQueue(PriorityType priorityType)
 {
 	_size = 0;
 	_array = new T[ARRAY_INITIAL_SIZE];
@@ -92,7 +92,7 @@ inline ThePriorityQueue<T>::ThePriorityQueue(PriorityType priorityType)
 /// delete the array holding the queue from memory
 /// </summary>
 template<class T>
-inline ThePriorityQueue<T>::~ThePriorityQueue()
+ThePriorityQueue<T>::~ThePriorityQueue()
 {
 	delete[] _array;
 }
@@ -116,7 +116,7 @@ inline ThePriorityQueue<T>::~ThePriorityQueue()
 /// </summary>
 /// <param name="key">the element to be added</param>
 template<class T>
-inline void ThePriorityQueue<T>::Enqueue(T key)
+void ThePriorityQueue<T>::Enqueue(T key)
 {
 	_size++;
 	if (_size == _arraySize)
@@ -156,7 +156,7 @@ inline void ThePriorityQueue<T>::Enqueue(T key)
 /// </summary>
 /// <returns>the element at the beginning of the queue</returns>
 template<class T>
-inline T ThePriorityQueue<T>::Dequeue()
+T ThePriorityQueue<T>::Dequeue()
 {
 	if (_size == 0)
 	{
@@ -191,7 +191,7 @@ inline T ThePriorityQueue<T>::Dequeue()
 /// </summary>
 /// <returns>the element at the beginning of the queue</returns>
 template<class T>
-inline T ThePriorityQueue<T>::Peek()
+T ThePriorityQueue<T>::Peek()
 {
 	if (_size == 0)
 	{
@@ -211,7 +211,7 @@ inline T ThePriorityQueue<T>::Peek()
 /// -----PSEUDO CODE-----
 /// </summary>
 template<class T>
-inline void ThePriorityQueue<T>::Clear()
+void ThePriorityQueue<T>::Clear()
 {
 	_size = 0;
 	_arraySize = ARRAY_INITIAL_SIZE;
@@ -233,7 +233,7 @@ inline void ThePriorityQueue<T>::Clear()
 /// </summary>
 /// <returns>the queue in an array form</returns>
 template<class T>
-inline T* ThePriorityQueue<T>::ToArray()
+T* ThePriorityQueue<T>::ToArray()
 {
 	T* tempArray = new T[_size];
 	for (int i = 0; i < _size; i++)
@@ -256,7 +256,7 @@ inline T* ThePriorityQueue<T>::ToArray()
 /// </summary>
 /// <returns>True if queue size at 0</returns>
 template<class T>
-inline bool ThePriorityQueue<T>::Empty()
+bool ThePriorityQueue<T>::Empty()
 {
 	return _size == 0;
 }
@@ -274,7 +274,7 @@ inline bool ThePriorityQueue<T>::Empty()
 /// -----PSEUDO CODE-----
 /// </summary>
 template<class T>
-inline void ThePriorityQueue<T>::IncreaseSize()
+void ThePriorityQueue<T>::IncreaseSize()
 {
 	_arraySize *= 2;
 	T* tempArray = new T[_arraySize];
@@ -310,7 +310,7 @@ inline void ThePriorityQueue<T>::IncreaseSize()
 /// <param name="i">sub tree root index of the heap</param>
 /// <param name="heapSize">the size of the heap</param>
 template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
-inline void ThePriorityQueue<T>::MaxHeapify(int i, int heapSize)
+void ThePriorityQueue<T>::MaxHeapify(int i, int heapSize)
 {
 	int l = Left(i);
 	int r = Right(i);
@@ -360,7 +360,7 @@ inline void ThePriorityQueue<T>::MaxHeapify(int i, int heapSize)
 /// <param name="i">sub tree root index of the heap</param>
 /// <param name="heapSize">the size of the heap</param>
 template<class T> // can be of any type, custom types needs to implement LessThan operator '<'
-inline void ThePriorityQueue<T>::MinHeapify(int i, int heapSize)
+void ThePriorityQueue<T>::MinHeapify(int i, int heapSize)
 {
 	int l = Left(i);
 	int r = Right(i);
@@ -404,7 +404,7 @@ inline void ThePriorityQueue<T>::MinHeapify(int i, int heapSize)
 /// <param name="i">the index of the element to increase</param>
 /// <param name="key">the new element</param>
 template<class T> // can be of any type, custom types needs to implement LessThan operator '<'
-inline void ThePriorityQueue<T>::IncreaseKey(int i, T key)
+void ThePriorityQueue<T>::IncreaseKey(int i, T key)
 {
 	if (key < _array[i])
 	{
@@ -438,7 +438,7 @@ inline void ThePriorityQueue<T>::IncreaseKey(int i, T key)
 /// <param name="i">the index of the element to decrease</param>
 /// <param name="key">the new element</param>
 template<class T> // can be of any type, custom types needs to implement GreaterThan operator '>'
-inline void ThePriorityQueue<T>::DecreaseKey(int i, T key)
+void ThePriorityQueue<T>::DecreaseKey(int i, T key)
 {
 	if (key > _array[i])
 	{
@@ -460,7 +460,7 @@ inline void ThePriorityQueue<T>::DecreaseKey(int i, T key)
 /// <param name="i">index of requested element</param>
 /// <returns>Left parent's index of requested element</returns>
 template<class T>
-inline int ThePriorityQueue<T>::Parent(int i)
+int ThePriorityQueue<T>::Parent(int i)
 {
 	return (i / 2);
 }
@@ -471,7 +471,7 @@ inline int ThePriorityQueue<T>::Parent(int i)
 /// <param name="i">index of requested element</param>
 /// <returns>Left child's index of requested element</returns>
 template<class T>
-inline int ThePriorityQueue<T>::Left(int i)
+int ThePriorityQueue<T>::Left(int i)
 {
 	return (i * 2) + 1;
 }
@@ -482,7 +482,7 @@ inline int ThePriorityQueue<T>::Left(int i)
 /// <param name="i">index of requested element</param>
 /// <returns>Right child's index of requested element</returns>
 template<class T> 
-inline int ThePriorityQueue<T>::Right(int i)
+int ThePriorityQueue<T>::Right(int i)
 {
 	return (i * 2) + 2;
 }
