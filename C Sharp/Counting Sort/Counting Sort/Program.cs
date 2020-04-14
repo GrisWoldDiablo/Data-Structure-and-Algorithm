@@ -37,7 +37,7 @@ namespace Counting_Sort
         /// -----PSEUDO CODE-----
         /// (A is an Array with index 0..n, with keys be integer)
         /// CountingSort(A)
-        ///  minValue = the minimun key's value in A
+        ///  minValue = the minimum key's value in A
         ///  let C[0..k] be a new array, k is the keys' values range
         ///  initialize C's elements to 0
         ///  for i = 0 to length of A - 1
@@ -51,9 +51,9 @@ namespace Counting_Sort
         ///  A = B
         /// -----PSEUDO CODE-----
         /// </summary>
-        /// <typeparam name="T">can be of any type, needs to implement IComparable</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IComparable and IConvertible</typeparam>
         /// <param name="A">array to be sorted</param>
-        static void CountingSort<T>(T[] A) where T : IComparable
+        static void CountingSort<T>(T[] A) where T : IComparable, IConvertible
         {
             int k = FindRangeAndMinValue(A, out int minValue);
             
@@ -61,7 +61,7 @@ namespace Counting_Sort
 
             for (int i = 0; i < A.Length; i++)
             {
-                C[(dynamic)A[i] - minValue]++; // To be refine for more complex generic type
+                C[Convert.ToInt32(A[i]) - minValue]++; // using the IConvertible interface
             }
 
             for (int i = 1; i < C.Length; i++)
@@ -78,8 +78,8 @@ namespace Counting_Sort
                 B[valueOfC] = (dynamic)A[i]; // To be refine for more complex generic type
                 C[valueOfA]--;*/
                 
-                B[C[(dynamic)A[i] - minValue] - 1] = (dynamic)A[i]; // To be refine for more complex generic type
-                C[(dynamic)A[i] - minValue]--; // To be refine for more complex generic type
+                B[C[Convert.ToInt32(A[i]) - minValue] - 1] = A[i]; // using the IConvertible interface
+                C[Convert.ToInt32(A[i]) - minValue]--; // using the IConvertible interface
             }
             
             Array.Copy(B, A, A.Length);
@@ -88,11 +88,11 @@ namespace Counting_Sort
         /// <summary>
         /// Finds the range of values in an array and set a minimum value
         /// </summary>
-        /// <typeparam name="T">can be of any type</typeparam>
+        /// <typeparam name="T">can be of any type, needs to implement IConvertible</typeparam>
         /// <param name="A">array to search</param>
         /// <param name="minValue">the minimum value found</param>
         /// <returns>The range of the values, max - min + 1(to be inclusive)</returns>
-        static int FindRangeAndMinValue<T>(T[] A, out int minValue)
+        static int FindRangeAndMinValue<T>(T[] A, out int minValue) where T : IConvertible
         {
             int maxValue = int.MinValue;
             minValue = int.MaxValue;
@@ -100,11 +100,11 @@ namespace Counting_Sort
             {
                 if (maxValue.CompareTo(item) < 0)
                 {
-                    maxValue = (dynamic)item; // To be refine for more complex generic type
+                    maxValue = Convert.ToInt32(item); // using the IConvertible interface
                 }
                 if (minValue.CompareTo(item) > 0)
                 {
-                    minValue = (dynamic)item; // To be refine for more complex generic type
+                    minValue = Convert.ToInt32(item); // using the IConvertible interface
                 }
             }
             return maxValue - minValue + 1;
