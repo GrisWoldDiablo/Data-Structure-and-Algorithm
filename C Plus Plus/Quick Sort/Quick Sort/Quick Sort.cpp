@@ -65,7 +65,6 @@ int main()
 
 	diff = endTime - startTime; // Get the difference from start to end time
 
-	cout << endl;
 	cout << "Total Seconds : " << diff.count() << endl; // Print the time spent in seconds.
 }
 
@@ -108,7 +107,7 @@ void QuickSort(T A[], int p, int r)
 }
 
 /// <summary>
-/// Partition the array, rearrange the array inplace based 
+/// Partition the array, rearrange the array in place based 
 /// on the element at index r used as pivot.
 /// -----PSEUDO CODE-----
 /// (A is an Array with index 0..n)
