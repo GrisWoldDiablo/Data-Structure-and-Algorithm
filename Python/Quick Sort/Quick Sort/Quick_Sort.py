@@ -37,7 +37,7 @@ def main():
     ticks = time.time() - ticks # Get the time difference after sorting.
 
     #print_list(myList2) # Display list after sorting.
-    print()
+
     print("Total Seconds :", ticks) # Print the time spent in seconds.
 
 def quick_sort(A:list, p:int=None, r:int=None):
