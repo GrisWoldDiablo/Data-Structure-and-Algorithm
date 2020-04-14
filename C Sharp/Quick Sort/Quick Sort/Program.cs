@@ -43,7 +43,6 @@ namespace Quick_Sort
 
             //PrintArray(array2); // Display array2 after sorting.
 
-            Console.WriteLine();
             Console.WriteLine($"Total Seconds: {TimeSpan.FromTicks(time).TotalSeconds}"); // Print the time spent in seconds.
         }
 
