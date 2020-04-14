@@ -1,18 +1,18 @@
 /*
- * Author: Alexandre Lepage
- * Date: March 2020
- */
+* Author: Alexandre Lepage
+* Date: March 2020
+*/
 
-#pragma once
-
+#ifndef ABSTRACTGRAPH
+#define ABSTRACTGRAPH
 #include "Vertex.h"
 #include <vector>
 #include <limits.h>
 #include <iostream>
 
- /// <summary>
- /// Custom Abstract Graph class
- /// </summary>
+/// <summary>
+/// Custom Abstract Graph class
+/// </summary>
 class AbstractGraph
 {
 protected:
@@ -29,17 +29,25 @@ protected:
 public:
 	void PrintVertices(); //
 	void PrintPath(int sourceKey, int destinationKey);
+	void PrintTimestamps();
 
 private:
-	void PrintPath(Vertex& s, Vertex& v);
+	void PrintPath(Vertex* s, Vertex* v);
 
 public:
 	virtual void AddEdge(int sourceKey, int destinationKey) {};
 	virtual void BreadthFirstSearch(int sourceKey) {};
 	virtual void DepthFirstSearch() {};
+	virtual void DepthFirstSearchKey(int sourceKey) {};
+	virtual void DepthFirstSearchIterative() {};
+	virtual void DepthFirstSearchIterativeKey(int sourceKey) {};
 	virtual bool BellmanFord(int sourceKey) { return false; };
 	virtual void Dijkstra(int sourceKey) {};
 	virtual void AStar(int sourceKey) {};
+
+private:
+	virtual void DepthFirstSearchVisit(Vertex* u) {};
+	virtual void DepthFirstSearchIterativeVisit(Vertex* u) {};
 
 };
 
@@ -179,11 +187,11 @@ void AbstractGraph::PrintPath(int sourceKey, int destinationKey)
 {
 	auto foundSource = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
 	auto foundDestination = find_if(vertices.begin(), vertices.end(), [destinationKey](Vertex v) {return v.key == destinationKey; });
-	Vertex sourceVertex = NULL;
-	Vertex destinationVertex = NULL;
+	Vertex* sourceVertex = nullptr;
+	Vertex* destinationVertex = nullptr;
 	if (foundSource != vertices.end())
 	{
-		sourceVertex = *foundSource;
+		sourceVertex = foundSource._Ptr;
 	}
 	else
 	{
@@ -192,7 +200,7 @@ void AbstractGraph::PrintPath(int sourceKey, int destinationKey)
 	}
 	if (foundDestination != vertices.end())
 	{
-		destinationVertex = *foundDestination;
+		destinationVertex = foundDestination._Ptr;
 	}
 	else
 	{
@@ -220,19 +228,36 @@ void AbstractGraph::PrintPath(int sourceKey, int destinationKey)
 /// </summary>
 /// <param name="sourceVertex">source vertex</param>
 /// <param name="destinationVertex">destination vertex</param>
-void AbstractGraph::PrintPath(Vertex& sourceVertex, Vertex& destinationVertex)
+void AbstractGraph::PrintPath(Vertex* sourceVertex, Vertex* destinationVertex)
 {
 	if (destinationVertex == sourceVertex)
 	{
-		std::cout << sourceVertex.key;
+		std::cout << sourceVertex->key;
 	}
-	else if (destinationVertex.predecessor == nullptr)
+	else if (destinationVertex->predecessor == nullptr)
 	{
 		std::cout << "No path from " << sourceVertex << " to " << destinationVertex << " exists.";
 	}
 	else
 	{
-		PrintPath(sourceVertex, *destinationVertex.predecessor);
+		PrintPath(sourceVertex, destinationVertex->predecessor);
 		std::cout << "->" << destinationVertex;
 	}
 }
+
+void AbstractGraph::PrintTimestamps()
+{
+	for (Vertex vertex : vertices)
+	{
+		if (vertex.predecessor != nullptr)
+		{
+			std::cout << vertex << ": " << vertex.discoveryTime << '/' << vertex.finishingTime << ", " << vertex.predecessor << std::endl;
+		}
+		else
+		{
+			std::cout << vertex << ": " << vertex.discoveryTime << '/' << vertex.finishingTime << std::endl;
+		}
+	}
+}
+
+#endif // !ABSTRACTGRAPH

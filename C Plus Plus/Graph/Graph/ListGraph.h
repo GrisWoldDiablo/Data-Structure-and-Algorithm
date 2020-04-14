@@ -2,10 +2,12 @@
  * Author: Alexandre Lepage
  * Date: March 2020
  */
-#pragma once
 
+#ifndef LISTGRAPH
+#define LISTGRAPH
 #include "AbstractGraph.h"
 #include <queue>
+#include <stack>
 
  /// <summary>
  /// Custom ListGraph class for graph algorithms
@@ -23,10 +25,17 @@ public:
 	void AddEdge(int sourceKey, int destinationKey) override;
 	void BreadthFirstSearch(int sourceKey) override;
 	void DepthFirstSearch() override;
+	void DepthFirstSearchKey(int sourceKey) override;
+	void DepthFirstSearchIterative() override;
+	void DepthFirstSearchIterativeKey(int sourceKey) override;
 	bool BellmanFord(int sourceKey) override;
 	void Dijkstra(int sourceKey) override;
 	void AStar(int sourceKey) override;
 	void PrintEdges();
+
+private:
+	void DepthFirstSearchVisit(Vertex* u) override;
+	void DepthFirstSearchIterativeVisit(Vertex* u) override;
 };
 
 /// <summary>
@@ -106,12 +115,14 @@ void ListGraph::AddEdge(int sourceKey, int destinationKey)
 	auto destination = find_if(vertices.begin(), vertices.end(), [destinationKey](Vertex v) {return v.key == destinationKey; });
 	if (destination != vertices.end())
 	{
-		adjacencyList[sourceKey - minKey].push_back(destination._Ptr);
+		if (find(adjacencyList[sourceKey - minKey].begin(), adjacencyList[sourceKey - minKey].end(), destination._Ptr) == adjacencyList[sourceKey - minKey].end()) {
+			adjacencyList[sourceKey - minKey].push_back(destination._Ptr);
+		}
 	}
 }
 
 /// <summary>
-/// This is populate the predecessors from the keys that leads to the source key
+/// This is populating the predecessors from the keys that leads to the source key
 /// -----PSEUDO CODE-----
 /// (G is the Graph, s is the source vertex)
 /// BFS(G,s)
@@ -139,7 +150,7 @@ void ListGraph::AddEdge(int sourceKey, int destinationKey)
 void ListGraph::BreadthFirstSearch(int sourceKey)
 {
 	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
-	Vertex* s = NULL;
+	Vertex* s = nullptr;
 	if (sf != vertices.end())
 	{
 		s = sf._Ptr;
@@ -150,19 +161,13 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 		return;
 	}
 
-	std::for_each(vertices.begin(), vertices.end(),
+	for_each(vertices.begin(), vertices.end(),
 		[](Vertex& u)
 		{
 			u.color = Color::White;
 			u.distance = INT_MAX;
 			u.predecessor = nullptr;
 		});
-	//for (Vertex& u : vertices)
-	//{
-	//	u.color = Color::White;
-	//	u.distance = INT_MAX;
-	//	u.predecessor = nullptr;
-	//}
 	s->color = Color::Grey;
 	s->distance = 0;
 	s->predecessor = nullptr;
@@ -174,8 +179,6 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 		Q.pop();
 		for (Vertex* v : adjacencyList[u->key - minKey])
 		{
-			PrintVertices();
-			std::cout << "-" << std::endl;
 			if (v->color == Color::White)
 			{
 				v->color = Color::Grey;
@@ -188,9 +191,290 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 	}
 }
 
+/// <summary>
+/// Going through all vertices and setting subtrees and timestamps
+/// (recursive)
+/// -----PSEUDO CODE-----
+/// (G is the graph to search)
+/// DFS(G)
+///  for each vertex u in G.vertices
+///		u.color = WHITE
+///		u.predecessor = NIL
+///  G.time = 0
+///  for each u in G.vertices
+///		if u.color == WHITE
+///			u.predecessor = u
+///			DFS-VISIT(G,v)
+/// -----PSEUDO CODE-----
+/// </summary>
 void ListGraph::DepthFirstSearch()
 {
+	for_each(vertices.begin(), vertices.end(),
+		[](Vertex& u)
+		{
+			u.color = Color::White;
+			u.predecessor = nullptr;
+		});
+	time = 0;
+	for_each(vertices.begin(), vertices.end(),
+		[this](Vertex& u)
+		{
+			if (u.color == Color::White)
+			{
+				DepthFirstSearchVisit(&u);
+			}
+		});
+}
 
+/// <summary>
+/// Finding path that leads to that source vertex
+/// (recursive)
+/// -----PSEUDO CODE-----
+/// (G is the graph to search, s is the source vertex)
+/// DFS(G,s)
+///  for each vertex u in G.vertices
+///		u.color = WHITE
+///		u.predecessor = NIL
+///  G.time = 1
+///  u.discoveryTime = G.time
+///  u.color = GRAY
+///  for each v in G.adj[u]
+///		if v.color == WHITE
+///			v.predecessor = u
+///			DFS-VISIT(G,v)
+///  u.color = BLACK
+///  G.time = G.time + 1
+///  u.finishingTime = G.time
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="sourceKey">The vertex's key to search from</param>
+void ListGraph::DepthFirstSearchKey(int sourceKey)
+{
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
+	Vertex* s = nullptr;
+	if (sf != vertices.end())
+	{
+		s = sf._Ptr;
+	}
+	else
+	{
+		std::cout << "Source key does not exists." << std::endl;
+		return;
+	}
+
+	for_each(vertices.begin(), vertices.end(),
+		[](Vertex& u)
+		{
+			u.color = Color::White;
+			u.predecessor = nullptr;
+		});
+	time = 1;
+
+	s->discoveryTime = time;
+	s->color = Color::Grey;
+	for (Vertex* v : adjacencyList[s->key - minKey])
+	{
+		if (v->color == Color::White)
+		{
+			v->predecessor = s;
+			DepthFirstSearchVisit(v);
+		}
+	}
+	s->color = Color::Black;
+	time++;
+	s->finishingTime = time;
+}
+
+/// <summary>
+/// Visiting all the vertices from the adjacency list
+/// (recursive)
+/// -----PSEUDO CODE-----
+/// (G is the graph to search, u is the source vertex)
+/// DFS-Visit(G,u)
+///  G.time = G.time + 1
+///  u.discoveryTime = G.time
+///  u.color = GRAY
+///  for each v in G.adj[u]
+///		if v.color == WHITE
+///			v.predecessor = u
+///			DFS-VISIT(G,v)
+///  u.color = BLACK
+///  G.time = G.time + 1
+///  u.finishingTime = G.time
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="u">The vertex to search from</param>
+void ListGraph::DepthFirstSearchVisit(Vertex* u)
+{
+	time++;
+	u->discoveryTime = time;
+	u->color = Color::Grey;
+	for (Vertex* v : adjacencyList[u->key - minKey])
+	{
+		if (v->color == Color::White)
+		{
+			v->predecessor = u;
+			DepthFirstSearchVisit(v);
+		}
+	}
+	u->color = Color::Black;
+	time++;
+	u->finishingTime = time;
+}
+
+/// <summary>
+/// Going through all vertices and setting subtrees and timestamps
+/// (Iterative)
+/// -----PSEUDO CODE-----
+/// (G is the graph to search)
+/// DFS-Iterative(G)
+///  for each vertex u in G.vertices
+///		u.color = WHITE
+///		u.predecessor = NIL
+///  G.time = 0
+///  for each u in G.vertices
+///		if u.color == WHITE
+///			u.predecessor = u
+///			DFS-Iterative(G,v)
+/// -----PSEUDO CODE-----
+/// </summary>
+void ListGraph::DepthFirstSearchIterative()
+{
+	for_each(vertices.begin(), vertices.end(),
+		[](Vertex& u)
+		{
+			u.color = Color::White;
+			u.predecessor = nullptr;
+		});
+	time = 0;
+	for_each(vertices.begin(), vertices.end(),
+		[this](Vertex& u)
+		{
+			if (u.color == Color::White)
+			{
+				DepthFirstSearchIterativeVisit(&u);
+			}
+		});
+}
+
+/// <summary>
+/// Visiting all the vertices from the adjacency list
+/// (iterative)
+/// -----PSEUDO CODE-----
+/// (G is the graph to search, s is the source vertex)
+/// DFS-IterativeKey(G,s)
+///  for each vertex u in G.vertices
+///		u.color = WHITE
+///		u.predecessor = NIL
+///	 G.time = 0
+///	 let Stk be a stack
+///	 Stk.push(s)
+///	 while Stk is not empty
+///		v = Stk.top()
+///		G.time = G.time + 1
+///		v.discovertyTime = time
+///		v.color = BLACK
+///		for i = size of G.adj[v.key] - 1 to 1
+///			if G.adj[v.key][i].color == WHITE
+///				G.adj[v.key][i].predecessor = v
+///				Stk.push(G.adj[v.key][i])
+///		G.time = G.time + 1
+///		v.finishingTime = G.time
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="u">The vertex to search from</param>
+void ListGraph::DepthFirstSearchIterativeVisit(Vertex* u)
+{
+	Vertex* v = nullptr;
+	std::stack<Vertex*> Stk;
+	Stk.push(u);
+	while (!Stk.empty())
+	{
+		v = Stk.top();
+		Stk.pop();
+		time++;
+		v->discoveryTime = time;
+		v->color = Color::Black;
+		for (int i = adjacencyList[v->key - minKey].size() - 1; i >= 0; i--)
+		{
+			if (adjacencyList[v->key - minKey][i]->color == Color::White)
+			{
+				adjacencyList[v->key - minKey][i]->predecessor = v;
+				Stk.push(adjacencyList[v->key - minKey][i]);
+			}
+		}
+		time++;
+		v->finishingTime = time;
+	}
+}
+/// <summary>
+/// Visiting all the vertices from the adjacency list
+/// (iterative)
+/// -----PSEUDO CODE-----
+/// (G is the graph to search, s is the source vertex)
+/// DFS-IterativeKey(G,s)
+///  for each vertex u in G.vertices
+///		u.color = WHITE
+///		u.predecessor = NIL
+///	 G.time = 0
+///	 let Stk be a stack
+///	 Stk.push(s)
+///	 while Stk is not empty
+///		v = Stk.top()
+///		G.time = G.time + 1
+///		v.discovertyTime = time
+///		v.color = BLACK
+///		for i = size of G.adj[v.key] - 1 to 1
+///			if G.adj[v.key][i].color == WHITE
+///				G.adj[v.key][i].predecessor = v
+///				Stk.push(G.adj[v.key][i])
+///		G.time = G.time + 1
+///		v.finishingTime = G.time
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="sourceKey">The vertex to search from</param>
+void ListGraph::DepthFirstSearchIterativeKey(int sourceKey)
+{
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
+	Vertex* sk = nullptr;
+	if (sf != vertices.end())
+	{
+		sk = sf._Ptr;
+	}
+	else
+	{
+		std::cout << "Source key does not exists." << std::endl;
+		return;
+	}
+
+	for_each(vertices.begin(), vertices.end(),
+		[](Vertex& u)
+		{
+			u.color = Color::White;
+			u.predecessor = nullptr;
+		});
+	time = 0;
+	auto v = sk;
+	std::stack<Vertex*> Stk;
+	Stk.push(v);
+	while (!Stk.empty())
+	{
+		v = Stk.top();
+		Stk.pop();
+		time++;
+		v->discoveryTime = time;
+		v->color = Color::Black;
+		for (int i = adjacencyList[v->key - minKey].size() - 1; i >= 0; i--)
+		{
+			if (adjacencyList[v->key - minKey][i]->color == Color::White)
+			{
+				adjacencyList[v->key - minKey][i]->predecessor = v;
+				Stk.push(adjacencyList[v->key - minKey][i]);
+			}
+		}
+		time++;
+		v->finishingTime = time;
+	}
 }
 
 bool ListGraph::BellmanFord(int sourceKey)
@@ -225,7 +509,8 @@ void ListGraph::AStar(int sourceKey)
 /// </summary>
 void ListGraph::PrintEdges()
 {
-	for (int i = 0; i < adjacencyList->size(); i++)
+
+	for (size_t i = 0; i < vertices.size(); i++)
 	{
 		std::cout << vertices[i].key << '[';
 		for (auto vertex : adjacencyList[i])
@@ -242,3 +527,7 @@ void ListGraph::PrintEdges()
 		std::cout << ']' << std::endl;
 	}
 }
+
+
+
+#endif // !LISTGRAPH

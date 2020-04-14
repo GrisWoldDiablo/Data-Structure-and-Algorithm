@@ -3,8 +3,8 @@
  * Date: March 2020
  */
 
-#pragma once
-
+#ifndef VERTEX
+#define VERTEX
 #include <limits.h>
 #include <iostream>
 
@@ -52,6 +52,8 @@ class Vertex
 public:
 	unsigned int key; // The number of the vertex
 	int distance; // How far from the source this vertex is
+	int discoveryTime; // For DFS, set when the vertex is discovered
+	int finishingTime; // For DFS, set when the vertex is used
 	Vertex* predecessor; // The vertex preceding this one
 	Color color; // The color of this key
 
@@ -62,7 +64,7 @@ public:
 	/// compares the vertices' key
 	/// </summary>
 	bool operator==(const Vertex& a) const {
-		return this->key == a.key; 
+		return this->key == a.key;
 	};
 
 	/// <summary>
@@ -75,7 +77,7 @@ public:
 	{
 		return os << v.key;// << ':' << v.color;
 	}
-	
+
 	/// <summary>
 	/// overload of the left shift operator for vertex pointer
 	/// </summary>
@@ -105,5 +107,8 @@ Vertex::Vertex(int key) {
 	this->distance = INT_MAX;
 	this->predecessor = nullptr;
 	this->color = Color::White;
+	this->discoveryTime = -1;
+	this->finishingTime = -1;
 }
 
+#endif // !VERTEX
