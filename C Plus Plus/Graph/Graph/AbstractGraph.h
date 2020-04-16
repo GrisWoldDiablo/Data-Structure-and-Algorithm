@@ -6,6 +6,7 @@
 #ifndef ABSTRACTGRAPH
 #define ABSTRACTGRAPH
 #include "Vertex.h"
+#include "AdjacentVertex.h"
 #include <vector>
 #include <limits.h>
 #include <iostream>
@@ -17,7 +18,7 @@ class AbstractGraph
 {
 protected:
 	// class variables
-	std::vector<Vertex>  vertices; // List of the vertices in the Graph
+	std::vector<Vertex*>  vertices; // List of the vertices in the Graph
 	int minKey = INT_MAX; // The minimum value of the keys
 	int maxKey = INT_MIN; // The maximum value of the keys
 	int time = 0;
@@ -27,15 +28,16 @@ protected:
 	AbstractGraph(int keys[], int arraySize); // Constructor
 
 public:
-	void PrintVertices(); //
+	void PrintVertices();
 	void PrintPath(int sourceKey, int destinationKey);
 	void PrintTimestamps();
+	~AbstractGraph();
 
 private:
 	void PrintPath(Vertex* s, Vertex* v);
 
 public:
-	virtual void AddEdge(int sourceKey, int destinationKey) {};
+	virtual void AddEdge(int sourceKey, int destinationKey, int weight = 1) {};
 	virtual void BreadthFirstSearch(int sourceKey) {};
 	virtual void DepthFirstSearch() {};
 	virtual void DepthFirstSearchKey(int sourceKey) {};
@@ -48,6 +50,8 @@ public:
 private:
 	virtual void DepthFirstSearchVisit(Vertex* u) {};
 	virtual void DepthFirstSearchIterativeVisit(Vertex* u) {};
+	virtual void InitializeSingleSource(Vertex* s) {};
+	virtual void Relax(Vertex* u, AdjacentVertex* v) {};
 
 };
 
@@ -69,7 +73,7 @@ AbstractGraph::AbstractGraph(std::initializer_list<int> keys)
 {
 	for (int key : keys)
 	{
-		vertices.push_back(Vertex(key));
+		vertices.push_back(new Vertex(key));
 		if (key < minKey)
 		{
 			minKey = key;
@@ -99,7 +103,7 @@ AbstractGraph::AbstractGraph(std::vector<int> keys)
 {
 	for (int key : keys)
 	{
-		vertices.push_back(Vertex(key));
+		vertices.push_back(new Vertex(key));
 		if (key < minKey)
 		{
 			minKey = key;
@@ -130,7 +134,7 @@ AbstractGraph::AbstractGraph(int keys[], int arraySize)
 {
 	for (int i = 0; i < arraySize; i++)
 	{
-		vertices.push_back(Vertex(keys[i]));
+		vertices.push_back(new Vertex(keys[i]));
 		if (keys[i] < minKey)
 		{
 			minKey = keys[i];
@@ -153,9 +157,9 @@ AbstractGraph::AbstractGraph(int keys[], int arraySize)
 /// </summary>
 void AbstractGraph::PrintVertices()
 {
-	for (Vertex v : vertices)
+	for (Vertex* v : vertices)
 	{
-		std::cout << v << ':' << v.color << std::endl;
+		std::cout << v << ':' << v->color << ":" << v->distance << std::endl;
 	}
 }
 
@@ -185,13 +189,13 @@ void AbstractGraph::PrintVertices()
 /// <param name="destinationKey">The destination key</param>
 void AbstractGraph::PrintPath(int sourceKey, int destinationKey)
 {
-	auto foundSource = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
-	auto foundDestination = find_if(vertices.begin(), vertices.end(), [destinationKey](Vertex v) {return v.key == destinationKey; });
+	auto foundSource = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex* v) {return v->key == sourceKey; });
+	auto foundDestination = find_if(vertices.begin(), vertices.end(), [destinationKey](Vertex* v) {return v->key == destinationKey; });
 	Vertex* sourceVertex = nullptr;
 	Vertex* destinationVertex = nullptr;
 	if (foundSource != vertices.end())
 	{
-		sourceVertex = foundSource._Ptr;
+		sourceVertex = *foundSource;
 	}
 	else
 	{
@@ -200,7 +204,7 @@ void AbstractGraph::PrintPath(int sourceKey, int destinationKey)
 	}
 	if (foundDestination != vertices.end())
 	{
-		destinationVertex = foundDestination._Ptr;
+		destinationVertex = *foundDestination;
 	}
 	else
 	{
@@ -245,17 +249,24 @@ void AbstractGraph::PrintPath(Vertex* sourceVertex, Vertex* destinationVertex)
 	}
 }
 
+inline AbstractGraph::~AbstractGraph()
+{
+	for (Vertex* vertex : vertices) {
+		delete vertex;
+	}
+}
+
 void AbstractGraph::PrintTimestamps()
 {
-	for (Vertex vertex : vertices)
+	for (Vertex* vertex : vertices)
 	{
-		if (vertex.predecessor != nullptr)
+		if (vertex->predecessor != nullptr)
 		{
-			std::cout << vertex << ": " << vertex.discoveryTime << '/' << vertex.finishingTime << ", " << vertex.predecessor << std::endl;
+			std::cout << vertex << ": " << vertex->discoveryTime << '/' << vertex->finishingTime << ", " << vertex->predecessor << std::endl;
 		}
 		else
 		{
-			std::cout << vertex << ": " << vertex.discoveryTime << '/' << vertex.finishingTime << std::endl;
+			std::cout << vertex << ": " << vertex->discoveryTime << '/' << vertex->finishingTime << std::endl;
 		}
 	}
 }

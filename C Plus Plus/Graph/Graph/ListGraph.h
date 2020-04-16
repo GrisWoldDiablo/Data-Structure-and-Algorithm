@@ -15,14 +15,14 @@
 class ListGraph : public AbstractGraph
 {
 public:
-	std::vector<Vertex*>* adjacencyList; //The adjacency list for the vertices.
+	std::vector<AdjacentVertex*>* adjacencyList; //The adjacency list for the vertices.
 
 	ListGraph(std::initializer_list<int> keys); // Constructor
 	ListGraph(std::vector<int> keys); // Constructor
 	ListGraph(int keys[], int arraySize); // Constructor
 	~ListGraph();
 
-	void AddEdge(int sourceKey, int destinationKey) override;
+	void AddEdge(int sourceKey, int destinationKey, int weight = 1) override;
 	void BreadthFirstSearch(int sourceKey) override;
 	void DepthFirstSearch() override;
 	void DepthFirstSearchKey(int sourceKey) override;
@@ -36,6 +36,9 @@ public:
 private:
 	void DepthFirstSearchVisit(Vertex* u) override;
 	void DepthFirstSearchIterativeVisit(Vertex* u) override;
+	void InitializeSingleSource(Vertex* s) override;
+	void Relax(Vertex* u, AdjacentVertex* v) override;
+
 };
 
 /// <summary>
@@ -50,7 +53,7 @@ private:
 /// <param name="keys">list of keys of the vertices to add to the graph</param>
 ListGraph::ListGraph(std::initializer_list<int> keys) : AbstractGraph(keys)
 {
-	adjacencyList = new std::vector<Vertex*>[maxKey - minKey + 1];
+	adjacencyList = new std::vector<AdjacentVertex*>[maxKey - minKey + 1];
 }
 
 /// <summary>
@@ -65,7 +68,7 @@ ListGraph::ListGraph(std::initializer_list<int> keys) : AbstractGraph(keys)
 /// <param name="keys">list of keys of the vertices to add to the graph</param>
 ListGraph::ListGraph(std::vector<int> keys) : AbstractGraph(keys)
 {
-	adjacencyList = new std::vector<Vertex*>[maxKey - minKey + 1];
+	adjacencyList = new std::vector<AdjacentVertex*>[maxKey - minKey + 1];
 }
 
 /// <summary>
@@ -81,7 +84,7 @@ ListGraph::ListGraph(std::vector<int> keys) : AbstractGraph(keys)
 /// <param name="arraySize">size of the array</param>
 ListGraph::ListGraph(int keys[], int arraySize) : AbstractGraph(keys, arraySize)
 {
-	adjacencyList = new std::vector<Vertex*>[maxKey - minKey + 1];
+	adjacencyList = new std::vector<AdjacentVertex*>[maxKey - minKey + 1];
 }
 
 /// <summary>
@@ -93,30 +96,45 @@ ListGraph::ListGraph(int keys[], int arraySize) : AbstractGraph(keys, arraySize)
 /// </summary>
 ListGraph::~ListGraph()
 {
+	for (int i = 0; i < vertices.size(); i++)
+	{
+		for (auto v : adjacencyList[vertices[i]->key - minKey])
+		{
+			delete v;
+		}
+	}
 	delete[] adjacencyList;
 }
 
 /// <summary>
 /// Add an edge to a vertex
 /// -----PSEUDO CODE-----
-/// AddEdge(G,sK,dK)
+/// (G is the graph)
+/// (sK is the source key)
+/// (dK is the destination key)
+/// (w is the weight if the edge)
+/// AddEdge(G,sK,dK,w)
 ///  dV = NIL
 ///  for each v in G.vertices
 ///		if v.key == dK.key
 ///			dV = v
 ///  if dV =/= NIL
-///		G.adjacencyList[sK - G.minKey].add(dV)
+///		aV = AdjacentVertex(dV,w)
+///		G.adj[sK - G.minKey].add(aV)
 /// -----PSEUDO CODE-----
 /// </summary>
 /// <param name="sourceKey">source key</param>
 /// <param name="destinationKey">destination key</param>
-void ListGraph::AddEdge(int sourceKey, int destinationKey)
+void ListGraph::AddEdge(int sourceKey, int destinationKey, int weight)
 {
-	auto destination = find_if(vertices.begin(), vertices.end(), [destinationKey](Vertex v) {return v.key == destinationKey; });
+	auto destination = find_if(vertices.begin(), vertices.end(), [destinationKey](Vertex* v) {return v->key == destinationKey; });
 	if (destination != vertices.end())
 	{
-		if (find(adjacencyList[sourceKey - minKey].begin(), adjacencyList[sourceKey - minKey].end(), destination._Ptr) == adjacencyList[sourceKey - minKey].end()) {
-			adjacencyList[sourceKey - minKey].push_back(destination._Ptr);
+		AdjacentVertex av = AdjacentVertex(*destination, weight);
+		auto avd = find_if(adjacencyList[sourceKey - minKey].begin(), adjacencyList[sourceKey - minKey].end(), [av](AdjacentVertex* v) {return v->vertex == av.vertex && v->weight == av.weight; });
+
+		if (avd == adjacencyList[sourceKey - minKey].end()) {
+			adjacencyList[sourceKey - minKey].push_back(new AdjacentVertex(*destination, weight));
 		}
 	}
 }
@@ -149,11 +167,11 @@ void ListGraph::AddEdge(int sourceKey, int destinationKey)
 /// <param name="sourceKey">the source key</param>
 void ListGraph::BreadthFirstSearch(int sourceKey)
 {
-	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex* v) {return v->key == sourceKey; });
 	Vertex* s = nullptr;
 	if (sf != vertices.end())
 	{
-		s = sf._Ptr;
+		s = *sf;
 	}
 	else
 	{
@@ -162,11 +180,11 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 	}
 
 	for_each(vertices.begin(), vertices.end(),
-		[](Vertex& u)
+		[](Vertex* u)
 		{
-			u.color = Color::White;
-			u.distance = INT_MAX;
-			u.predecessor = nullptr;
+			u->color = Color::White;
+			u->distance = INT_MAX;
+			u->predecessor = nullptr;
 		});
 	s->color = Color::Grey;
 	s->distance = 0;
@@ -177,8 +195,9 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 	{
 		Vertex* u = Q.front();
 		Q.pop();
-		for (Vertex* v : adjacencyList[u->key - minKey])
+		for (AdjacentVertex* neighbor : adjacencyList[u->key - minKey])
 		{
+			Vertex* v = neighbor->vertex;
 			if (v->color == Color::White)
 			{
 				v->color = Color::Grey;
@@ -210,18 +229,18 @@ void ListGraph::BreadthFirstSearch(int sourceKey)
 void ListGraph::DepthFirstSearch()
 {
 	for_each(vertices.begin(), vertices.end(),
-		[](Vertex& u)
+		[](Vertex* u)
 		{
-			u.color = Color::White;
-			u.predecessor = nullptr;
+			u->color = Color::White;
+			u->predecessor = nullptr;
 		});
 	time = 0;
 	for_each(vertices.begin(), vertices.end(),
-		[this](Vertex& u)
+		[this](Vertex* u)
 		{
-			if (u.color == Color::White)
+			if (u->color == Color::White)
 			{
-				DepthFirstSearchVisit(&u);
+				DepthFirstSearchVisit(u);
 			}
 		});
 }
@@ -250,11 +269,11 @@ void ListGraph::DepthFirstSearch()
 /// <param name="sourceKey">The vertex's key to search from</param>
 void ListGraph::DepthFirstSearchKey(int sourceKey)
 {
-	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex* v) {return v->key == sourceKey; });
 	Vertex* s = nullptr;
 	if (sf != vertices.end())
 	{
-		s = sf._Ptr;
+		s = *sf;
 	}
 	else
 	{
@@ -263,17 +282,18 @@ void ListGraph::DepthFirstSearchKey(int sourceKey)
 	}
 
 	for_each(vertices.begin(), vertices.end(),
-		[](Vertex& u)
+		[](Vertex* u)
 		{
-			u.color = Color::White;
-			u.predecessor = nullptr;
+			u->color = Color::White;
+			u->predecessor = nullptr;
 		});
 	time = 1;
 
 	s->discoveryTime = time;
 	s->color = Color::Grey;
-	for (Vertex* v : adjacencyList[s->key - minKey])
+	for (AdjacentVertex* neighbor : adjacencyList[s->key - minKey])
 	{
+		Vertex* v = neighbor->vertex;
 		if (v->color == Color::White)
 		{
 			v->predecessor = s;
@@ -309,8 +329,9 @@ void ListGraph::DepthFirstSearchVisit(Vertex* u)
 	time++;
 	u->discoveryTime = time;
 	u->color = Color::Grey;
-	for (Vertex* v : adjacencyList[u->key - minKey])
+	for (AdjacentVertex* neighbor : adjacencyList[u->key - minKey])
 	{
+		Vertex* v = neighbor->vertex;
 		if (v->color == Color::White)
 		{
 			v->predecessor = u;
@@ -341,18 +362,18 @@ void ListGraph::DepthFirstSearchVisit(Vertex* u)
 void ListGraph::DepthFirstSearchIterative()
 {
 	for_each(vertices.begin(), vertices.end(),
-		[](Vertex& u)
+		[](Vertex* u)
 		{
-			u.color = Color::White;
-			u.predecessor = nullptr;
+			u->color = Color::White;
+			u->predecessor = nullptr;
 		});
 	time = 0;
 	for_each(vertices.begin(), vertices.end(),
-		[this](Vertex& u)
+		[this](Vertex* u)
 		{
-			if (u.color == Color::White)
+			if (u->color == Color::White)
 			{
-				DepthFirstSearchIterativeVisit(&u);
+				DepthFirstSearchIterativeVisit(u);
 			}
 		});
 }
@@ -397,16 +418,17 @@ void ListGraph::DepthFirstSearchIterativeVisit(Vertex* u)
 		v->color = Color::Black;
 		for (int i = adjacencyList[v->key - minKey].size() - 1; i >= 0; i--)
 		{
-			if (adjacencyList[v->key - minKey][i]->color == Color::White)
+			if (adjacencyList[v->key - minKey][i]->vertex->color == Color::White)
 			{
-				adjacencyList[v->key - minKey][i]->predecessor = v;
-				Stk.push(adjacencyList[v->key - minKey][i]);
+				adjacencyList[v->key - minKey][i]->vertex->predecessor = v;
+				Stk.push(adjacencyList[v->key - minKey][i]->vertex);
 			}
 		}
 		time++;
 		v->finishingTime = time;
 	}
 }
+
 /// <summary>
 /// Visiting all the vertices from the adjacency list
 /// (iterative)
@@ -435,11 +457,11 @@ void ListGraph::DepthFirstSearchIterativeVisit(Vertex* u)
 /// <param name="sourceKey">The vertex to search from</param>
 void ListGraph::DepthFirstSearchIterativeKey(int sourceKey)
 {
-	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex v) {return v.key == sourceKey; });
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex* v) {return v->key == sourceKey; });
 	Vertex* sk = nullptr;
 	if (sf != vertices.end())
 	{
-		sk = sf._Ptr;
+		sk = *sf;
 	}
 	else
 	{
@@ -448,10 +470,10 @@ void ListGraph::DepthFirstSearchIterativeKey(int sourceKey)
 	}
 
 	for_each(vertices.begin(), vertices.end(),
-		[](Vertex& u)
+		[](Vertex* u)
 		{
-			u.color = Color::White;
-			u.predecessor = nullptr;
+			u->color = Color::White;
+			u->predecessor = nullptr;
 		});
 	time = 0;
 	auto v = sk;
@@ -466,10 +488,10 @@ void ListGraph::DepthFirstSearchIterativeKey(int sourceKey)
 		v->color = Color::Black;
 		for (int i = adjacencyList[v->key - minKey].size() - 1; i >= 0; i--)
 		{
-			if (adjacencyList[v->key - minKey][i]->color == Color::White)
+			if (adjacencyList[v->key - minKey][i]->vertex->color == Color::White)
 			{
-				adjacencyList[v->key - minKey][i]->predecessor = v;
-				Stk.push(adjacencyList[v->key - minKey][i]);
+				adjacencyList[v->key - minKey][i]->vertex->predecessor = v;
+				Stk.push(adjacencyList[v->key - minKey][i]->vertex);
 			}
 		}
 		time++;
@@ -477,14 +499,149 @@ void ListGraph::DepthFirstSearchIterativeKey(int sourceKey)
 	}
 }
 
+/// <summary>
+/// Solves the single source shortest path problem using weighted edges.
+/// -----PSEUDO CODE-----
+/// BellmanFord(G,w,s)
+///  Initialize-Single-Source(G,s)
+///  for i = 0 to length of G.vertices - 1
+///		for each edge(u,v) in G.adj
+///			Relax(u,v,w)
+///	 for each edge(u,v)
+///		if v.distance > u.distance + w(u,v)
+///			return FALSE
+///  return TRUE
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="sourceKey">The vertex's key to search from</param>
+/// <returns>TRUE if and only if the graph contains no negative-weight cycles that are reachable from the source</returns>
 bool ListGraph::BellmanFord(int sourceKey)
 {
-	return false;
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex* v) {return v->key == sourceKey; });
+	Vertex* s = nullptr;
+	if (sf != vertices.end())
+	{
+		s = *sf;
+	}
+	else
+	{
+		std::cout << "Source key does not exists." << std::endl;
+		return false;
+	}
+
+	InitializeSingleSource(s);
+	for (auto u : vertices)
+	{
+		for (int i = 0; i < vertices.size(); i++)
+		{
+			for (auto v : adjacencyList[vertices[i]->key - minKey])
+			{
+				Relax(vertices[i], v);
+			}
+		}
+	}
+
+	for (int i = 0; i < vertices.size(); i++)
+	{
+		for (auto v : adjacencyList[vertices[i]->key - minKey])
+		{
+			if (v->vertex->distance > vertices[i]->distance + v->weight && vertices[i]->distance != INT_MAX)
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
 }
 
+/// <summary>
+/// initialize all the vertices distance to infinity
+/// and predecessors to nil, then set the source vertex distance to 0
+/// -----PSEUDO CODE-----
+/// (G is the graph, s is the source vertex)
+/// Initialize-Single-Source(G,s)
+///  for each vertex v in G.vertices
+///		v.distance = INFINITY
+///		v.predecessor = NIL
+///  s.distance = 0
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="s">source vertex</param>
+void ListGraph::InitializeSingleSource(Vertex* s)
+{
+	for_each(vertices.begin(), vertices.end(),
+		[](Vertex* u)
+		{
+			u->distance = INT_MAX;
+			u->predecessor = nullptr;
+		});
+	s->distance = 0;
+}
+
+/// <summary>
+/// reduce the distance of the adjacent vertex using the weight of the edge
+/// -----PSEUDO CODE-----
+/// (u is the source vertex, v is the adjacent vertex)
+/// Relax(u,v)
+///  if v.distance > u.distance + v.weight
+///		v.distance = u.distance + v.weight
+///		v.predecessor = u
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="u">source vertex</param>
+/// <param name="v">adjacent vertex</param>
+void ListGraph::Relax(Vertex* u, AdjacentVertex* v)
+{
+	if (v->vertex->distance > u->distance + v->weight && u->distance != INT_MAX)
+	{
+		v->vertex->distance = u->distance + v->weight;
+		v->vertex->predecessor = u;
+	}
+}
+
+/// <summary>
+/// Find the quickest path from the source key.
+/// -----PSEUDO CODE-----
+/// Dijkstra(G,s)
+///  Inititialize-Single-Source(G,s)
+///  Q = G.vertices
+///  while Q is not empty
+///		u = Extract-Min(Q)
+///		for each v in G.adj[u]
+///			Relax(u,v)
+/// -----PSEUDO CODE-----
+/// </summary>
+/// <param name="sourceKey">The vertex's key to search from</param>
 void ListGraph::Dijkstra(int sourceKey)
 {
+	auto sf = find_if(vertices.begin(), vertices.end(), [sourceKey](Vertex* v) {return v->key == sourceKey; });
+	Vertex* s = nullptr;
+	if (sf != vertices.end())
+	{
+		s = *sf;
+	}
+	else
+	{
+		std::cout << "Source key does not exists." << std::endl;
+		return;
+	}
 
+	InitializeSingleSource(s);
+	std::priority_queue<Vertex*, std::vector<Vertex*>, VertexCompareMax> Q;
+	
+	for (auto u : vertices) {
+		Q.push(u);
+	}
+
+	while (!Q.empty())
+	{
+		auto u = Q.top();
+		Q.pop();
+		for (auto v : adjacencyList[u->key - minKey]) {
+			Relax(u, v);
+		}
+	}
 }
 
 void ListGraph::AStar(int sourceKey)
@@ -497,7 +654,7 @@ void ListGraph::AStar(int sourceKey)
 /// -----PSEUDO CODE-----
 /// (G is the Graph)
 /// PrintEdges(G)
-///  for i = 0 to length of G.adjacencyList - 1
+///  for i = 0 to length of G.adj - 1
 ///		print "G.vertices[i].key["
 ///		for each v in adjacencyList[i]
 ///			if v == adjacencyList[i] last element
@@ -509,25 +666,21 @@ void ListGraph::AStar(int sourceKey)
 /// </summary>
 void ListGraph::PrintEdges()
 {
-
 	for (size_t i = 0; i < vertices.size(); i++)
 	{
-		std::cout << vertices[i].key << '[';
-		for (auto vertex : adjacencyList[i])
+		std::cout << vertices[i]->key << '[';
+		for (auto av : adjacencyList[i])
 		{
-			if (vertex == adjacencyList[i].back())
+			if (av == adjacencyList[i].back())
 			{
-				std::cout << vertex->key;
+				std::cout << av->vertex->key << "(" << av->weight << ")";
 			}
 			else
 			{
-				std::cout << vertex->key << ',';
+				std::cout << av->vertex->key << "(" << av->weight << ")" << ',';
 			}
 		}
 		std::cout << ']' << std::endl;
 	}
 }
-
-
-
 #endif // !LISTGRAPH
