@@ -49,8 +49,8 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	|**2b. DFS (Depth-First Search Recursive)**<sup id="a5">[5](#f5)</sup>|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/6c585efcb86b4753ab16b51e44033464a3b37607/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L194)||
 	|**2c. DFS (Depth-First Search Single Source Iterative)**|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/6c585efcb86b4753ab16b51e44033464a3b37607/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L410)||
 	|**2d. DFS (Depth-First Search Single Source Recursive)**|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/6c585efcb86b4753ab16b51e44033464a3b37607/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L229)||
-	|**3. Bellman Ford**<sup id="a6">[6](#f6)</sup>|||
-	|**4. Disjkstra**<sup id="a7">[7](#f7)</sup>|||
+	|**3. Bellman-Ford**<sup id="a6">[6](#f6)</sup>|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/055831988f786fb7ef58a207a284f1c9593965e7/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L502)||
+	|**4. Disjkstra**<sup id="a7">[7](#f7)</sup>|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/055831988f786fb7ef58a207a284f1c9593965e7/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L603)||
 	|**5. A\* (A Star)**<sup id="a8">[8](#f8)</sup>|||
 
 ## `Foot Notes`
@@ -59,6 +59,6 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 <b id="f3">3.</b> Adjacency Matrix *[Wikipedia](https://en.wikipedia.org/wiki/Adjacency_matrix)* [↩](#a3)  
 <b id="f4">4.</b> BFS (Breadth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)* [↩](#a4)  
 <b id="f5">5.</b> DFS (Depth-First Search) *[Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)* [↩](#a5)  
-<b id="f6">6.</b> Bellman Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)* [↩](#a6)  
+<b id="f6">6.</b> Bellman-Ford *[Wikipedia](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)* [↩](#a6)  
 <b id="f7">7.</b> Dijkstra *[Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)* [↩](#a7)  
 <b id="f8">8.</b> A* (A Star) *[Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)* [↩](#a8)  
