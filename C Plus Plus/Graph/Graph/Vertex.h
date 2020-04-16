@@ -44,6 +44,7 @@ std::ostream& operator<<(std::ostream& os, const Color& e)
 	return os;
 }
 
+
 /// <summary>
 /// Custom vertex class
 /// </summary>
@@ -66,6 +67,7 @@ public:
 	bool operator==(const Vertex& a) const {
 		return this->key == a.key;
 	};
+
 
 	/// <summary>
 	/// overload of the left shift operator for vertex 
@@ -110,5 +112,16 @@ Vertex::Vertex(int key) {
 	this->discoveryTime = -1;
 	this->finishingTime = -1;
 }
+
+/// <summary>
+/// Comparer used for std::priority_queue
+/// </summary>
+class VertexCompareMax
+{
+public:
+	bool operator()(const Vertex* a, const Vertex* b) {
+		return a->distance > b->distance;
+	}
+};
 
 #endif // !VERTEX
