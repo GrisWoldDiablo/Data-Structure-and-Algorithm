@@ -50,7 +50,7 @@ Feel free to used any of the code. [MIT License](https://github.com/GrisWoldDiab
 	|**2c. DFS (Depth-First Search Single Source Iterative)**|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L432)||
 	|**2d. DFS (Depth-First Search Single Source Recursive)**|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L248)||
 	|**3. Bellman-Ford**<sup id="a6">[6](#f6)</sup>|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L502)||
-	|**4. Disjkstra**<sup id="a7">[7](#f7)</sup>|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L603)||
+	|**4. Dijkstra**<sup id="a7">[7](#f7)</sup>|[C++](https://github.com/GrisWoldDiablo/Data-Structure-and-Algorithm/blob/master/C%20Plus%20Plus/Graph/Graph/ListGraph.h#L603)||
 	|**5. A\* (A Star)**<sup id="a8">[8](#f8)</sup>|||
 
 ## `Foot Notes`
